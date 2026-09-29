@@ -56,8 +56,16 @@ body {
   object-fit: cover;
   object-position: center center;
   z-index: -3;
-  filter: saturate(1.2) brightness(0.85);
+  filter: saturate(1.2) brightness(0.85) blur(2px);
   pointer-events: none;
+  transform: scale(1.05);   /* чуть увеличиваем, чтобы размытые края не бросались в глаза */
+}
+
+/* На телефоне — сильнее размытие */
+@media (max-width: 768px) {
+  .bg-video {
+    filter: saturate(1.2) brightness(0.85) blur(6px);
+  }
 }
 
     /* Затемняющая подложка + цветовой градиент */
