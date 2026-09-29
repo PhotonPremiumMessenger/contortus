@@ -10,9 +10,9 @@
   <meta property="og:type" content="website">
   <style>
     /* ============ ШРИФТЫ ============ */
-    /* Unbounded — современный плотный шрифт для имени.
-       Manrope — мягкий, красивый для текста. */
-    @import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap');
+    /* Unbounded — для имени. Manrope — для текста.
+       Plus Jakarta Sans — для кнопок (современный, стильный). */
+    @import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700;800;900&family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
 
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -22,76 +22,69 @@
       --pink: #ff2d95;
       --magenta: #d100ff;
       --red: #ff3b3b;
-      --bg-card: rgba(15, 8, 20, 0.55);
-      --bg-card-hover: rgba(30, 10, 35, 0.75);
-      --border-card: rgba(255, 122, 26, 0.35);
+      /* Кнопки стали чуть плотнее — фон хуже виден */
+      --bg-card: rgba(12, 6, 16, 0.72);
+      --bg-card-hover: rgba(28, 10, 32, 0.9);
+      --border-card: rgba(255, 122, 26, 0.45);
       --text: #ffffff;
-      --text-secondary: rgba(255, 255, 255, 0.55);
-      --shadow: 0 10px 40px rgba(255, 45, 149, 0.25);
+      --text-secondary: rgba(255, 255, 255, 0.6);
+      --shadow: 0 10px 40px rgba(255, 45, 149, 0.35);
     }
 
     html {
-  background: #0a0208;
-  min-height: 100vh;
-  min-height: 100dvh;
-}
+      background: #0a0208;
+      min-height: 100vh;
+      min-height: 100dvh;
+    }
 
-body {
-  font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
-  background: transparent;   /* ← ГЛАВНОЕ: body прозрачный */
-  color: var(--text);
-  min-height: 100vh;
-  min-height: 100dvh;
-  overflow-x: hidden;
-  position: relative;
-}
+    body {
+      font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: transparent;
+      color: var(--text);
+      min-height: 100vh;
+      min-height: 100dvh;
+      overflow-x: hidden;
+      position: relative;
+    }
 
     /* ============ ВИДЕО-ФОН ============ */
-.bg-video {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  object-fit: cover;
-  object-position: center center;
-  z-index: -3;
-  filter: saturate(1.2) brightness(0.85) blur(9px);
-  pointer-events: none;
-  transform: scale(1.05);   /* чуть увеличиваем, чтобы размытые края не бросались в глаза */
-}
+    .bg-video {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      object-position: center center;
+      z-index: -3;
+      filter: saturate(1.2) brightness(0.85) blur(9px);
+      pointer-events: none;
+      transform: scale(1.05);
+    }
+    @media (max-width: 768px) {
+      .bg-video { filter: saturate(1.2) brightness(0.85) blur(13px); }
+    }
 
-/* На телефоне — сильнее размытие */
-@media (max-width: 768px) {
-  .bg-video {
-    filter: saturate(1.2) brightness(0.85) blur(13px);
-  }
-}
-
-    /* Затемняющая подложка + цветовой градиент */
-.bg-overlay {
-  position: fixed;
-  inset: 0;
-  background:
-    linear-gradient(135deg,
-      rgba(255, 45, 149, 0.08) 0%,
-      rgba(0, 0, 0, 0.35) 45%,
-      rgba(255, 122, 26, 0.08) 100%);
-  z-index: -2;
-  pointer-events: none;
-}
-
-    /* Переливающийся слой поверх */
+    .bg-overlay {
+      position: fixed;
+      inset: 0;
+      background:
+        linear-gradient(135deg,
+          rgba(255, 45, 149, 0.08) 0%,
+          rgba(0, 0, 0, 0.35) 45%,
+          rgba(255, 122, 26, 0.08) 100%);
+      z-index: -2;
+      pointer-events: none;
+    }
     .bg-shine {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background:
-    radial-gradient(circle at 20% 20%, rgba(255, 45, 149, 0.12), transparent 45%),
-    radial-gradient(circle at 80% 80%, rgba(255, 122, 26, 0.12), transparent 45%);
-  animation: bgPulse 8s ease-in-out infinite alternate;
-}
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255, 45, 149, 0.12), transparent 45%),
+        radial-gradient(circle at 80% 80%, rgba(255, 122, 26, 0.12), transparent 45%);
+      animation: bgPulse 8s ease-in-out infinite alternate;
+    }
     @keyframes bgPulse {
       0%   { opacity: 0.6; transform: scale(1); }
       100% { opacity: 1;   transform: scale(1.08); }
@@ -99,13 +92,13 @@ body {
 
     /* ============ КОНТЕЙНЕР ============ */
     .container {
-  width: 100%;
-  max-width: 460px;
-  margin: 0 auto;
-  padding: 32px 20px 40px;
-  position: relative;
-  z-index: 1;
-}
+      width: 100%;
+      max-width: 460px;
+      margin: 0 auto;
+      padding: 32px 20px 40px;
+      position: relative;
+      z-index: 1;
+    }
 
     /* ============ ПРОФИЛЬ ============ */
     .profile {
@@ -114,8 +107,6 @@ body {
       align-items: center;
       margin-bottom: 22px;
     }
-
-    /* --- АВАТАРКА-КРУГ --- */
     .avatar {
       width: 140px;
       height: 140px;
@@ -124,8 +115,7 @@ body {
       position: relative;
     }
     .avatar img {
-      width: 100%;
-      height: 100%;
+      width: 100%; height: 100%;
       border-radius: 50%;
       display: block;
       object-fit: cover;
@@ -136,7 +126,6 @@ body {
         0 0 60px rgba(255, 122, 26, 0.5),
         inset 0 0 20px rgba(255, 255, 255, 0.1);
     }
-    /* Внешнее свечение вокруг аватарки — пульсирует */
     .avatar::before {
       content: '';
       position: absolute;
@@ -152,13 +141,11 @@ body {
       from { transform: rotate(0deg); }
       to   { transform: rotate(360deg); }
     }
-
     @keyframes floatAvatar {
       0%, 100% { transform: translateY(0); }
       50%      { transform: translateY(-6px); }
     }
 
-    /* --- ИМЯ --- */
     .profile-name {
       font-family: 'Unbounded', sans-serif;
       font-size: 30px;
@@ -191,7 +178,7 @@ body {
       animation: fadeInUp 0.7s ease-out 0.15s both;
     }
 
-    /* ============ КНОПКИ-ССЫЛКИ ============ */
+    /* ============ КНОПКИ-ССЫЛКИ (УЛУЧШЕННЫЕ) ============ */
     .links {
       display: flex;
       flex-direction: column;
@@ -205,25 +192,30 @@ body {
       align-items: center;
       gap: 14px;
       width: 100%;
-      padding: 15px 18px;
+      padding: 16px 18px;
       background: var(--bg-card);
-      backdrop-filter: blur(20px) saturate(1.6);
-      -webkit-backdrop-filter: blur(20px) saturate(1.6);
+      backdrop-filter: blur(28px) saturate(1.8);
+      -webkit-backdrop-filter: blur(28px) saturate(1.8);
       border-radius: var(--radius);
       text-decoration: none;
       color: var(--text);
-      font-family: 'Manrope', sans-serif;
+      font-family: 'Plus Jakarta Sans', sans-serif;
       font-size: 15px;
-      font-weight: 700;
-      letter-spacing: 0.6px;
+      font-weight: 800;
+      letter-spacing: 0.8px;
       transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
                   background 0.3s ease,
                   box-shadow 0.3s ease;
       overflow: hidden;
       isolation: isolate;
+      /* Свечение вокруг кнопки */
+      box-shadow:
+        0 0 0 1px rgba(255, 122, 26, 0.15),
+        0 4px 20px rgba(255, 45, 149, 0.15),
+        0 0 30px rgba(209, 0, 255, 0.1);
     }
 
-    /* Переливающаяся рамка вокруг кнопки */
+    /* Анимированная переливающаяся рамка */
     .link-btn::before {
       content: '';
       position: absolute;
@@ -239,43 +231,62 @@ body {
       -webkit-mask-composite: xor;
       mask-composite: exclude;
       z-index: -1;
-      opacity: 0.7;
+      opacity: 0.8;
     }
     @keyframes shineBorder {
       0%   { background-position: 0% 50%; }
       100% { background-position: 300% 50%; }
     }
 
+    /* Блик внутри кнопки (диагональный) */
+    .link-btn::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(90deg,
+        transparent,
+        rgba(255, 255, 255, 0.12),
+        transparent);
+      transform: skewX(-25deg);
+      transition: left 0.6s ease;
+      pointer-events: none;
+    }
+    .link-btn:hover::after { left: 150%; }
+
     .link-btn:hover {
       background: var(--bg-card-hover);
       transform: translateY(-3px) scale(1.015);
       box-shadow:
-        0 10px 35px rgba(255, 45, 149, 0.35),
-        0 0 30px rgba(255, 122, 26, 0.25);
+        0 0 0 1px rgba(255, 122, 26, 0.5),
+        0 10px 40px rgba(255, 45, 149, 0.55),
+        0 0 60px rgba(255, 122, 26, 0.4),
+        0 0 90px rgba(209, 0, 255, 0.3);
     }
     .link-btn:hover::before { opacity: 1; }
     .link-btn:active { transform: scale(0.98); }
 
     .link-icon {
-      width: 38px;
-      height: 38px;
-      border-radius: 11px;
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
       position: relative;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.4);
       transition: transform 0.3s ease;
     }
     .link-btn:hover .link-icon {
-      transform: rotate(-6deg) scale(1.08);
+      transform: rotate(-8deg) scale(1.12);
     }
     .link-icon svg { width: 22px; height: 22px; }
 
     .link-text {
       flex: 1;
-      text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
+      text-shadow: 0 1px 8px rgba(0, 0, 0, 0.7);
     }
 
     .link-arrow {
@@ -296,7 +307,6 @@ body {
       margin: 0 auto 14px;
       border-radius: 2px;
     }
-
     .section-title {
       font-family: 'Unbounded', sans-serif;
       font-size: 11px;
@@ -336,8 +346,7 @@ body {
       border-color: rgba(255, 45, 149, 0.6);
     }
     .catalog-card-icon {
-      width: 34px;
-      height: 34px;
+      width: 34px; height: 34px;
       border-radius: 10px;
       background: rgba(255, 255, 255, 0.1);
       display: flex;
@@ -345,22 +354,15 @@ body {
       justify-content: center;
     }
     .catalog-card-icon svg { width: 17px; height: 17px; }
-    .catalog-card-name {
-      font-size: 12px;
-      font-weight: 700;
-    }
+    .catalog-card-name { font-size: 12px; font-weight: 700; }
 
-    /* ============ АНИМАЦИИ ВХОДА ============ */
+    /* ============ АНИМАЦИИ ============ */
     .animate-in {
       opacity: 0;
       animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
     }
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-16px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
@@ -377,15 +379,173 @@ body {
       font-size: 14px;
       letter-spacing: 2px;
     }
+
+    /* ============================================================
+       МОДАЛЬНЫЕ ОКНА (О стримере, Расписание)
+       ============================================================ */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .modal-backdrop.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal {
+      position: relative;
+      width: 100%;
+      max-width: 420px;
+      background: linear-gradient(135deg, rgba(20, 8, 25, 0.96), rgba(10, 4, 15, 0.98));
+      border-radius: 24px;
+      padding: 32px 28px 28px;
+      box-shadow:
+        0 0 0 1px rgba(255, 122, 26, 0.4),
+        0 0 60px rgba(255, 45, 149, 0.5),
+        0 0 120px rgba(209, 0, 255, 0.3),
+        0 30px 80px rgba(0, 0, 0, 0.6);
+      transform: scale(0.9) translateY(20px);
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow: hidden;
+    }
+    .modal-backdrop.active .modal {
+      transform: scale(1) translateY(0);
+    }
+
+    /* Переливающаяся рамка модального окна */
+    .modal::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: 24px;
+      padding: 2px;
+      background: linear-gradient(90deg, #ff7a1a, #ff2d95, #d100ff, #ff7a1a);
+      background-size: 300% 100%;
+      animation: shineBorder 3s linear infinite;
+      -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      z-index: -1;
+      opacity: 0.9;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 122, 26, 0.4);
+      color: #fff;
+      font-size: 20px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.25s ease;
+      line-height: 1;
+    }
+    .modal-close:hover {
+      background: rgba(255, 45, 149, 0.3);
+      border-color: #ff2d95;
+      transform: rotate(90deg) scale(1.1);
+      box-shadow: 0 0 20px rgba(255, 45, 149, 0.6);
+    }
+
+    .modal-icon {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 18px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(255, 122, 26, 0.25), rgba(255, 45, 149, 0.25));
+      border: 2px solid rgba(255, 122, 26, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      box-shadow: 0 0 30px rgba(255, 45, 149, 0.5);
+      animation: floatAvatar 3s ease-in-out infinite;
+    }
+
+    .modal-title {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 14px;
+      background: linear-gradient(90deg, #ff7a1a, #ff2d95, #d100ff, #ff7a1a);
+      background-size: 300% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+      animation: shineName 4s linear infinite;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .modal-text {
+      font-family: 'Manrope', sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.85);
+      text-align: center;
+    }
+    .modal-text strong {
+      color: #ff7a1a;
+      font-weight: 700;
+    }
   </style>
 </head>
 <body>
   <div class="loading" id="loading">ЗАГРУЗКА...</div>
 
+  <!-- МОДАЛЬНОЕ ОКНО: О стримере -->
+  <div class="modal-backdrop" id="modal-about">
+    <div class="modal">
+      <button class="modal-close" data-close="modal-about">×</button>
+      <div class="modal-icon">💖</div>
+      <div class="modal-title">О стримере</div>
+      <div class="modal-text">
+        Люблю стримить 💖<br>
+        А ещё я гуль
+      </div>
+    </div>
+  </div>
+
+  <!-- МОДАЛЬНОЕ ОКНО: Расписание -->
+  <div class="modal-backdrop" id="modal-schedule">
+    <div class="modal">
+      <button class="modal-close" data-close="modal-schedule">×</button>
+      <div class="modal-icon">⏰</div>
+      <div class="modal-title">Расписание</div>
+      <div class="modal-text">
+        Стримлю <strong>круглосуточно</strong> —<br>
+        с <strong>4–5 утра</strong> до <strong>00:00 ночи</strong>.<br><br>
+        Заходи в любое время, всегда рад видеть! 🔥
+      </div>
+    </div>
+  </div>
+
   <script>
     /* ============================================================
-       ВСТРОЕННЫЕ ИКОНКИ (SVG)
-       — ВК и Twitch добавлены прямо сюда, чтобы не зависеть от icons.svg
+       ВСТРОЕННЫЕ ИКОНКИ
        ============================================================ */
     const INLINE_ICONS = {
       vk: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.162 18.994c.609 0 .858-.406.851-.915-.031-1.917.714-2.949 2.059-1.604 1.488 1.488 1.796 2.519 3.603 2.519h3.2c.808 0 1.126-.26 1.126-.668 0-.863-1.421-2.386-2.625-3.504-1.686-1.565-1.765-1.602-.313-3.486 1.801-2.339 4.157-5.336 2.073-5.336h-3.981c-.772 0-.828.435-1.103 1.083-.995 2.347-2.886 5.387-3.604 4.922-.751-.485-.407-2.406-.35-5.261.015-.754.011-1.271-1.141-1.539-.629-.145-1.241-.205-1.809-.205-2.273 0-3.841.953-2.95 1.119 1.571.293 1.42 3.692 1.054 5.16-.638 2.556-3.036-2.024-4.035-4.305-.241-.548-.315-.974-1.175-.974H.818c-.492 0-.787.16-.787.516 0 .602 2.96 6.72 5.786 9.77 2.756 2.975 5.48 2.708 7.345 2.708z"/></svg>',
@@ -426,7 +586,7 @@ body {
       location: 'rgba(255, 107, 107, 0.25)',
       send: 'linear-gradient(135deg, rgba(255,122,26,0.35), rgba(255,45,149,0.35))',
       image: 'rgba(255, 45, 149, 0.25)',
-      link: 'rgba(209, 0, 255, 0.25)',
+      link: 'linear-gradient(135deg, rgba(255,122,26,0.35), rgba(209,0,255,0.35))',
       threads: 'rgba(255, 255, 255, 0.1)',
       snapchat: 'rgba(255, 252, 0, 0.2)',
       vk: 'rgba(76, 117, 163, 0.3)',
@@ -438,8 +598,6 @@ body {
     let iconsLoaded = false;
     let iconsDoc = null;
 
-    /* Пытаемся загрузить icons.svg (для нестандартных иконок),
-       но если не получится — используем встроенные. */
     async function loadIcons() {
       try {
         const res = await fetch('icons.svg');
@@ -453,9 +611,7 @@ body {
     }
 
     function getIconSVG(name) {
-      /* Сначала проверяем встроенные иконки */
       if (INLINE_ICONS[name]) return INLINE_ICONS[name];
-      /* Потом — из icons.svg */
       if (!iconsLoaded || !iconsDoc) return INLINE_ICONS.link;
       const symbol = iconsDoc.querySelector('#icon-' + name);
       if (!symbol) return INLINE_ICONS.link;
@@ -469,95 +625,74 @@ body {
       if (config.i18n.translations && config.i18n.translations[lang]) return lang;
       return config.i18n.default || null;
     }
-
     function t(text, config, lang) {
       if (!lang || !config.i18n || !config.i18n.translations) return text;
       const tr = config.i18n.translations[lang];
       return (tr && tr[text]) || text;
     }
 
-/* ============================================================
-   ВИДЕО-ФОН
-   — на ПК играет pc.mp4, на телефоне — phone.mp4
-   ============================================================ */
-function renderVideoBackground() {
-  const isMobile = window.innerWidth <= 768;
+    /* ВИДЕО-ФОН */
+    function renderVideoBackground() {
+      const isMobile = window.innerWidth <= 768;
 
-  // Видео для ПК
-  const pc = document.createElement('video');
-  pc.id = 'bg-video-pc';
-  pc.className = 'bg-video';
-  pc.src = 'video/pc.mp4';
-  pc.autoplay = true;
-  pc.loop = true;
-  pc.muted = true;
-  pc.defaultMuted = true;
-  pc.setAttribute('muted', '');
-  pc.setAttribute('playsinline', '');
-  pc.setAttribute('webkit-playsinline', '');
-  pc.setAttribute('preload', 'auto');
-  pc.style.display = isMobile ? 'none' : 'block';
-  document.body.prepend(pc);
+      const pc = document.createElement('video');
+      pc.id = 'bg-video-pc';
+      pc.className = 'bg-video';
+      pc.src = 'video/pc.mp4';
+      pc.autoplay = true; pc.loop = true; pc.muted = true; pc.defaultMuted = true;
+      pc.setAttribute('muted', '');
+      pc.setAttribute('playsinline', '');
+      pc.setAttribute('webkit-playsinline', '');
+      pc.setAttribute('preload', 'auto');
+      pc.style.display = isMobile ? 'none' : 'block';
+      document.body.prepend(pc);
 
-  // Видео для телефона
-  const phone = document.createElement('video');
-  phone.id = 'bg-video-phone';
-  phone.className = 'bg-video';
-  phone.src = 'video/phone.mp4';
-  phone.autoplay = true;
-  phone.loop = true;
-  phone.muted = true;
-  phone.defaultMuted = true;
-  phone.setAttribute('muted', '');
-  phone.setAttribute('playsinline', '');
-  phone.setAttribute('webkit-playsinline', '');
-  phone.setAttribute('preload', 'auto');
-  phone.style.display = isMobile ? 'block' : 'none';
-  document.body.prepend(phone);
+      const phone = document.createElement('video');
+      phone.id = 'bg-video-phone';
+      phone.className = 'bg-video';
+      phone.src = 'video/phone.mp4';
+      phone.autoplay = true; phone.loop = true; phone.muted = true; phone.defaultMuted = true;
+      phone.setAttribute('muted', '');
+      phone.setAttribute('playsinline', '');
+      phone.setAttribute('webkit-playsinline', '');
+      phone.setAttribute('preload', 'auto');
+      phone.style.display = isMobile ? 'block' : 'none';
+      document.body.prepend(phone);
 
-  // Переключение при изменении размера окна
-  window.addEventListener('resize', function() {
-    const mobile = window.innerWidth <= 768;
-    pc.style.display = mobile ? 'none' : 'block';
-    phone.style.display = mobile ? 'block' : 'none';
-  });
+      window.addEventListener('resize', function() {
+        const mobile = window.innerWidth <= 768;
+        pc.style.display = mobile ? 'none' : 'block';
+        phone.style.display = mobile ? 'block' : 'none';
+      });
 
-  // Форсируем автозапуск
-  const tryPlay = function() {
-    pc.play().catch(function() {});
-    phone.play().catch(function() {});
-  };
-  setTimeout(tryPlay, 100);
-  document.addEventListener('click', tryPlay, { once: true });
-  document.addEventListener('touchstart', tryPlay, { once: true });
+      const tryPlay = function() {
+        pc.play().catch(function() {});
+        phone.play().catch(function() {});
+      };
+      setTimeout(tryPlay, 100);
+      document.addEventListener('click', tryPlay, { once: true });
+      document.addEventListener('touchstart', tryPlay, { once: true });
 
-  // Затемняющая подложка
-  const overlay = document.createElement('div');
-  overlay.className = 'bg-overlay';
-  document.body.prepend(overlay);
+      const overlay = document.createElement('div');
+      overlay.className = 'bg-overlay';
+      document.body.prepend(overlay);
 
-  // Переливающийся слой
-  const shine = document.createElement('div');
-  shine.className = 'bg-shine';
-  document.body.prepend(shine);
-}
+      const shine = document.createElement('div');
+      shine.className = 'bg-shine';
+      document.body.prepend(shine);
+    }
 
-    /* ============================================================
-       ПРОФИЛЬ (аватар + имя + био)
-       ============================================================ */
+    /* ПРОФИЛЬ */
     function renderProfile(config, lang) {
       const profile = document.createElement('div');
       profile.className = 'profile';
 
-      // --- Аватарка-круг ---
       const avatarWrap = document.createElement('div');
       avatarWrap.className = 'avatar';
       const img = document.createElement('img');
-      // Путь к аватарке: video/avatar.jpg
       img.src = 'video/avatar.jpg';
       img.alt = config.name || 'avatar';
       img.loading = 'eager';
-      // Если аватарка не найдётся — скрываем блок
       img.onerror = function() { avatarWrap.style.display = 'none'; };
       avatarWrap.appendChild(img);
       profile.appendChild(avatarWrap);
@@ -568,31 +703,40 @@ function renderVideoBackground() {
         name.textContent = config.name;
         profile.appendChild(name);
       }
-
       if (config.bio) {
         const bio = document.createElement('div');
         bio.className = 'profile-bio';
         bio.textContent = t(config.bio, config, lang);
         profile.appendChild(bio);
       }
-
       return profile;
     }
 
-    /* ============================================================
-       КНОПКИ-ССЫЛКИ
-       ============================================================ */
+    /* КНОПКИ */
     function renderLinks(links, config, lang) {
       const container = document.createElement('div');
       container.className = 'links';
 
       links.forEach(function(link, i) {
-        const a = document.createElement('a');
-        a.href = link.url;
-        a.target = '_blank';
-        a.rel = 'noopener noreferrer';
+        const isModal = link.action === 'about' || link.action === 'schedule';
+        const a = document.createElement(isModal ? 'button' : 'a');
+
+        if (isModal) {
+          a.type = 'button';
+          a.addEventListener('click', function() {
+            const modal = document.getElementById('modal-' + link.action);
+            if (modal) modal.classList.add('active');
+          });
+        } else {
+          a.href = link.url;
+          a.target = '_blank';
+          a.rel = 'noopener noreferrer';
+        }
+
         a.className = 'link-btn animate-in';
         a.style.animationDelay = (0.2 + i * 0.07) + 's';
+        if (isModal) a.style.cursor = 'pointer';
+        a.style.fontFamily = "'Plus Jakarta Sans', sans-serif";
 
         const iconName = link.icon || 'link';
         const color = ICON_COLORS[iconName] || '#fff';
@@ -621,12 +765,9 @@ function renderVideoBackground() {
       return container;
     }
 
-    /* ============================================================
-       СЕКЦИИ (сетка карточек)
-       ============================================================ */
+    /* СЕКЦИИ */
     function renderSection(section, config, lang, startDelay) {
       const fragment = document.createDocumentFragment();
-
       const divider = document.createElement('div');
       divider.className = 'divider';
       fragment.appendChild(divider);
@@ -666,10 +807,8 @@ function renderVideoBackground() {
           card.appendChild(name);
           grid.appendChild(card);
         });
-
         fragment.appendChild(grid);
       }
-
       return fragment;
     }
 
@@ -685,9 +824,35 @@ function renderVideoBackground() {
       }
     }
 
-    /* ============================================================
-       ИНИЦИАЛИЗАЦИЯ
-       ============================================================ */
+    /* МОДАЛЬНЫЕ ОКНА — закрытие */
+    function setupModals() {
+      // Кнопки закрытия (крестик)
+      document.querySelectorAll('.modal-close').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          const id = btn.getAttribute('data-close');
+          const modal = document.getElementById(id);
+          if (modal) modal.classList.remove('active');
+        });
+      });
+
+      // Клик по фону вокруг окна
+      document.querySelectorAll('.modal-backdrop').forEach(function(backdrop) {
+        backdrop.addEventListener('click', function(e) {
+          if (e.target === backdrop) backdrop.classList.remove('active');
+        });
+      });
+
+      // Escape
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          document.querySelectorAll('.modal-backdrop.active').forEach(function(m) {
+            m.classList.remove('active');
+          });
+        }
+      });
+    }
+
+    /* ИНИЦИАЛИЗАЦИЯ */
     async function init() {
       try {
         const [configRes] = await Promise.all([
@@ -699,25 +864,16 @@ function renderVideoBackground() {
 
         document.getElementById('loading').remove();
 
-        // 1. Видео-фон
         renderVideoBackground();
-
-        // 2. SEO
         applySEO(config);
 
-        // 3. Контейнер
         const container = document.createElement('div');
         container.className = 'container';
-
-        // 4. Профиль
         container.appendChild(renderProfile(config, lang));
 
-        // 5. Кнопки-ссылки
         if (config.links && config.links.length) {
           container.appendChild(renderLinks(config.links, config, lang));
         }
-
-        // 6. Секции
         if (config.sections && config.sections.length) {
           let delay = 0.2 + (config.links ? config.links.length * 0.07 : 0) + 0.1;
           config.sections.forEach(function(section) {
@@ -725,9 +881,9 @@ function renderVideoBackground() {
             delay += (section.items ? section.items.length * 0.05 : 0) + 0.1;
           });
         }
-
         document.body.appendChild(container);
 
+        setupModals();
       } catch (e) {
         const el = document.getElementById('loading');
         if (el) el.textContent = 'Ошибка загрузки';
