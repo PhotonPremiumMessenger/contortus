@@ -437,39 +437,56 @@
 
     /* ============ ВИДЕО-ФОН ============ */
     function renderVideoBackground() {
-      // Видео для ПК
-      const pc = document.createElement('video');
-      pc.id = 'bg-video-pc';
-      pc.className = 'bg-video';
-      pc.src = 'video/pc.mp4';
-      pc.autoplay = true;
-      pc.loop = true;
-      pc.muted = true;
-      pc.playsInline = true;
-      pc.setAttribute('playsinline', '');
-      document.body.prepend(pc);
+  // Видео для ПК
+  const pc = document.createElement('video');
+  pc.id = 'bg-video-pc';
+  pc.className = 'bg-video';
+  pc.src = 'video/pc.mp4';
+  pc.autoplay = true;
+  pc.loop = true;
+  pc.muted = true;                    // ← ГЛАВНОЕ
+  pc.defaultMuted = true;             // ← ГЛАВНОЕ
+  pc.setAttribute('muted', '');       // ← ГЛАВНОЕ
+  pc.setAttribute('playsinline', '');
+  pc.setAttribute('webkit-playsinline', '');
+  pc.setAttribute('preload', 'auto');
+  pc.setAttribute('disablepictureinpicture', '');
+  document.body.prepend(pc);
 
-      // Видео для телефона
-      const phone = document.createElement('video');
-      phone.id = 'bg-video-phone';
-      phone.className = 'bg-video';
-      phone.src = 'video/phone.mp4';
-      phone.autoplay = true;
-      phone.loop = true;
-      phone.muted = true;
-      phone.playsInline = true;
-      phone.setAttribute('playsinline', '');
-      document.body.prepend(phone);
+  // Видео для телефона
+  const phone = document.createElement('video');
+  phone.id = 'bg-video-phone';
+  phone.className = 'bg-video';
+  phone.src = 'video/phone.mp4';
+  phone.autoplay = true;
+  phone.loop = true;
+  phone.muted = true;                 // ← ГЛАВНОЕ
+  phone.defaultMuted = true;          // ← ГЛАВНОЕ
+  phone.setAttribute('muted', '');    // ← ГЛАВНОЕ
+  phone.setAttribute('playsinline', '');
+  phone.setAttribute('webkit-playsinline', '');
+  phone.setAttribute('preload', 'auto');
+  phone.setAttribute('disablepictureinpicture', '');
+  document.body.prepend(phone);
 
-      // Подложка + переливающийся слой
-      const overlay = document.createElement('div');
-      overlay.className = 'bg-overlay';
-      document.body.prepend(overlay);
+  // Принудительный запуск после создания
+  const tryPlay = () => {
+    pc.play().catch(() => {});
+    phone.play().catch(() => {});
+  };
+  setTimeout(tryPlay, 100);
+  document.addEventListener('click', tryPlay, { once: true });
+  document.addEventListener('touchstart', tryPlay, { once: true });
 
-      const shine = document.createElement('div');
-      shine.className = 'bg-shine';
-      document.body.prepend(shine);
-    }
+  // Подложка + переливающийся слой
+  const overlay = document.createElement('div');
+  overlay.className = 'bg-overlay';
+  document.body.prepend(overlay);
+
+  const shine = document.createElement('div');
+  shine.className = 'bg-shine';
+  document.body.prepend(shine);
+}
 
     function renderProfile(config, lang) {
       const profile = document.createElement('div');
