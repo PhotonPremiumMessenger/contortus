@@ -47,18 +47,18 @@
     }
 
     /* ============ ВИДЕО-ФОН ============ */
-    .bg-video {
-      position: fixed;
-      top: 50%; left: 50%;
-      min-width: 100%;
-      min-height: 100%;
-      width: auto;
-      height: auto;
-      transform: translate(-50%, -50%);
-      object-fit: cover;
-      z-index: -3;
-      filter: saturate(1.2) brightness(0.85);
-    }
+.bg-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  object-position: center center;
+  z-index: -3;
+  filter: saturate(1.2) brightness(0.85);
+  pointer-events: none;
+}
 
     /* Затемняющая подложка + цветовой градиент */
     .bg-overlay {
@@ -467,72 +467,71 @@
       return (tr && tr[text]) || text;
     }
 
-    /* ============================================================
-       ВИДЕО-ФОН
-       — видео создаются сразу с нужным display
-       — на ПК играет pc.mp4, на телефоне — phone.mp4
-       ============================================================ */
-    function renderVideoBackground() {
-      const isMobile = window.innerWidth <= 768;
+/* ============================================================
+   ВИДЕО-ФОН
+   — на ПК играет pc.mp4, на телефоне — phone.mp4
+   ============================================================ */
+function renderVideoBackground() {
+  const isMobile = window.innerWidth <= 768;
 
-      // Видео для ПК
-      const pc = document.createElement('video');
-      pc.id = 'bg-video-pc';
-      pc.className = 'bg-video';
-      pc.src = 'video/pc.mp4';
-      pc.autoplay = true;
-      pc.loop = true;
-      pc.muted = true;
-      pc.defaultMuted = true;
-      pc.setAttribute('muted', '');
-      pc.setAttribute('playsinline', '');
-      pc.setAttribute('webkit-playsinline', '');
-      pc.setAttribute('preload', 'auto');
-      pc.style.display = isMobile ? 'none' : 'block';
-      document.body.prepend(pc);
+  // Видео для ПК
+  const pc = document.createElement('video');
+  pc.id = 'bg-video-pc';
+  pc.className = 'bg-video';
+  pc.src = 'video/pc.mp4';
+  pc.autoplay = true;
+  pc.loop = true;
+  pc.muted = true;
+  pc.defaultMuted = true;
+  pc.setAttribute('muted', '');
+  pc.setAttribute('playsinline', '');
+  pc.setAttribute('webkit-playsinline', '');
+  pc.setAttribute('preload', 'auto');
+  pc.style.display = isMobile ? 'none' : 'block';
+  document.body.prepend(pc);
 
-      // Видео для телефона
-      const phone = document.createElement('video');
-      phone.id = 'bg-video-phone';
-      phone.className = 'bg-video';
-      phone.src = 'video/phone.mp4';
-      phone.autoplay = true;
-      phone.loop = true;
-      phone.muted = true;
-      phone.defaultMuted = true;
-      phone.setAttribute('muted', '');
-      phone.setAttribute('playsinline', '');
-      phone.setAttribute('webkit-playsinline', '');
-      phone.setAttribute('preload', 'auto');
-      phone.style.display = isMobile ? 'block' : 'none';
-      document.body.prepend(phone);
+  // Видео для телефона
+  const phone = document.createElement('video');
+  phone.id = 'bg-video-phone';
+  phone.className = 'bg-video';
+  phone.src = 'video/phone.mp4';
+  phone.autoplay = true;
+  phone.loop = true;
+  phone.muted = true;
+  phone.defaultMuted = true;
+  phone.setAttribute('muted', '');
+  phone.setAttribute('playsinline', '');
+  phone.setAttribute('webkit-playsinline', '');
+  phone.setAttribute('preload', 'auto');
+  phone.style.display = isMobile ? 'block' : 'none';
+  document.body.prepend(phone);
 
-      // Переключение на лету при изменении размера окна
-      window.addEventListener('resize', function() {
-        const mobile = window.innerWidth <= 768;
-        pc.style.display = mobile ? 'none' : 'block';
-        phone.style.display = mobile ? 'block' : 'none';
-      });
+  // Переключение при изменении размера окна
+  window.addEventListener('resize', function() {
+    const mobile = window.innerWidth <= 768;
+    pc.style.display = mobile ? 'none' : 'block';
+    phone.style.display = mobile ? 'block' : 'none';
+  });
 
-      // Форсируем автозапуск (Chrome требует взаимодействия или muted)
-      const tryPlay = function() {
-        pc.play().catch(function() {});
-        phone.play().catch(function() {});
-      };
-      setTimeout(tryPlay, 100);
-      document.addEventListener('click', tryPlay, { once: true });
-      document.addEventListener('touchstart', tryPlay, { once: true });
+  // Форсируем автозапуск
+  const tryPlay = function() {
+    pc.play().catch(function() {});
+    phone.play().catch(function() {});
+  };
+  setTimeout(tryPlay, 100);
+  document.addEventListener('click', tryPlay, { once: true });
+  document.addEventListener('touchstart', tryPlay, { once: true });
 
-      // Затемняющая подложка
-      const overlay = document.createElement('div');
-      overlay.className = 'bg-overlay';
-      document.body.prepend(overlay);
+  // Затемняющая подложка
+  const overlay = document.createElement('div');
+  overlay.className = 'bg-overlay';
+  document.body.prepend(overlay);
 
-      // Переливающийся слой
-      const shine = document.createElement('div');
-      shine.className = 'bg-shine';
-      document.body.prepend(shine);
-    }
+  // Переливающийся слой
+  const shine = document.createElement('div');
+  shine.className = 'bg-shine';
+  document.body.prepend(shine);
+}
 
     /* ============================================================
        ПРОФИЛЬ (аватар + имя + био)
