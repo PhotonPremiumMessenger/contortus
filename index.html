@@ -435,8 +435,11 @@
       return (tr && tr[text]) || text;
     }
 
-    /* ============ ВИДЕО-ФОН ============ */
-    function renderVideoBackground() {
+/* ============ ВИДЕО-ФОН ============ */
+function renderVideoBackground() {
+  // Определяем, кто мы — ПК или телефон
+  const isMobile = window.innerWidth <= 768;
+
   // Видео для ПК
   const pc = document.createElement('video');
   pc.id = 'bg-video-pc';
@@ -444,13 +447,13 @@
   pc.src = 'video/pc.mp4';
   pc.autoplay = true;
   pc.loop = true;
-  pc.muted = true;                    // ← ГЛАВНОЕ
-  pc.defaultMuted = true;             // ← ГЛАВНОЕ
-  pc.setAttribute('muted', '');       // ← ГЛАВНОЕ
+  pc.muted = true;
+  pc.defaultMuted = true;
+  pc.setAttribute('muted', '');
   pc.setAttribute('playsinline', '');
   pc.setAttribute('webkit-playsinline', '');
   pc.setAttribute('preload', 'auto');
-  pc.setAttribute('disablepictureinpicture', '');
+  pc.style.display = isMobile ? 'none' : 'block';  // ← ГЛАВНОЕ
   document.body.prepend(pc);
 
   // Видео для телефона
@@ -460,16 +463,23 @@
   phone.src = 'video/phone.mp4';
   phone.autoplay = true;
   phone.loop = true;
-  phone.muted = true;                 // ← ГЛАВНОЕ
-  phone.defaultMuted = true;          // ← ГЛАВНОЕ
-  phone.setAttribute('muted', '');    // ← ГЛАВНОЕ
+  phone.muted = true;
+  phone.defaultMuted = true;
+  phone.setAttribute('muted', '');
   phone.setAttribute('playsinline', '');
   phone.setAttribute('webkit-playsinline', '');
   phone.setAttribute('preload', 'auto');
-  phone.setAttribute('disablepictureinpicture', '');
+  phone.style.display = isMobile ? 'block' : 'none';  // ← ГЛАВНОЕ
   document.body.prepend(phone);
 
-  // Принудительный запуск после создания
+  // Если пользователь меняет размер окна — переключаем видео на лету
+  window.addEventListener('resize', () => {
+    const mobile = window.innerWidth <= 768;
+    pc.style.display = mobile ? 'none' : 'block';
+    phone.style.display = mobile ? 'block' : 'none';
+  });
+
+  // Принудительный запуск
   const tryPlay = () => {
     pc.play().catch(() => {});
     phone.play().catch(() => {});
