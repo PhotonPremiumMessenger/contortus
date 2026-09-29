@@ -9,7 +9,10 @@
   <meta property="og:description" content="Стример, создатель контента">
   <meta property="og:type" content="website">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+    /* ============ ШРИФТЫ ============ */
+    /* Unbounded — современный плотный шрифт для имени.
+       Manrope — мягкий, красивый для текста. */
+    @import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap');
 
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -28,7 +31,7 @@
     }
 
     html, body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
       background: #0a0208;
       color: var(--text);
       min-height: 100vh;
@@ -55,14 +58,6 @@
       object-fit: cover;
       z-index: -3;
       filter: saturate(1.2) brightness(0.85);
-    }
-    /* Показываем видео для ПК на широких экранах, для телефона — на узких */
-    #bg-video-pc { display: block; }
-    #bg-video-phone { display: none; }
-
-    @media (max-width: 768px) {
-      #bg-video-pc { display: none; }
-      #bg-video-phone { display: block; }
     }
 
     /* Затемняющая подложка + цветовой градиент */
@@ -98,7 +93,7 @@
     .container {
       width: 100%;
       max-width: 460px;
-      padding: 28px 20px 40px;
+      padding: 32px 20px 40px;
       position: relative;
       z-index: 1;
     }
@@ -108,35 +103,59 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-bottom: 20px;
+      margin-bottom: 22px;
     }
 
+    /* --- АВАТАРКА-КРУГ --- */
     .avatar {
       width: 140px;
-      margin-bottom: 14px;
+      height: 140px;
+      margin-bottom: 16px;
       animation: floatAvatar 4s ease-in-out infinite;
       position: relative;
     }
     .avatar img {
       width: 100%;
-      height: auto;
+      height: 100%;
       border-radius: 50%;
       display: block;
+      object-fit: cover;
+      border: 3px solid rgba(255, 122, 26, 0.6);
       box-shadow:
-        0 0 0 3px rgba(0,0,0,0.4),
-        0 0 30px rgba(255, 45, 149, 0.6),
-        0 0 60px rgba(255, 122, 26, 0.4);
+        0 0 0 3px rgba(0, 0, 0, 0.5),
+        0 0 30px rgba(255, 45, 149, 0.7),
+        0 0 60px rgba(255, 122, 26, 0.5),
+        inset 0 0 20px rgba(255, 255, 255, 0.1);
     }
+    /* Внешнее свечение вокруг аватарки — пульсирует */
+    .avatar::before {
+      content: '';
+      position: absolute;
+      inset: -8px;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, #ff7a1a, #ff2d95, #d100ff, #ff7a1a);
+      z-index: -1;
+      filter: blur(14px);
+      opacity: 0.75;
+      animation: spinGlow 6s linear infinite;
+    }
+    @keyframes spinGlow {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
     @keyframes floatAvatar {
       0%, 100% { transform: translateY(0); }
       50%      { transform: translateY(-6px); }
     }
 
+    /* --- ИМЯ --- */
     .profile-name {
-      font-size: 28px;
+      font-family: 'Unbounded', sans-serif;
+      font-size: 30px;
       font-weight: 900;
-      letter-spacing: 3px;
-      margin-bottom: 6px;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
       background: linear-gradient(90deg, #ff7a1a, #ff2d95, #d100ff, #ff7a1a);
       background-size: 300% 100%;
       -webkit-background-clip: text;
@@ -145,6 +164,7 @@
       color: transparent;
       animation: shineName 4s linear infinite;
       text-align: center;
+      text-transform: uppercase;
     }
     @keyframes shineName {
       0%   { background-position: 0% 50%; }
@@ -152,7 +172,9 @@
     }
 
     .profile-bio {
-      font-size: 13px;
+      font-family: 'Manrope', sans-serif;
+      font-size: 13.5px;
+      font-weight: 500;
       color: var(--text-secondary);
       text-align: center;
       max-width: 320px;
@@ -181,6 +203,7 @@
       border-radius: var(--radius);
       text-decoration: none;
       color: var(--text);
+      font-family: 'Manrope', sans-serif;
       font-size: 15px;
       font-weight: 700;
       letter-spacing: 0.6px;
@@ -266,6 +289,7 @@
     }
 
     .section-title {
+      font-family: 'Unbounded', sans-serif;
       font-size: 11px;
       font-weight: 700;
       letter-spacing: 3px;
@@ -350,6 +374,22 @@
   <div class="loading" id="loading">ЗАГРУЗКА...</div>
 
   <script>
+    /* ============================================================
+       ВСТРОЕННЫЕ ИКОНКИ (SVG)
+       — ВК и Twitch добавлены прямо сюда, чтобы не зависеть от icons.svg
+       ============================================================ */
+    const INLINE_ICONS = {
+      vk: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.162 18.994c.609 0 .858-.406.851-.915-.031-1.917.714-2.949 2.059-1.604 1.488 1.488 1.796 2.519 3.603 2.519h3.2c.808 0 1.126-.26 1.126-.668 0-.863-1.421-2.386-2.625-3.504-1.686-1.565-1.765-1.602-.313-3.486 1.801-2.339 4.157-5.336 2.073-5.336h-3.981c-.772 0-.828.435-1.103 1.083-.995 2.347-2.886 5.387-3.604 4.922-.751-.485-.407-2.406-.35-5.261.015-.754.011-1.271-1.141-1.539-.629-.145-1.241-.205-1.809-.205-2.273 0-3.841.953-2.95 1.119 1.571.293 1.42 3.692 1.054 5.16-.638 2.556-3.036-2.024-4.035-4.305-.241-.548-.315-.974-1.175-.974H.818c-.492 0-.787.16-.787.516 0 .602 2.96 6.72 5.786 9.77 2.756 2.975 5.48 2.708 7.345 2.708z"/></svg>',
+      twitch: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0 1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/></svg>',
+      telegram: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>',
+      tiktok: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>',
+      youtube: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>',
+      email: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>',
+      send: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>',
+      website: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 4 10 15 15 0 0 1-4 10 15 15 0 0 1-4-10 15 15 0 0 1 4-10Z"/></svg>',
+      link: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>'
+    };
+
     const ICON_COLORS = {
       whatsapp: '#25D366', instagram: '#E1306C', telegram: '#0088cc',
       twitter: '#fff', github: '#fff', linkedin: '#0A66C2',
@@ -384,24 +424,13 @@
       twitch: 'rgba(145, 70, 255, 0.3)'
     };
 
-    const HOVER_BORDERS = {
-      whatsapp: 'rgba(37, 211, 102, 0.6)',
-      instagram: 'rgba(225, 48, 108, 0.6)',
-      telegram: 'rgba(0, 136, 204, 0.6)',
-      youtube: 'rgba(255, 0, 0, 0.6)',
-      tiktok: 'rgba(255, 45, 149, 0.6)',
-      vk: 'rgba(76, 117, 163, 0.7)',
-      twitch: 'rgba(145, 70, 255, 0.7)',
-      send: 'rgba(255, 45, 149, 0.7)',
-      website: 'rgba(255, 122, 26, 0.7)',
-      email: 'rgba(234, 67, 53, 0.6)'
-    };
-
     const ARROW_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>';
 
     let iconsLoaded = false;
     let iconsDoc = null;
 
+    /* Пытаемся загрузить icons.svg (для нестандартных иконок),
+       но если не получится — используем встроенные. */
     async function loadIcons() {
       try {
         const res = await fetch('icons.svg');
@@ -410,14 +439,17 @@
         iconsDoc = parser.parseFromString(text, 'image/svg+xml');
         iconsLoaded = true;
       } catch (e) {
-        console.warn('Could not load icons.svg:', e);
+        console.warn('icons.svg не загружен — используем встроенные иконки');
       }
     }
 
     function getIconSVG(name) {
-      if (!iconsLoaded || !iconsDoc) return '';
+      /* Сначала проверяем встроенные иконки */
+      if (INLINE_ICONS[name]) return INLINE_ICONS[name];
+      /* Потом — из icons.svg */
+      if (!iconsLoaded || !iconsDoc) return INLINE_ICONS.link;
       const symbol = iconsDoc.querySelector('#icon-' + name);
-      if (!symbol) return '';
+      if (!symbol) return INLINE_ICONS.link;
       const viewBox = symbol.getAttribute('viewBox') || '0 0 24 24';
       return '<svg viewBox="' + viewBox + '">' + symbol.innerHTML + '</svg>';
     }
@@ -435,83 +467,92 @@
       return (tr && tr[text]) || text;
     }
 
-/* ============ ВИДЕО-ФОН ============ */
-function renderVideoBackground() {
-  // Определяем, кто мы — ПК или телефон
-  const isMobile = window.innerWidth <= 768;
+    /* ============================================================
+       ВИДЕО-ФОН
+       — видео создаются сразу с нужным display
+       — на ПК играет pc.mp4, на телефоне — phone.mp4
+       ============================================================ */
+    function renderVideoBackground() {
+      const isMobile = window.innerWidth <= 768;
 
-  // Видео для ПК
-  const pc = document.createElement('video');
-  pc.id = 'bg-video-pc';
-  pc.className = 'bg-video';
-  pc.src = 'video/pc.mp4';
-  pc.autoplay = true;
-  pc.loop = true;
-  pc.muted = true;
-  pc.defaultMuted = true;
-  pc.setAttribute('muted', '');
-  pc.setAttribute('playsinline', '');
-  pc.setAttribute('webkit-playsinline', '');
-  pc.setAttribute('preload', 'auto');
-  pc.style.display = isMobile ? 'none' : 'block';  // ← ГЛАВНОЕ
-  document.body.prepend(pc);
+      // Видео для ПК
+      const pc = document.createElement('video');
+      pc.id = 'bg-video-pc';
+      pc.className = 'bg-video';
+      pc.src = 'video/pc.mp4';
+      pc.autoplay = true;
+      pc.loop = true;
+      pc.muted = true;
+      pc.defaultMuted = true;
+      pc.setAttribute('muted', '');
+      pc.setAttribute('playsinline', '');
+      pc.setAttribute('webkit-playsinline', '');
+      pc.setAttribute('preload', 'auto');
+      pc.style.display = isMobile ? 'none' : 'block';
+      document.body.prepend(pc);
 
-  // Видео для телефона
-  const phone = document.createElement('video');
-  phone.id = 'bg-video-phone';
-  phone.className = 'bg-video';
-  phone.src = 'video/phone.mp4';
-  phone.autoplay = true;
-  phone.loop = true;
-  phone.muted = true;
-  phone.defaultMuted = true;
-  phone.setAttribute('muted', '');
-  phone.setAttribute('playsinline', '');
-  phone.setAttribute('webkit-playsinline', '');
-  phone.setAttribute('preload', 'auto');
-  phone.style.display = isMobile ? 'block' : 'none';  // ← ГЛАВНОЕ
-  document.body.prepend(phone);
+      // Видео для телефона
+      const phone = document.createElement('video');
+      phone.id = 'bg-video-phone';
+      phone.className = 'bg-video';
+      phone.src = 'video/phone.mp4';
+      phone.autoplay = true;
+      phone.loop = true;
+      phone.muted = true;
+      phone.defaultMuted = true;
+      phone.setAttribute('muted', '');
+      phone.setAttribute('playsinline', '');
+      phone.setAttribute('webkit-playsinline', '');
+      phone.setAttribute('preload', 'auto');
+      phone.style.display = isMobile ? 'block' : 'none';
+      document.body.prepend(phone);
 
-  // Если пользователь меняет размер окна — переключаем видео на лету
-  window.addEventListener('resize', () => {
-    const mobile = window.innerWidth <= 768;
-    pc.style.display = mobile ? 'none' : 'block';
-    phone.style.display = mobile ? 'block' : 'none';
-  });
+      // Переключение на лету при изменении размера окна
+      window.addEventListener('resize', function() {
+        const mobile = window.innerWidth <= 768;
+        pc.style.display = mobile ? 'none' : 'block';
+        phone.style.display = mobile ? 'block' : 'none';
+      });
 
-  // Принудительный запуск
-  const tryPlay = () => {
-    pc.play().catch(() => {});
-    phone.play().catch(() => {});
-  };
-  setTimeout(tryPlay, 100);
-  document.addEventListener('click', tryPlay, { once: true });
-  document.addEventListener('touchstart', tryPlay, { once: true });
+      // Форсируем автозапуск (Chrome требует взаимодействия или muted)
+      const tryPlay = function() {
+        pc.play().catch(function() {});
+        phone.play().catch(function() {});
+      };
+      setTimeout(tryPlay, 100);
+      document.addEventListener('click', tryPlay, { once: true });
+      document.addEventListener('touchstart', tryPlay, { once: true });
 
-  // Подложка + переливающийся слой
-  const overlay = document.createElement('div');
-  overlay.className = 'bg-overlay';
-  document.body.prepend(overlay);
+      // Затемняющая подложка
+      const overlay = document.createElement('div');
+      overlay.className = 'bg-overlay';
+      document.body.prepend(overlay);
 
-  const shine = document.createElement('div');
-  shine.className = 'bg-shine';
-  document.body.prepend(shine);
-}
+      // Переливающийся слой
+      const shine = document.createElement('div');
+      shine.className = 'bg-shine';
+      document.body.prepend(shine);
+    }
 
+    /* ============================================================
+       ПРОФИЛЬ (аватар + имя + био)
+       ============================================================ */
     function renderProfile(config, lang) {
       const profile = document.createElement('div');
       profile.className = 'profile';
 
-      if (config.avatar) {
-        const avatarWrap = document.createElement('div');
-        avatarWrap.className = 'avatar';
-        const img = document.createElement('img');
-        img.src = config.avatar;
-        img.alt = config.name || '';
-        img.loading = 'eager';
-        avatarWrap.appendChild(img);
-        profile.appendChild(avatarWrap);
-      }
+      // --- Аватарка-круг ---
+      const avatarWrap = document.createElement('div');
+      avatarWrap.className = 'avatar';
+      const img = document.createElement('img');
+      // Путь к аватарке: video/avatar.jpg
+      img.src = 'video/avatar.jpg';
+      img.alt = config.name || 'avatar';
+      img.loading = 'eager';
+      // Если аватарка не найдётся — скрываем блок
+      img.onerror = function() { avatarWrap.style.display = 'none'; };
+      avatarWrap.appendChild(img);
+      profile.appendChild(avatarWrap);
 
       if (config.name) {
         const name = document.createElement('div');
@@ -530,6 +571,9 @@ function renderVideoBackground() {
       return profile;
     }
 
+    /* ============================================================
+       КНОПКИ-ССЫЛКИ
+       ============================================================ */
     function renderLinks(links, config, lang) {
       const container = document.createElement('div');
       container.className = 'links';
@@ -569,6 +613,9 @@ function renderVideoBackground() {
       return container;
     }
 
+    /* ============================================================
+       СЕКЦИИ (сетка карточек)
+       ============================================================ */
     function renderSection(section, config, lang, startDelay) {
       const fragment = document.createDocumentFragment();
 
@@ -630,6 +677,9 @@ function renderVideoBackground() {
       }
     }
 
+    /* ============================================================
+       ИНИЦИАЛИЗАЦИЯ
+       ============================================================ */
     async function init() {
       try {
         const [configRes] = await Promise.all([
@@ -641,20 +691,25 @@ function renderVideoBackground() {
 
         document.getElementById('loading').remove();
 
-        // ВИДЕО-ФОН
+        // 1. Видео-фон
         renderVideoBackground();
 
+        // 2. SEO
         applySEO(config);
 
+        // 3. Контейнер
         const container = document.createElement('div');
         container.className = 'container';
 
+        // 4. Профиль
         container.appendChild(renderProfile(config, lang));
 
+        // 5. Кнопки-ссылки
         if (config.links && config.links.length) {
           container.appendChild(renderLinks(config.links, config, lang));
         }
 
+        // 6. Секции
         if (config.sections && config.sections.length) {
           let delay = 0.2 + (config.links ? config.links.length * 0.07 : 0) + 0.1;
           config.sections.forEach(function(section) {
