@@ -9,7 +9,7 @@
       "icon": "vk"
     },
     {
-      "title": "Анонсы стримов",
+      "title": "ТГК (Telegram)",
       "url": "https://telegram.me/contortus",
       "icon": "telegram"
     },
@@ -27,6 +27,16 @@
       "title": "Twitch",
       "url": "https://twitch.tv/contortuszxc",
       "icon": "twitch"
+    },
+    {
+      "title": "О стримере",
+      "action": "about",
+      "icon": "link"
+    },
+    {
+      "title": "Расписание",
+      "action": "schedule",
+      "icon": "link"
     },
     {
       "title": "Деловые предложения",
