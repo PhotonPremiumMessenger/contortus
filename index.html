@@ -60,29 +60,29 @@
 }
 
     /* Затемняющая подложка + цветовой градиент */
-    .bg-overlay {
-      position: fixed;
-      inset: 0;
-      background:
-        linear-gradient(135deg,
-          rgba(255, 45, 149, 0.15) 0%,
-          rgba(0, 0, 0, 0.65) 45%,
-          rgba(255, 122, 26, 0.18) 100%);
-      z-index: -2;
-      pointer-events: none;
-    }
+.bg-overlay {
+  position: fixed;
+  inset: 0;
+  background:
+    linear-gradient(135deg,
+      rgba(255, 45, 149, 0.08) 0%,
+      rgba(0, 0, 0, 0.35) 45%,
+      rgba(255, 122, 26, 0.08) 100%);
+  z-index: -2;
+  pointer-events: none;
+}
 
     /* Переливающийся слой поверх */
     .bg-shine {
-      position: fixed;
-      inset: 0;
-      z-index: -1;
-      pointer-events: none;
-      background:
-        radial-gradient(circle at 20% 20%, rgba(255, 45, 149, 0.25), transparent 45%),
-        radial-gradient(circle at 80% 80%, rgba(255, 122, 26, 0.25), transparent 45%);
-      animation: bgPulse 8s ease-in-out infinite alternate;
-    }
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255, 45, 149, 0.12), transparent 45%),
+    radial-gradient(circle at 80% 80%, rgba(255, 122, 26, 0.12), transparent 45%);
+  animation: bgPulse 8s ease-in-out infinite alternate;
+}
     @keyframes bgPulse {
       0%   { opacity: 0.6; transform: scale(1); }
       100% { opacity: 1;   transform: scale(1.08); }
