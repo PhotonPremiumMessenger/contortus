@@ -511,6 +511,27 @@
       color: #ff7a1a;
       font-weight: 700;
     }
+
+    /* Отключаем все анимации на телефоне — убирает перезагрузку при скролле */
+@media (max-width: 768px) {
+  .animate-in {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .bg-shine,
+  .avatar,
+  .avatar::before,
+  .profile-name,
+  .link-btn::before,
+  .link-btn::after {
+    animation: none !important;
+  }
+  /* Убираем transition, чтобы кнопки не "дёргались" */
+  .link-btn {
+    transition: none !important;
+  }
+}
   </style>
 </head>
 <body>
