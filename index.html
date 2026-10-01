@@ -541,6 +541,18 @@
   .link-btn {
     transition: none !important;
   }
+} 
+    
+    /* Плавный скролл — убирает фризы при резком скролле */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+  touch-action: pan-y;
+  will-change: scroll-position;
 }
   </style>
 </head>
@@ -662,24 +674,10 @@
       return (tr && tr[text]) || text;
     }
 
-    /* ВИДЕО-ФОН — только на ПК, на телефоне — градиент */
-function renderVideoBackground() {
+    function renderVideoBackground() {
   const isMobile = window.innerWidth <= 768;
 
-  // На телефоне видео вообще не создаём
-  if (isMobile) {
-    // Только подложки
-    const overlay = document.createElement('div');
-    overlay.className = 'bg-overlay';
-    document.body.prepend(overlay);
-
-    const shine = document.createElement('div');
-    shine.className = 'bg-shine';
-    document.body.prepend(shine);
-    return;
-  }
-
-  // На ПК — видео, как было
+  // Видео для ПК
   const pc = document.createElement('video');
   pc.id = 'bg-video-pc';
   pc.className = 'bg-video';
@@ -689,12 +687,39 @@ function renderVideoBackground() {
   pc.setAttribute('playsinline', '');
   pc.setAttribute('webkit-playsinline', '');
   pc.setAttribute('preload', 'auto');
+  pc.style.display = isMobile ? 'none' : 'block';
   document.body.prepend(pc);
 
-  const tryPlay = function() { pc.play().catch(function() {}); };
+  // Видео для телефона — ВОЗВРАЩАЕМ
+  const phone = document.createElement('video');
+  phone.id = 'bg-video-phone';
+  phone.className = 'bg-video';
+  phone.src = 'video/phone.mp4';
+  phone.autoplay = true; phone.loop = true; phone.muted = true; phone.defaultMuted = true;
+  phone.setAttribute('muted', '');
+  phone.setAttribute('playsinline', '');
+  phone.setAttribute('webkit-playsinline', '');
+  phone.setAttribute('preload', 'auto');
+  phone.style.display = isMobile ? 'block' : 'none';
+  document.body.prepend(phone);
+
+  // Переключение при изменении размера
+  window.addEventListener('resize', function() {
+    const mobile = window.innerWidth <= 768;
+    pc.style.display = mobile ? 'none' : 'block';
+    phone.style.display = mobile ? 'block' : 'none';
+  });
+
+  // Автозапуск
+  const tryPlay = function() {
+    pc.play().catch(function() {});
+    phone.play().catch(function() {});
+  };
   setTimeout(tryPlay, 100);
   document.addEventListener('click', tryPlay, { once: true });
+  document.addEventListener('touchstart', tryPlay, { once: true });
 
+  // Подложки
   const overlay = document.createElement('div');
   overlay.className = 'bg-overlay';
   document.body.prepend(overlay);
