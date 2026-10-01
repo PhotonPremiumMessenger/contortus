@@ -187,33 +187,31 @@
     }
 
     .link-btn {
-      position: relative;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      width: 100%;
-      padding: 16px 18px;
-      background: var(--bg-card);
-      backdrop-filter: blur(28px) saturate(1.8);
-      -webkit-backdrop-filter: blur(28px) saturate(1.8);
-      border-radius: var(--radius);
-      text-decoration: none;
-      color: var(--text);
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 15px;
-      font-weight: 800;
-      letter-spacing: 0.8px;
-      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-                  background 0.3s ease,
-                  box-shadow 0.3s ease;
-      overflow: hidden;
-      isolation: isolate;
-      /* Свечение вокруг кнопки */
-      box-shadow:
-        0 0 0 1px rgba(255, 122, 26, 0.15),
-        0 4px 20px rgba(255, 45, 149, 0.15),
-        0 0 30px rgba(209, 0, 255, 0.1);
-    }
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 16px 18px;
+  /* Сплошной тёмный фон вместо размытия */
+  background: rgba(15, 8, 20, 0.92);
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: var(--text);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              background 0.3s ease,
+              box-shadow 0.3s ease;
+  overflow: hidden;
+  isolation: isolate;
+  box-shadow:
+    0 0 0 1px rgba(255, 122, 26, 0.15),
+    0 4px 20px rgba(255, 45, 149, 0.15),
+    0 0 30px rgba(209, 0, 255, 0.1);
+}
 
     /* Анимированная переливающаяся рамка */
     .link-btn::before {
@@ -256,7 +254,7 @@
     .link-btn:hover::after { left: 150%; }
 
     .link-btn:hover {
-      background: var(--bg-card-hover);
+      background: rgba(15, 8, 20, 0.75);
       transform: translateY(-3px) scale(1.015);
       box-shadow:
         0 0 0 1px rgba(255, 122, 26, 0.5),
@@ -332,8 +330,6 @@
       gap: 6px;
       padding: 16px 10px;
       background: var(--bg-card);
-      backdrop-filter: blur(20px) saturate(1.5);
-      -webkit-backdrop-filter: blur(20px) saturate(1.5);
       border: 1px solid var(--border-card);
       border-radius: 14px;
       text-decoration: none;
