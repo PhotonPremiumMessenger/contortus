@@ -4,14 +4,14 @@
   "avatar": "",
   "links": [
     {
-      "title": "Уникальный контент",
-      "url": "https://vk.ru/contortuszxc",
-      "icon": "vk"
-    },
-    {
-      "title": "ТГК (Telegram)",
+      "title": "Telegram",
       "url": "https://telegram.me/contortus",
       "icon": "telegram"
+    },
+    {
+      "title": "Kick",
+      "url": "https://kick.com/contortus",
+      "icon": "kick"
     },
     {
       "title": "TikTok",
@@ -24,23 +24,13 @@
       "icon": "send"
     },
     {
-      "title": "Twitch",
-      "url": "https://twitch.tv/contortuszxc",
-      "icon": "twitch"
-    },
-    {
-      "title": "О стримере",
+      "title": "Обо мне",
       "action": "about",
       "icon": "link"
     },
     {
-      "title": "Расписание",
-      "action": "schedule",
-      "icon": "link"
-    },
-    {
-      "title": "Деловые предложения",
-      "url": "mailto:jcapswohis@gmail.com",
+      "title": "Контакты",
+      "action": "contacts",
       "icon": "email"
     }
   ]
