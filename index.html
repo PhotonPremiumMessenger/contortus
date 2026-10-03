@@ -862,7 +862,9 @@ iconDiv.className = 'link-icon';
 if (link.iconImg) {
   iconDiv.style.background = 'transparent';
   iconDiv.style.padding = '0';
-  iconDiv.innerHTML = '<img src="' + link.iconImg + '" alt="" style="width:100%; height:100%; object-fit:contain; border-radius:10px;" onerror="this.style.display=\'none\'">';
+  iconDiv.style.overflow = 'hidden';
+  iconDiv.style.borderRadius = '12px';
+  iconDiv.innerHTML = '<img src="' + link.iconImg + '" alt="" style="width:100%; height:100%; object-fit:cover; border-radius:12px; display:block;" onerror="this.style.display=\'none\'">';
 } else {
   const iconName = link.icon || 'link';
   const color = ICON_COLORS[iconName] || '#fff';
