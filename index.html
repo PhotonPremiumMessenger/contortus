@@ -537,6 +537,68 @@
       touch-action: pan-y;
       will-change: scroll-position;
     }
+
+    /* На телефоне — без скролла, компактная версия */
+@media (max-width: 768px) {
+  html, body {
+    overflow: hidden !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    position: fixed !important;
+    width: 100%;
+  }
+  
+  /* Убираем аватарку */
+  .avatar {
+    display: none !important;
+  }
+  
+  /* Уменьшаем отступы */
+  .container {
+    padding: 20px 16px 16px !important;
+    height: 100vh;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  /* Ник — чуть меньше */
+  .profile-name {
+    font-size: 24px !important;
+    margin-bottom: 6px !important;
+  }
+  
+  /* Описание — скрываем, чтобы влезло */
+  .profile-bio {
+    display: none !important;
+  }
+  
+  /* Кнопки — компактнее */
+  .link-btn {
+    padding: 12px 14px !important;
+    font-size: 14px !important;
+  }
+  .link-icon {
+    width: 34px !important;
+    height: 34px !important;
+  }
+  .link-icon svg {
+    width: 18px !important;
+    height: 18px !important;
+  }
+  
+  /* Отступы между кнопками */
+  .links {
+    gap: 8px !important;
+    margin-bottom: 0 !important;
+  }
+  
+  /* Скрываем профиль снизу */
+  .profile {
+    margin-bottom: 14px !important;
+  }
+}
   </style>
 
   <!-- Yandex.Metrika counter -->
@@ -608,112 +670,6 @@
 </div>
 
   <!-- ============================================================ -->
-  <!-- СКРИПТ СТАТИСТИКИ (отдельный, не внутри основного)           -->
-  <!-- ============================================================ -->
-  <script>
-    const YM_TOKEN = 'y0__wgBEKfr5bcGGLGhSyCX3uqhGTD4rdCXCCn2l25E0LsDz3iraDDXzimB00xh';
-    const YM_COUNTER = '113351229';
-
-    const YM_GOALS = [
-      { id: 667897492, name: 'Telegram', icon: '✈️' },
-      { id: 667897715, name: 'Kick',     icon: '🎮' },
-      { id: 667897806, name: 'TikTok',   icon: '🎵' },
-      { id: 667897935, name: 'Донат',    icon: '💸' },
-      { id: 667898119, name: 'Контакты', icon: '📬' }
-    ];
-
-    document.addEventListener('DOMContentLoaded', function() {
-      const waitForLinks = setInterval(function() {
-        const linksContainer = document.querySelector('.links');
-        if (linksContainer) {
-          clearInterval(waitForLinks);
-
-          const statsBtn = document.createElement('button');
-          statsBtn.type = 'button';
-          statsBtn.innerHTML = '<div class="link-icon" style="background:linear-gradient(135deg, rgba(255,122,26,0.35), rgba(209,0,255,0.35)); color:#ff7a1a;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px;"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></div><span class="link-text">Статистика</span><span class="link-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>';
-          statsBtn.className = 'link-btn animate-in';
-          statsBtn.style.cssText = 'cursor:pointer; margin-top:8px; font-family:"Plus Jakarta Sans",sans-serif;';
-          statsBtn.addEventListener('click', function() {
-            document.getElementById('stats-panel').style.display = 'block';
-            loadStats();
-          });
-
-          linksContainer.parentNode.insertBefore(statsBtn, linksContainer.nextSibling);
-        }
-      }, 100);
-    });
-
-    async function loadStats() {
-  const content = document.getElementById('stats-content');
-  const totalBox = document.getElementById('stats-total');
-
-  content.innerHTML = '<p style="text-align:center; color:#8B8B9E;">Загрузка данных...</p>';
-  totalBox.innerHTML = '';
-
-  let total = 0;
-  let html = '<div style="display:flex; flex-direction:column; gap:12px;">';
-
-  // Иконки такие же, как в кнопках
-  const ICONS = {
-    'Telegram': '<svg viewBox="0 0 24 24" fill="currentColor" style="width:22px;height:22px;"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>',
-    'Kick': '<svg viewBox="0 0 24 24" fill="currentColor" style="width:22px;height:22px;"><path d="M1.333 0h8v5.333h2.667V2.667h2.667V0h8v8h-2.667v2.667h-2.666v2.666h2.666V16H24v8h-8v-2.667h-2.667v-2.666h-2.666V24h-8V0zm10.667 13.333h-2.667v2.667h2.667v-2.667z"/></svg>',
-    'TikTok': '<svg viewBox="0 0 24 24" fill="currentColor" style="width:22px;height:22px;"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>',
-    'Донат': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:22px;height:22px;"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>',
-    'Контакты': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:22px;height:22px;"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>'
-  };
-  const COLORS = {
-    'Telegram': '#0088cc',
-    'Kick': '#53FC18',
-    'TikTok': '#fff',
-    'Донат': '#ff2d95',
-    'Контакты': '#EA4335'
-  };
-  const BGS = {
-    'Telegram': 'rgba(0, 136, 204, 0.25)',
-    'Kick': 'rgba(83, 252, 24, 0.25)',
-    'TikTok': 'linear-gradient(135deg, rgba(0,0,0,0.5), rgba(255,0,80,0.3))',
-    'Донат': 'linear-gradient(135deg, rgba(255,122,26,0.35), rgba(255,45,149,0.35))',
-    'Контакты': 'rgba(234, 67, 53, 0.25)'
-  };
-
-  let idx = 0;
-  for (const goal of YM_GOALS) {
-    let count = 0;
-    try {
-      const url = `https://api-metrika.yandex.net/stat/v1/data?ids=${YM_COUNTER}&metrics=ym:s:goal${goal.id}reaches&date1=2025-01-01&date2=today&accuracy=full`;
-      const response = await fetch(url, {
-        headers: { 'Authorization': 'OAuth ' + YM_TOKEN }
-      });
-      const data = await response.json();
-      count = (data.totals && data.totals[0]) ? data.totals[0] : 0;
-      total += count;
-    } catch (e) {
-      count = '—';
-    }
-
-    html += `
-      <div style="display:flex; align-items:center; gap:14px; padding:14px 18px; background:rgba(15, 8, 20, 0.92); border-radius:16px; box-shadow:0 0 0 1px rgba(255, 122, 26, 0.15), 0 4px 20px rgba(255, 45, 149, 0.15); animation:fadeInUp 0.5s ease-out ${idx * 0.08}s both;">
-        <div style="width:40px; height:40px; border-radius:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0; background:${BGS[goal.name]}; color:${COLORS[goal.name]}; box-shadow:0 4px 14px rgba(0,0,0,0.4);">
-          ${ICONS[goal.name]}
-        </div>
-        <span style="flex:1; font-weight:700; font-size:15px; font-family:'Plus Jakarta Sans',sans-serif;">${goal.name}</span>
-        <span style="color:#ff7a1a; font-weight:800; font-size:22px; font-family:'Unbounded',sans-serif;">${count}</span>
-      </div>
-    `;
-    idx++;
-  }
-
-  html += '</div>';
-  content.innerHTML = html;
-
-  totalBox.innerHTML = `
-    <div style="font-size:13px; color:#8B8B9E; margin-bottom:8px; font-family:'Manrope',sans-serif;">Всего кликов</div>
-    <div style="font-family:'Unbounded',sans-serif; font-size:38px; font-weight:900; background:linear-gradient(90deg, #ff7a1a, #ff2d95, #d100ff, #ff7a1a); background-size:300% 100%; -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent; animation:shineName 4s linear infinite;">${total}</div>
-  `;
-}
-  </script>
-
-  <!-- ============================================================ -->
   <!-- ОСНОВНОЙ СКРИПТ ПРИЛОЖЕНИЯ                                   -->
   <!-- ============================================================ -->
   <script>
@@ -723,46 +679,28 @@
       telegram: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>',
       tiktok: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>',
       youtube: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>',
-      email: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>',
-      send: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>',
+      email: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>',
+      send: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm4.5 12.5h-3v3h-3v-3h-3v-3h3v-3h3v3h3v3z"/></svg>',
       kick: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M1.333 0h8v5.333h2.667V2.667h2.667V0h8v8h-2.667v2.667h-2.666v2.666h2.666V16H24v8h-8v-2.667h-2.667v-2.666h-2.666V24h-8V0zm10.667 13.333h-2.667v2.667h2.667v-2.667z"/></svg>',
       website: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 4 10 15 15 0 0 1-4 10 15 15 0 0 1-4-10 15 15 0 0 1 4-10Z"/></svg>',
-      link: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>'
+      link: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>',
     };
 
     const ICON_COLORS = {
-      whatsapp: '#25D366', instagram: '#E1306C', telegram: '#0088cc',
-      twitter: '#fff', github: '#fff', linkedin: '#0A66C2',
-      youtube: '#FF0000', tiktok: '#fff', discord: '#5865F2',
-      spotify: '#1DB954', email: '#EA4335', website: '#ff7a1a',
-      phone: '#25D366', location: '#FF6B6B', send: '#ff2d95',
-      image: '#ff2d95', link: '#d100ff', threads: '#fff', snapchat: '#FFFC00',
-      vk: '#4C75A3', twitch: '#9146FF', kick: '#53FC18'
+      telegram: '#0088cc',
+      send: '#ff8c00',
+      link: '#ff2d95',
+      email: '#EA4335',
+      kick: '#53FC18',
     };
 
     const ICON_BG = {
-      whatsapp: 'rgba(37, 211, 102, 0.2)',
-      instagram: 'linear-gradient(135deg, rgba(131, 58, 180, 0.4), rgba(253, 29, 29, 0.4))',
-      telegram: 'rgba(0, 136, 204, 0.25)',
-      twitter: 'rgba(255, 255, 255, 0.1)',
-      github: 'rgba(255, 255, 255, 0.1)',
-      linkedin: 'rgba(10, 102, 194, 0.25)',
-      youtube: 'rgba(255, 0, 0, 0.25)',
-      tiktok: 'linear-gradient(135deg, rgba(0,0,0,0.5), rgba(255,0,80,0.3))',
-      discord: 'rgba(88, 101, 242, 0.25)',
-      spotify: 'rgba(29, 185, 84, 0.25)',
-      email: 'rgba(234, 67, 53, 0.25)',
-      website: 'linear-gradient(135deg, rgba(255,122,26,0.35), rgba(255,45,149,0.35))',
-      phone: 'rgba(37, 211, 102, 0.25)',
-      location: 'rgba(255, 107, 107, 0.25)',
-      send: 'linear-gradient(135deg, rgba(255,122,26,0.35), rgba(255,45,149,0.35))',
-      image: 'rgba(255, 45, 149, 0.25)',
-      link: 'linear-gradient(135deg, rgba(255,122,26,0.35), rgba(209,0,255,0.35))',
-      threads: 'rgba(255, 255, 255, 0.1)',
-      snapchat: 'rgba(255, 252, 0, 0.2)',
-      vk: 'rgba(76, 117, 163, 0.3)',
-      twitch: 'rgba(145, 70, 255, 0.3)', 
-      kick: 'rgba(83, 252, 24, 0.25)'
+      telegram: 'linear-gradient(135deg, #0088cc, #00b3e6)',
+      send: 'linear-gradient(135deg, #ff8c00, #ff2d95)',
+      link: 'linear-gradient(135deg, #ff2d95, #d100ff)',
+      email: 'linear-gradient(135deg, #EA4335, #ff6b6b)',
+      kick: 'linear-gradient(135deg, #53FC18, #2ecc71)',
+      tiktok: 'linear-gradient(135deg, #000000, #ff0050)',
     };
 
     const ARROW_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>';
@@ -799,8 +737,8 @@
     }
     function t(text, config, lang) {
       if (!lang || !config.i18n || !config.i18n.translations) return text;
-      const tr = config.i18n.translations[lang];
-      return (tr && tr[text]) || text;
+       return (tr && tr[text]) || text;
+     const tr = config.i18n.translations[lang];
     }
 
     function renderVideoBackground() {
