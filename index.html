@@ -859,11 +859,10 @@
         const iconDiv = document.createElement('div');
 iconDiv.className = 'link-icon';
 
-// Если есть картинка — используем её, иначе SVG
 if (link.iconImg) {
-  iconDiv.style.background = 'rgba(255, 255, 255, 0.08)';
-  iconDiv.style.padding = '4px';
-  iconDiv.innerHTML = '<img src="' + link.iconImg + '" alt="" style="width:100%; height:100%; object-fit:contain; border-radius:8px;" onerror="this.style.display=\'none\'">';
+  iconDiv.style.background = 'transparent';
+  iconDiv.style.padding = '0';
+  iconDiv.innerHTML = '<img src="' + link.iconImg + '" alt="" style="width:100%; height:100%; object-fit:contain; border-radius:10px;" onerror="this.style.display=\'none\'">';
 } else {
   const iconName = link.icon || 'link';
   const color = ICON_COLORS[iconName] || '#fff';
