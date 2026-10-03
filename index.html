@@ -104,9 +104,9 @@
       margin-bottom: 22px;
     }
     .avatar {
-      width: 140px;
-      height: 140px;
-      margin-bottom: 16px;
+      width: 110px;
+      height: 110px;
+      margin-bottom: 14px;
       animation: floatAvatar 4s ease-in-out infinite;
       position: relative;
     }
@@ -157,6 +157,7 @@
       animation: shineName 4s linear infinite;
       text-align: center;
       text-transform: uppercase;
+      filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
     }
     @keyframes shineName {
       0%   { background-position: 0% 50%; }
@@ -211,9 +212,9 @@
       background: rgba(20, 20, 20, 0.95);
       transform: translateY(-3px) scale(1.015);
       box-shadow:
-        0 0 0 1px rgba(255, 255, 255, 0.5),
-        0 10px 40px rgba(255, 255, 255, 0.2),
-        0 0 60px rgba(255, 255, 255, 0.15);
+        0 0 0 1px rgba(255, 255, 255, 0.6),
+        0 10px 40px rgba(255, 255, 255, 0.25),
+        0 0 80px rgba(255, 255, 255, 0.2);
     }
 
     .link-btn::before {
@@ -503,21 +504,11 @@
     }
 
     @media (max-width: 768px) {
-      .animate-in {
-        animation: none !important;
-        opacity: 1 !important;
-        transform: none !important;
-      }
-      .bg-shine,
-      .avatar,
-      .avatar::before,
-      .profile-name,
-      .link-btn::before,
-      .link-btn::after {
-        animation: none !important;
-      }
-      .link-btn {
-        transition: none !important;
+      .link-btn,
+      .catalog-card,
+      .modal {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
       }
     }
 
