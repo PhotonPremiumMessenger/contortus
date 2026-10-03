@@ -587,6 +587,12 @@
     width: 18px !important;
     height: 18px !important;
   }
+  .link-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+  } 
   
   /* Отступы между кнопками */
   .links {
@@ -850,15 +856,22 @@
           }
         });
 
-        const iconName = link.icon || 'link';
-        const color = ICON_COLORS[iconName] || '#fff';
-        const bg = ICON_BG[iconName] || 'rgba(255,255,255,0.1)';
-
         const iconDiv = document.createElement('div');
-        iconDiv.className = 'link-icon';
-        iconDiv.style.background = bg;
-        iconDiv.style.color = color;
-        iconDiv.innerHTML = getIconSVG(iconName);
+iconDiv.className = 'link-icon';
+
+// Если есть картинка — используем её, иначе SVG
+if (link.iconImg) {
+  iconDiv.style.background = 'rgba(255, 255, 255, 0.08)';
+  iconDiv.style.padding = '4px';
+  iconDiv.innerHTML = '<img src="' + link.iconImg + '" alt="" style="width:100%; height:100%; object-fit:contain; border-radius:8px;" onerror="this.style.display=\'none\'">';
+} else {
+  const iconName = link.icon || 'link';
+  const color = ICON_COLORS[iconName] || '#fff';
+  const bg = ICON_BG[iconName] || 'rgba(255,255,255,0.1)';
+  iconDiv.style.background = bg;
+  iconDiv.style.color = color;
+  iconDiv.innerHTML = getIconSVG(iconName);
+}
 
         const text = document.createElement('span');
         text.className = 'link-text';
