@@ -6,32 +6,32 @@
   {
     "title": "Telegram",
     "url": "https://telegram.me/contortus",
-    "iconImg": "ВСТАВЬ_ССЫЛКУ_НА_ТГ"
+    "iconImg": "video/icon-telegram.jpg"
   },
   {
     "title": "Kick",
     "url": "https://kick.com/contortus",
-    "iconImg": "ВСТАВЬ_ССЫЛКУ_НА_КИК"
+    "iconImg": "video/icon-kick.jpg"
   },
   {
     "title": "TikTok",
     "url": "https://www.tiktok.com/@contortuszxc",
-    "iconImg": "ВСТАВЬ_ССЫЛКУ_НА_ТИКТОК"
+    "iconImg": "video/icon-tiktok.jpg"
   },
   {
     "title": "Донат",
     "url": "https://www.donationalerts.com/r/contortuszxc797",
-    "iconImg": "ВСТАВЬ_ССЫЛКУ_НА_ДОНАТ"
+    "iconImg": "video/icon-donationalerts.jpg"
   },
   {
     "title": "Обо мне",
     "action": "about",
-    "iconImg": "ВСТАВЬ_ССЫЛКУ_НА_ОБО_МНЕ"
+    "iconImg": "video/icon-about.jpg"
   },
   {
     "title": "Контакты",
     "action": "contacts",
-    "iconImg": "ВСТАВЬ_ССЫЛКУ_НА_КОНТАКТЫ"
+    "iconImg": "video/icon-contacts.jpg"
   }
 ]
 }
