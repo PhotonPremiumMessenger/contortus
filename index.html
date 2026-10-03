@@ -561,18 +561,17 @@
     justify-content: center;
   }
   
-  /* ВОЗВРАЩАЕМ аватарку, но чуть меньше */
+  /* Убираем аватарку на телефоне */
   .avatar {
-    display: block !important;
-    width: 100px !important;
-    height: 100px !important;
-    margin-bottom: 10px !important;
+    display: none !important;
   }
   
-  /* Ник — чуть меньше */
+  /* Ник — крупнее и на месте аватарки */
   .profile-name {
-    font-size: 22px !important;
-    margin-bottom: 4px !important;
+    font-size: 32px !important;
+    margin-top: 0 !important;
+    margin-bottom: 6px !important;
+    line-height: 1.1 !important;
   }
   
   /* Описание — оставляем, но компактно */
@@ -582,9 +581,11 @@
     margin-bottom: 12px !important;
   }
   
-  /* Профиль — уменьшаем отступы */
+  /* Профиль — ник поднят наверх */
   .profile {
-    margin-bottom: 14px !important;
+    margin-top: 0 !important;
+    margin-bottom: 18px !important;
+    padding-top: 0 !important;
   }
   
   /* ============ КНОПКИ — УВЕЛИЧЕНЫ НА 25% ============ */
