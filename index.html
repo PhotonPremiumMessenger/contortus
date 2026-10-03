@@ -494,6 +494,71 @@
       font-weight: 700;
     }
 
+    /* ============ ОФОРМЛЕНИЕ "ОБО МНЕ" ============ */
+.about-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.about-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 12px;
+  border-left: 3px solid rgba(255, 255, 255, 0.6);
+}
+
+.about-label {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+}
+
+.about-value {
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  line-height: 1.4;
+}
+
+/* На телефоне — компактнее */
+@media (max-width: 768px) {
+  .about-list {
+    gap: 8px;
+  }
+  .about-item {
+    padding: 9px 13px;
+  }
+  .about-label {
+    font-size: 9px;
+    letter-spacing: 1.5px;
+  }
+  .about-value {
+    font-size: 13px;
+  }
+  .modal {
+    padding: 24px 20px 22px;
+  }
+  .modal-title {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  .modal-icon {
+    width: 54px;
+    height: 54px;
+    font-size: 26px;
+    margin-bottom: 12px;
+  }
+}
+
     @media (max-width: 768px) {
       .link-btn,
       .catalog-card,
@@ -609,17 +674,40 @@
   <div class="loading" id="loading">ЗАГРУЗКА...</div>
 
   <!-- МОДАЛЬНОЕ ОКНО: Обо мне -->
-  <div class="modal-backdrop" id="modal-about">
-    <div class="modal">
-      <button class="modal-close" data-close="modal-about">×</button>
-      <div class="modal-icon">💖</div>
-      <div class="modal-title">Обо мне</div>
-      <div class="modal-text">
-        Люблю стримить 💖<br>
-        А ещё я гуль
+<div class="modal-backdrop" id="modal-about">
+  <div class="modal">
+    <button class="modal-close" data-close="modal-about">×</button>
+    <div class="modal-icon">🎮</div>
+    <div class="modal-title">Кто я такой?</div>
+
+    <div class="about-list">
+      <div class="about-item">
+        <span class="about-label">Ник</span>
+        <span class="about-value">Contortus</span>
+      </div>
+      <div class="about-item">
+        <span class="about-label">Внешка</span>
+        <span class="about-value">Лысый, мужественный, но немного инфантильный</span>
+      </div>
+      <div class="about-item">
+        <span class="about-label">Игры</span>
+        <span class="about-value">Roblox (основа), CS2, Minecraft</span>
+      </div>
+      <div class="about-item">
+        <span class="about-label">Фишка</span>
+        <span class="about-value">Обзоры скинов подписчиков</span>
+      </div>
+      <div class="about-item">
+        <span class="about-label">Факт</span>
+        <span class="about-value">Люблю всех животных. Они любят меня</span>
+      </div>
+      <div class="about-item">
+        <span class="about-label">Вайб</span>
+        <span class="about-value">Хаос и искренность</span>
       </div>
     </div>
   </div>
+</div>
 
   <!-- МОДАЛЬНОЕ ОКНО: Контакты -->
   <div class="modal-backdrop" id="modal-contacts">
