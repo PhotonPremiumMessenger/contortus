@@ -190,7 +190,9 @@
       gap: 14px;
       width: 100%;
       padding: 16px 18px;
-      background: rgba(10, 10, 10, 0.92);
+      background:
+        url('video/btn-bg.png') center / cover no-repeat,
+        rgba(10, 10, 10, 0.92);
       border-radius: var(--radius);
       text-decoration: none;
       color: var(--text);
@@ -209,7 +211,10 @@
         0 0 30px rgba(255, 255, 255, 0.05);
     }
     .link-btn:hover {
-      background: rgba(20, 20, 20, 0.95);
+      background:
+        linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+        url('video/btn-bg.png') center / cover no-repeat,
+        rgba(20, 20, 20, 0.95);
       transform: translateY(-3px) scale(1.015);
       box-shadow:
         0 0 0 1px rgba(255, 255, 255, 0.6),
