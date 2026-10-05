@@ -3,35 +3,41 @@
   "bio": "Стример, создатель контента",
   "avatar": "",
   "links": [
-  {
-    "title": "Telegram",
-    "url": "https://telegram.me/contortus",
-    "iconImg": "video/icon-telegram.jpg"
-  },
-  {
-    "title": "Kick",
-    "url": "https://kick.com/contortuszxc",
-    "iconImg": "video/icon-kick.jpg"
-  },
-  {
-    "title": "TikTok",
-    "url": "https://www.tiktok.com/@contortuszxc",
-    "iconImg": "video/icon-tiktok.jpg"
-  },
-  {
-    "title": "Донат",
-    "url": "https://www.donationalerts.com/r/contortuszxc797",
-    "iconImg": "video/icon-donationalertss.jpg"
-  },
-  {
-    "title": "Обо мне",
-    "action": "about",
-    "iconImg": "video/icon-about.jpg"
-  },
-  {
-    "title": "Контакты",
-    "action": "contacts",
-    "iconImg": "video/icon-contacts.jpg"
-  }
-]
+    {
+      "title": "Telegram",
+      "url": "https://telegram.me/contortus",
+      "icon": "telegram",
+      "iconImg": "video/icon-telegram.jpg"
+    },
+    {
+      "title": "Kick",
+      "url": "https://kick.com/contortuszxc",
+      "icon": "kick",
+      "iconImg": "video/icon-kick.jpg"
+    },
+    {
+      "title": "TikTok",
+      "url": "https://www.tiktok.com/@contortuszxc",
+      "icon": "tiktok",
+      "iconImg": "video/icon-tiktok.jpg"
+    },
+    {
+      "title": "Донат",
+      "url": "https://www.donationalerts.com/r/contortuszxc797",
+      "icon": "donate",
+      "iconImg": "video/icon-donationalertss.jpg"
+    },
+    {
+      "title": "Обо мне",
+      "action": "about",
+      "icon": "about",
+      "iconImg": "video/icon-about.jpg"
+    },
+    {
+      "title": "Контакты",
+      "action": "contacts",
+      "icon": "contacts",
+      "iconImg": "video/icon-contacts.jpg"
+    }
+  ]
 }
