@@ -6,70 +6,215 @@
   <title>Выбранные заявки — CONTORTUS</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Manrope', -apple-system, sans-serif;
+
+    html {
       background: #0a0208;
+      min-height: 100vh;
+    }
+
+    body {
+      font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255, 122, 26, 0.08), transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(255, 45, 149, 0.08), transparent 50%),
+        #0a0208;
       color: #fff;
       min-height: 100vh;
-      padding: 24px 16px;
+      padding: 32px 24px;
     }
+
     .container {
-      max-width: 480px;
+      max-width: 1400px;
       margin: 0 auto;
     }
+
     h1 {
       font-family: 'Unbounded', sans-serif;
-      font-size: 22px;
+      font-size: 32px;
+      font-weight: 800;
       text-align: center;
-      margin-bottom: 8px;
-      background: linear-gradient(90deg, #ff7a1a, #ff2d95, #d100ff);
+      margin-bottom: 6px;
+      background: linear-gradient(90deg, #ff7a1a, #ff2d95, #d100ff, #ff7a1a);
       background-size: 300% 100%;
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
+      color: transparent;
       animation: shine 4s linear infinite;
+      text-transform: uppercase;
+      letter-spacing: 2px;
     }
+
     @keyframes shine {
       0% { background-position: 0% 50%; }
       100% { background-position: 300% 50%; }
     }
+
     .subtitle {
       text-align: center;
       color: rgba(255,255,255,0.5);
       font-size: 13px;
-      margin-bottom: 24px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
     }
+
+    .stats {
+      text-align: center;
+      color: rgba(255,255,255,0.4);
+      font-size: 12px;
+      margin-bottom: 32px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 16px;
+    }
+
     .card {
-      background: rgba(20, 10, 25, 0.85);
-      border: 1px solid rgba(255, 122, 26, 0.4);
+      position: relative;
+      background: linear-gradient(135deg, rgba(20, 10, 25, 0.9), rgba(12, 6, 16, 0.9));
+      border: 1px solid rgba(255, 122, 26, 0.35);
       border-radius: 16px;
-      padding: 16px 18px;
+      padding: 18px 20px;
+      box-shadow:
+        0 0 30px rgba(255, 122, 26, 0.12),
+        inset 0 1px 0 rgba(255,255,255,0.05);
+      transition: all 0.3s ease;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: 16px;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(255,122,26,0.6), rgba(255,45,149,0.3), transparent);
+      -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+      opacity: 0.7;
+      transition: opacity 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow:
+        0 0 50px rgba(255, 122, 26, 0.3),
+        inset 0 1px 0 rgba(255,255,255,0.08);
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       margin-bottom: 12px;
-      box-shadow: 0 0 30px rgba(255, 122, 26, 0.15);
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(255, 122, 26, 0.2);
     }
-    .num {
+
+    .card-num {
       font-family: 'Unbounded', sans-serif;
-      font-size: 14px;
-      color: #ff7a1a;
-      margin-bottom: 8px;
+      font-size: 18px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #ff7a1a, #ff2d95);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+      letter-spacing: 1px;
     }
-    .row {
-      font-size: 14px;
-      margin-bottom: 4px;
+
+    .card-badge {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: rgba(83, 252, 24, 0.15);
+      color: #53FC18;
+      border: 1px solid rgba(83, 252, 24, 0.4);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .card-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      margin-bottom: 6px;
       color: rgba(255,255,255,0.85);
     }
-    .row code {
-      background: rgba(255,255,255,0.08);
-      padding: 2px 6px;
-      border-radius: 6px;
-      font-family: monospace;
-      color: #fff;
+
+    .card-row .label {
+      color: rgba(255,255,255,0.4);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      min-width: 60px;
     }
+
+    .card-row .value {
+      font-family: 'JetBrains Mono', 'Courier New', monospace;
+      background: rgba(255,255,255,0.06);
+      padding: 3px 8px;
+      border-radius: 6px;
+      color: #fff;
+      font-size: 12px;
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      user-select: all;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .card-row .value:hover {
+      background: rgba(255, 122, 26, 0.15);
+    }
+
     .loading, .empty {
+      grid-column: 1 / -1;
       text-align: center;
-      color: rgba(255,255,255,0.5);
+      color: rgba(255,255,255,0.4);
       font-size: 14px;
-      margin-top: 40px;
+      padding: 60px 20px;
+      letter-spacing: 2px;
+    }
+
+    .empty-icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+      opacity: 0.5;
+    }
+
+    @media (max-width: 768px) {
+      body { padding: 20px 12px; }
+      h1 { font-size: 22px; }
+      .grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .card { padding: 14px 16px; }
+      .card-num { font-size: 16px; }
+    }
+
+    /* Скроллбар */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #0a0208; }
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, #ff7a1a, #ff2d95);
+      border-radius: 4px;
     }
   </style>
 </head>
@@ -77,43 +222,86 @@
   <div class="container">
     <h1>Выбранные заявки</h1>
     <p class="subtitle">CONTORTUS · Стрим</p>
-    <div id="list"><p class="loading">Загрузка...</p></div>
+    <p class="stats" id="stats">Загрузка...</p>
+
+    <div class="grid" id="grid">
+      <p class="loading">Загрузка...</p>
+    </div>
   </div>
 
   <script>
     const API_URL = 'https://track.contortus.space/selected';
 
     async function loadSelected() {
-      const list = document.getElementById('list');
+      const grid = document.getElementById('grid');
+      const stats = document.getElementById('stats');
+
       try {
         const res = await fetch(API_URL);
         const data = await res.json();
 
         if (!data.length) {
-          list.innerHTML = '<p class="empty">Пока никто не выбран</p>';
+          grid.innerHTML = `
+            <div class="empty">
+              <div class="empty-icon">📭</div>
+              Пока никто не выбран
+            </div>
+          `;
+          stats.textContent = 'Всего: 0';
           return;
         }
 
-        list.innerHTML = '';
+        stats.textContent = `Всего: ${data.length}`;
+        grid.innerHTML = '';
+
         data.forEach((item, i) => {
           const card = document.createElement('div');
           card.className = 'card';
           card.innerHTML = `
-            <div class="num">Заявка #${i + 1}</div>
-            <div class="row">Telegram: <code>${item.tg ? '@' + item.tg : '—'}</code></div>
-            <div class="row">Roblox: <code>${item.roblox}</code></div>
-            <div class="row">TikTok: <code>${item.tiktok}</code></div>
+            <div class="card-header">
+              <span class="card-num">#${i + 1}</span>
+              <span class="card-badge">Выбран</span>
+            </div>
+            <div class="card-row">
+              <span class="label">TG</span>
+              <span class="value" title="Нажми, чтобы скопировать">${item.tg ? '@' + item.tg : '—'}</span>
+            </div>
+            <div class="card-row">
+              <span class="label">Roblox</span>
+              <span class="value" title="Нажми, чтобы скопировать">${item.roblox}</span>
+            </div>
+            <div class="card-row">
+              <span class="label">TikTok</span>
+              <span class="value" title="Нажми, чтобы скопировать">${item.tiktok}</span>
+            </div>
           `;
-          list.appendChild(card);
+          grid.appendChild(card);
         });
+
+        // Копирование по клику
+        document.querySelectorAll('.value').forEach(el => {
+          el.addEventListener('click', () => {
+            navigator.clipboard.writeText(el.textContent.trim());
+            const original = el.textContent;
+            el.textContent = '✓ Скопировано';
+            setTimeout(() => el.textContent = original, 800);
+          });
+        });
+
       } catch (e) {
-        list.innerHTML = '<p class="empty">Ошибка загрузки</p>';
+        grid.innerHTML = `
+          <div class="empty">
+            <div class="empty-icon">⚠️</div>
+            Ошибка загрузки
+          </div>
+        `;
+        stats.textContent = '';
         console.error(e);
       }
     }
 
     loadSelected();
-    setInterval(loadSelected, 30000); // обновление каждые 30 сек
+    setInterval(loadSelected, 30000); // авто-обновление каждые 30 сек
   </script>
 </body>
 </html>
