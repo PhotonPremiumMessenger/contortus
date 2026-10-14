@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Выбранные заявки — CONTORTUS</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Manrope', -apple-system, sans-serif;
+      background: #0a0208;
+      color: #fff;
+      min-height: 100vh;
+      padding: 24px 16px;
+    }
+    .container {
+      max-width: 480px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 22px;
+      text-align: center;
+      margin-bottom: 8px;
+      background: linear-gradient(90deg, #ff7a1a, #ff2d95, #d100ff);
+      background-size: 300% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shine 4s linear infinite;
+    }
+    @keyframes shine {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 300% 50%; }
+    }
+    .subtitle {
+      text-align: center;
+      color: rgba(255,255,255,0.5);
+      font-size: 13px;
+      margin-bottom: 24px;
+    }
+    .card {
+      background: rgba(20, 10, 25, 0.85);
+      border: 1px solid rgba(255, 122, 26, 0.4);
+      border-radius: 16px;
+      padding: 16px 18px;
+      margin-bottom: 12px;
+      box-shadow: 0 0 30px rgba(255, 122, 26, 0.15);
+    }
+    .num {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 14px;
+      color: #ff7a1a;
+      margin-bottom: 8px;
+    }
+    .row {
+      font-size: 14px;
+      margin-bottom: 4px;
+      color: rgba(255,255,255,0.85);
+    }
+    .row code {
+      background: rgba(255,255,255,0.08);
+      padding: 2px 6px;
+      border-radius: 6px;
+      font-family: monospace;
+      color: #fff;
+    }
+    .loading, .empty {
+      text-align: center;
+      color: rgba(255,255,255,0.5);
+      font-size: 14px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Выбранные заявки</h1>
+    <p class="subtitle">CONTORTUS · Стрим</p>
+    <div id="list"><p class="loading">Загрузка...</p></div>
+  </div>
+
+  <script>
+    const API_URL = 'https://track.contortus.space/selected';
+
+    async function loadSelected() {
+      const list = document.getElementById('list');
+      try {
+        const res = await fetch(API_URL);
+        const data = await res.json();
+
+        if (!data.length) {
+          list.innerHTML = '<p class="empty">Пока никто не выбран</p>';
+          return;
+        }
+
+        list.innerHTML = '';
+        data.forEach((item, i) => {
+          const card = document.createElement('div');
+          card.className = 'card';
+          card.innerHTML = `
+            <div class="num">Заявка #${i + 1}</div>
+            <div class="row">Telegram: <code>${item.tg ? '@' + item.tg : '—'}</code></div>
+            <div class="row">Roblox: <code>${item.roblox}</code></div>
+            <div class="row">TikTok: <code>${item.tiktok}</code></div>
+          `;
+          list.appendChild(card);
+        });
+      } catch (e) {
+        list.innerHTML = '<p class="empty">Ошибка загрузки</p>';
+        console.error(e);
+      }
+    }
+
+    loadSelected();
+    setInterval(loadSelected, 30000); // обновление каждые 30 сек
+  </script>
+</body>
+</html>
