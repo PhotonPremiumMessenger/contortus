@@ -798,6 +798,31 @@
 
   <script>
     // ============================================================
+    // СЧЁТЧИК ЗАХОДОВ НА САЙТ
+    // ============================================================
+    const VISIT_URL = 'https://track.contortus.space/visit';
+
+    function trackVisit() {
+      // Чтобы не считать каждый refresh — раз в 30 минут
+      const lastVisit = localStorage.getItem('last_visit');
+      const now = Date.now();
+      if (lastVisit && (now - parseInt(lastVisit)) < 30 * 60 * 1000) {
+        return;
+      }
+      localStorage.setItem('last_visit', now.toString());
+
+      fetch(VISIT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ page: window.location.pathname }),
+        keepalive: true,
+      }).catch(function() {});
+    }
+
+    // Вызываем при загрузке страницы
+    trackVisit();
+    
+    // ============================================================
     // ТРЕКЕР КЛИКОВ — отправка на наш сервер через Cloudflare Tunnel
     // ============================================================
     const TRACKER_URL = 'https://track.contortus.space/track';
