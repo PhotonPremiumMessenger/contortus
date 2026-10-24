@@ -1,43 +1,55 @@
 {
   "name": "CONTORTUS",
-  "bio": "Стример, создатель контента",
-  "avatar": "",
+  "bio": "Стример · Создатель контента",
+  "avatar": "video/avatar.jpg",
+  "tags": ["Roblox", "CS2", "Minecraft"],
+  "halloween": true,
   "links": [
     {
       "title": "Telegram",
+      "subtitle": "@contortus · Канал и анонсы",
       "url": "https://telegram.me/contortus",
       "icon": "telegram",
       "iconImg": "video/icon-telegram.jpg"
     },
     {
       "title": "Kick",
+      "subtitle": "contortuszxc · Прямые эфиры",
       "url": "https://kick.com/contortuszxc",
       "icon": "kick",
       "iconImg": "video/icon-kick.jpg"
     },
     {
       "title": "TikTok",
+      "subtitle": "@contortuszxc · Нарезки и клипы",
       "url": "https://www.tiktok.com/@contortuszxc",
       "icon": "tiktok",
       "iconImg": "video/icon-tiktok.jpg"
     },
     {
       "title": "Донат",
+      "subtitle": "DonationAlerts · Поддержать стрим",
       "url": "https://www.donationalerts.com/r/contortuszxc797",
       "icon": "donate",
-      "iconImg": "video/icon-donationalertss.jpg"
+      "iconImg": "video/icon-donationalerts.jpg"
     },
     {
       "title": "Обо мне",
+      "subtitle": "Кто я такой",
       "action": "about",
       "icon": "about",
       "iconImg": "video/icon-about.jpg"
     },
     {
       "title": "Контакты",
+      "subtitle": "Связь и почта",
       "action": "contacts",
       "icon": "contacts",
       "iconImg": "video/icon-contacts.jpg"
     }
-  ]
+  ],
+  "seo": {
+    "title": "CONTORTUS — Официальные ссылки",
+    "description": "Стример, создатель контента · Telegram, Kick, TikTok, Донат"
+  }
 }
