@@ -2,115 +2,137 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#050505">
   <title>Выбранные заявки — CONTORTUS</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23050505'/%3E%3Ccircle cx='32' cy='32' r='20' fill='%23ffffff'/%3E%3Cpath d='M18 35c5-4 9-3 14-8 5 5 9 4 14 8-4 1-7 4-9 8-3-3-7-3-10 0-2-4-5-7-9-8z' fill='%23050505'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600&family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@600;700;800;900&display=swap">
+
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     html {
-      background: #0a0208;
+      background: #050505;
+      color-scheme: dark;
       min-height: 100vh;
     }
 
     body {
       font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
       background:
-        radial-gradient(circle at 20% 20%, rgba(255, 122, 26, 0.08), transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(255, 45, 149, 0.08), transparent 50%),
-        #0a0208;
-      color: #fff;
+        radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.06), transparent 50%),
+        #050505;
+      color: #ffffff;
       min-height: 100vh;
-      padding: 32px 24px;
+      padding: 32px 24px 48px;
+      position: relative;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
 
+    .corner-web {
+      position: fixed;
+      top: 0;
+      width: 180px;
+      height: 180px;
+      color: rgba(255, 255, 255, 0.10);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .corner-web--left { left: 0; }
+    .corner-web--right { right: 0; transform: scaleX(-1); }
+
     .container {
-      max-width: 1400px;
+      position: relative;
+      z-index: 1;
+      max-width: 1320px;
       margin: 0 auto;
+    }
+
+    .header-bar {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 28px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 13px;
+      margin-bottom: 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+
+    .back-link:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.45);
+      color: #ffffff;
     }
 
     h1 {
       font-family: 'Unbounded', sans-serif;
-      font-size: 32px;
-      font-weight: 800;
+      font-size: clamp(22px, 4vw, 32px);
+      font-weight: 900;
       text-align: center;
       margin-bottom: 6px;
-      background: linear-gradient(90deg, #ff7a1a, #ff2d95, #d100ff, #ff7a1a);
-      background-size: 300% 100%;
+      background: linear-gradient(180deg, #ffffff 0%, #dcdcdc 60%, #999999 100%);
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
-      color: transparent;
-      animation: shine 4s linear infinite;
+      color: #ffffff;
       text-transform: uppercase;
       letter-spacing: 2px;
     }
 
-    @keyframes shine {
-      0% { background-position: 0% 50%; }
-      100% { background-position: 300% 50%; }
-    }
-
     .subtitle {
       text-align: center;
-      color: rgba(255,255,255,0.5);
-      font-size: 13px;
-      letter-spacing: 2px;
+      color: rgba(255, 255, 255, 0.52);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
       text-transform: uppercase;
       margin-bottom: 6px;
     }
 
     .stats {
       text-align: center;
-      color: rgba(255,255,255,0.4);
-      font-size: 12px;
-      margin-bottom: 32px;
+      color: rgba(255, 255, 255, 0.40);
+      font-size: 12.5px;
+      min-height: 18px;
     }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 14px;
     }
 
     .card {
       position: relative;
-      background: linear-gradient(135deg, rgba(20, 10, 25, 0.9), rgba(12, 6, 16, 0.9));
-      border: 1px solid rgba(255, 122, 26, 0.35);
-      border-radius: 16px;
+      background: linear-gradient(155deg, rgba(22, 22, 26, 0.92), rgba(10, 10, 12, 0.96));
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 18px;
       padding: 18px 20px;
       box-shadow:
-        0 0 30px rgba(255, 122, 26, 0.12),
-        inset 0 1px 0 rgba(255,255,255,0.05);
-      transition: all 0.3s ease;
-      overflow: hidden;
-    }
-
-    .card::before {
-      content: '';
-      position: absolute;
-      inset: -1px;
-      border-radius: 16px;
-      padding: 1px;
-      background: linear-gradient(135deg, rgba(255,122,26,0.6), rgba(255,45,149,0.3), transparent);
-      -webkit-mask:
-        linear-gradient(#000 0 0) content-box,
-        linear-gradient(#000 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      pointer-events: none;
-      opacity: 0.7;
-      transition: opacity 0.3s;
+        0 12px 34px rgba(0, 0, 0, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.10);
+      transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.25s ease;
     }
 
     .card:hover {
-      transform: translateY(-3px);
-      box-shadow:
-        0 0 50px rgba(255, 122, 26, 0.3),
-        inset 0 1px 0 rgba(255,255,255,0.08);
-    }
-
-    .card:hover::before {
-      opacity: 1;
+      transform: translate3d(0, -3px, 0);
+      border-color: rgba(255, 255, 255, 0.42);
     }
 
     .card-header {
@@ -119,29 +141,25 @@
       justify-content: space-between;
       margin-bottom: 12px;
       padding-bottom: 10px;
-      border-bottom: 1px solid rgba(255, 122, 26, 0.2);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.10);
     }
 
     .card-num {
       font-family: 'Unbounded', sans-serif;
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 800;
-      background: linear-gradient(135deg, #ff7a1a, #ff2d95);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      color: transparent;
+      color: #ffffff;
       letter-spacing: 1px;
     }
 
     .card-badge {
       font-size: 10px;
-      font-weight: 700;
-      padding: 3px 8px;
-      border-radius: 6px;
-      background: rgba(83, 252, 24, 0.15);
-      color: #53FC18;
-      border: 1px solid rgba(83, 252, 24, 0.4);
+      font-weight: 800;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.10);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.28);
       letter-spacing: 1px;
       text-transform: uppercase;
     }
@@ -151,78 +169,100 @@
       align-items: center;
       gap: 8px;
       font-size: 13px;
-      margin-bottom: 6px;
-      color: rgba(255,255,255,0.85);
+      margin-bottom: 7px;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .card-row:last-child {
+      margin-bottom: 0;
     }
 
     .card-row .label {
-      color: rgba(255,255,255,0.4);
+      color: rgba(255, 255, 255, 0.42);
       font-size: 11px;
+      font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 1px;
-      min-width: 60px;
+      min-width: 62px;
     }
 
     .card-row .value {
-      font-family: 'JetBrains Mono', 'Courier New', monospace;
-      background: rgba(255,255,255,0.06);
-      padding: 3px 8px;
-      border-radius: 6px;
-      color: #fff;
+      font-family: 'JetBrains Mono', monospace;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 5px 9px;
+      border-radius: 8px;
+      color: #ffffff;
       font-size: 12px;
       flex: 1;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      user-select: all;
       cursor: pointer;
-      transition: background 0.2s;
+      transition: background 0.2s ease, border-color 0.2s ease;
     }
 
     .card-row .value:hover {
-      background: rgba(255, 122, 26, 0.15);
+      background: rgba(255, 255, 255, 0.13);
+      border-color: rgba(255, 255, 255, 0.30);
     }
 
     .loading, .empty {
       grid-column: 1 / -1;
       text-align: center;
-      color: rgba(255,255,255,0.4);
+      color: rgba(255, 255, 255, 0.45);
       font-size: 14px;
       padding: 60px 20px;
-      letter-spacing: 2px;
+      letter-spacing: 1.5px;
     }
 
     .empty-icon {
-      font-size: 48px;
-      margin-bottom: 16px;
-      opacity: 0.5;
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 14px;
+      opacity: 0.55;
+      color: #ffffff;
     }
 
     @media (max-width: 768px) {
-      body { padding: 20px 12px; }
-      h1 { font-size: 22px; }
+      body { padding: 20px 14px 36px; }
       .grid {
         grid-template-columns: 1fr;
-        gap: 12px;
+        gap: 11px;
       }
-      .card { padding: 14px 16px; }
-      .card-num { font-size: 16px; }
+      .card { padding: 15px 16px; }
+      .card-num { font-size: 15px; }
     }
 
-    /* Скроллбар */
     ::-webkit-scrollbar { width: 8px; }
-    ::-webkit-scrollbar-track { background: #0a0208; }
+    ::-webkit-scrollbar-track { background: #050505; }
     ::-webkit-scrollbar-thumb {
-      background: linear-gradient(180deg, #ff7a1a, #ff2d95);
+      background: rgba(255, 255, 255, 0.25);
       border-radius: 4px;
     }
   </style>
 </head>
 <body>
+  <svg class="corner-web corner-web--left" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+    <line x1="0" y1="0" x2="200" y2="32"/><line x1="0" y1="0" x2="185" y2="88"/><line x1="0" y1="0" x2="150" y2="145"/><line x1="0" y1="0" x2="92" y2="188"/><line x1="0" y1="0" x2="32" y2="200"/>
+    <path d="M42 7 Q38 18 39 20 Q28 28 31 31 Q19 36 18 40 Q10 41 7 42"/>
+    <path d="M84 14 Q74 34 78 38 Q58 55 62 61 Q38 72 39 79 Q18 82 14 84"/>
+    <path d="M128 21 Q112 52 117 57 Q88 83 94 92 Q58 108 59 119 Q28 124 21 128"/>
+  </svg>
+  <svg class="corner-web corner-web--right" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+    <line x1="0" y1="0" x2="200" y2="32"/><line x1="0" y1="0" x2="185" y2="88"/><line x1="0" y1="0" x2="150" y2="145"/><line x1="0" y1="0" x2="92" y2="188"/><line x1="0" y1="0" x2="32" y2="200"/>
+    <path d="M42 7 Q38 18 39 20 Q28 28 31 31 Q19 36 18 40 Q10 41 7 42"/>
+    <path d="M84 14 Q74 34 78 38 Q58 55 62 61 Q38 72 39 79 Q18 82 14 84"/>
+    <path d="M128 21 Q112 52 117 57 Q88 83 94 92 Q58 108 59 119 Q28 124 21 128"/>
+  </svg>
+
   <div class="container">
-    <h1>Выбранные заявки</h1>
-    <p class="subtitle">CONTORTUS · Стрим</p>
-    <p class="stats" id="stats">Загрузка...</p>
+    <div class="header-bar">
+      <a href="index.html" class="back-link">← На главную</a>
+      <h1>Выбранные заявки</h1>
+      <p class="subtitle">CONTORTUS · Стрим</p>
+      <p class="stats" id="stats">Загрузка...</p>
+    </div>
 
     <div class="grid" id="grid">
       <p class="loading">Загрузка...</p>
@@ -232,76 +272,109 @@
   <script>
     const API_URL = 'https://track.contortus.space/selected';
 
+    function createRow(labelText, rawValue) {
+      const row = document.createElement('div');
+      row.className = 'card-row';
+
+      const label = document.createElement('span');
+      label.className = 'label';
+      label.textContent = labelText;
+
+      const value = document.createElement('span');
+      value.className = 'value';
+      const clean = rawValue ? String(rawValue).trim() : '';
+      const display = clean || '—';
+      value.textContent = display;
+
+      if (clean) {
+        value.dataset.raw = clean;
+        value.title = 'Нажми, чтобы скопировать';
+        let resetTimer = null;
+        value.addEventListener('click', function() {
+          const textToCopy = value.dataset.raw;
+          if (!textToCopy) return;
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(textToCopy).catch(function() {});
+          }
+          value.textContent = '✓ Скопировано';
+          clearTimeout(resetTimer);
+          resetTimer = setTimeout(function() {
+            value.textContent = textToCopy;
+          }, 900);
+        });
+      }
+
+      row.appendChild(label);
+      row.appendChild(value);
+      return row;
+    }
+
     async function loadSelected() {
       const grid = document.getElementById('grid');
       const stats = document.getElementById('stats');
 
       try {
         const res = await fetch(API_URL);
+        if (!res.ok) throw new Error('HTTP ' + res.status);
         const data = await res.json();
 
-        if (!data.length) {
-          grid.innerHTML = `
-            <div class="empty">
-              <div class="empty-icon">📭</div>
-              Пока никто не выбран
-            </div>
-          `;
+        if (!Array.isArray(data) || !data.length) {
+          grid.innerHTML =
+            '<div class="empty">' +
+              '<svg class="empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M3 13h5l2 3h4l2-3h5"/></svg>' +
+              '<div>Пока никто не выбран</div>' +
+            '</div>';
           stats.textContent = 'Всего: 0';
           return;
         }
 
-        stats.textContent = `Всего: ${data.length}`;
-        grid.innerHTML = '';
+        stats.textContent = 'Всего: ' + data.length;
+        const fragment = document.createDocumentFragment();
 
-        data.forEach((item, i) => {
+        data.forEach(function(item, i) {
           const card = document.createElement('div');
           card.className = 'card';
-          card.innerHTML = `
-            <div class="card-header">
-              <span class="card-num">#${i + 1}</span>
-              <span class="card-badge">Выбран</span>
-            </div>
-            <div class="card-row">
-              <span class="label">TG</span>
-              <span class="value" title="Нажми, чтобы скопировать">${item.tg ? '@' + item.tg : '—'}</span>
-            </div>
-            <div class="card-row">
-              <span class="label">Roblox</span>
-              <span class="value" title="Нажми, чтобы скопировать">${item.roblox}</span>
-            </div>
-            <div class="card-row">
-              <span class="label">TikTok</span>
-              <span class="value" title="Нажми, чтобы скопировать">${item.tiktok}</span>
-            </div>
-          `;
-          grid.appendChild(card);
+
+          const header = document.createElement('div');
+          header.className = 'card-header';
+
+          const num = document.createElement('span');
+          num.className = 'card-num';
+          num.textContent = '#' + (i + 1);
+
+          const badge = document.createElement('span');
+          badge.className = 'card-badge';
+          badge.textContent = 'Выбран';
+
+          header.appendChild(num);
+          header.appendChild(badge);
+          card.appendChild(header);
+
+          const tgVal = item.tg ? ('@' + String(item.tg).replace(/^@/, '')) : '';
+          card.appendChild(createRow('TG', tgVal));
+          card.appendChild(createRow('Roblox', item.roblox));
+          card.appendChild(createRow('TikTok', item.tiktok));
+
+          fragment.appendChild(card);
         });
 
-        // Копирование по клику
-        document.querySelectorAll('.value').forEach(el => {
-          el.addEventListener('click', () => {
-            navigator.clipboard.writeText(el.textContent.trim());
-            const original = el.textContent;
-            el.textContent = '✓ Скопировано';
-            setTimeout(() => el.textContent = original, 800);
-          });
-        });
-
+        grid.innerHTML = '';
+        grid.appendChild(fragment);
       } catch (e) {
-        grid.innerHTML = `
-          <div class="empty">
-            <div class="empty-icon">⚠️</div>
-            Ошибка загрузки
-          </div>
-        `;
+        grid.innerHTML =
+          '<div class="empty">' +
+            '<svg class="empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>' +
+            '<div>Не удалось загрузить список заявок</div>' +
+          '</div>';
         stats.textContent = '';
         console.error(e);
       }
     }
 
     loadSelected();
-    setInterval(loadSelected, 30000); // авто-обновление каждые 30 сек
+    setInterval(function() {
+      if (!document.hidden) loadSelected();
+    }, 30000);
   </script>
 </body>
 </html>

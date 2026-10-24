@@ -424,24 +424,36 @@
     <div class="modal-title" id="link-modal-title">Add Link</div>
     <div class="field">
       <label>Title</label>
-      <input type="text" id="link-title" placeholder="WhatsApp">
+      <input type="text" id="link-title" placeholder="Telegram">
     </div>
     <div class="field">
-      <label>URL</label>
+      <label>Subtitle (optional)</label>
+      <input type="text" id="link-subtitle" placeholder="@contortus · Канал и анонсы">
+    </div>
+    <div class="field">
+      <label>URL (leave empty for modal action)</label>
       <input type="url" id="link-url" placeholder="https://...">
+    </div>
+    <div class="field">
+      <label>Custom Image URL (optional)</label>
+      <input type="text" id="link-icon-img" placeholder="video/icon-telegram.jpg">
     </div>
     <div class="field">
       <label>Icon</label>
       <select id="link-icon">
         <option value="link">Link</option>
+        <option value="telegram">Telegram</option>
+        <option value="kick">Kick</option>
+        <option value="tiktok">TikTok</option>
+        <option value="donate">Donate</option>
+        <option value="about">About</option>
+        <option value="contacts">Contacts</option>
         <option value="whatsapp">WhatsApp</option>
         <option value="instagram">Instagram</option>
-        <option value="telegram">Telegram</option>
         <option value="twitter">Twitter / X</option>
         <option value="github">GitHub</option>
         <option value="linkedin">LinkedIn</option>
         <option value="youtube">YouTube</option>
-        <option value="tiktok">TikTok</option>
         <option value="discord">Discord</option>
         <option value="spotify">Spotify</option>
         <option value="threads">Threads</option>
@@ -622,21 +634,27 @@
     localStorage.setItem('lyink-draft', JSON.stringify(config));
   }
 
+  let prevConfigBlobURL = null;
+  let prevPageBlobURL = null;
+
   function refreshPreview() {
     const iframe = document.getElementById('preview-iframe');
-    // Write config into a blob URL so iframe can read it
+    if (prevConfigBlobURL) URL.revokeObjectURL(prevConfigBlobURL);
     const configBlob = new Blob([JSON.stringify(config)], { type: 'application/json' });
     const configURL = URL.createObjectURL(configBlob);
+    prevConfigBlobURL = configURL;
 
-    // Create a modified index.html that fetches from blob
+    const baseHref = window.location.href.replace(/[^/]*$/, '');
     fetch('index.html').then(r => r.text()).then(function(html) {
-      // Replace fetch('config.json') with the blob URL
-      const modified = html.replace(
+      let modified = html.replace('<head>', '<head><base href="' + baseHref + '">');
+      modified = modified.replace(
         "fetch('config.json')",
         "fetch('" + configURL + "')"
       );
+      if (prevPageBlobURL) URL.revokeObjectURL(prevPageBlobURL);
       const blob = new Blob([modified], { type: 'text/html' });
-      iframe.src = URL.createObjectURL(blob);
+      prevPageBlobURL = URL.createObjectURL(blob);
+      iframe.src = prevPageBlobURL;
     });
   }
 
@@ -671,7 +689,7 @@
         '<span class="link-drag">&#x2630;</span>' +
         '<div class="link-info">' +
           '<div class="link-info-title">' + escapeHTML(link.title) + '</div>' +
-          '<div class="link-info-url">' + escapeHTML(link.url) + '</div>' +
+          '<div class="link-info-url">' + escapeHTML(link.url || (link.action ? 'modal: ' + link.action : '')) + '</div>' +
         '</div>' +
         '<div class="link-actions">' +
           '<button class="btn btn-icon btn-sm" onclick="editLink(' + i + ')" title="Edit">&#9998;</button>' +
@@ -719,12 +737,16 @@
     if (editingLinkIndex >= 0) {
       const link = config.links[editingLinkIndex];
       document.getElementById('link-title').value = link.title || '';
+      document.getElementById('link-subtitle').value = link.subtitle || '';
       document.getElementById('link-url').value = link.url || '';
+      document.getElementById('link-icon-img').value = link.iconImg || '';
       document.getElementById('link-icon').value = link.icon || 'link';
       title.textContent = 'Edit Link';
     } else {
       document.getElementById('link-title').value = '';
+      document.getElementById('link-subtitle').value = '';
       document.getElementById('link-url').value = '';
+      document.getElementById('link-icon-img').value = '';
       document.getElementById('link-icon').value = 'link';
       title.textContent = 'Add Link';
     }
@@ -736,12 +758,28 @@
   }
 
   function saveLink() {
-    const link = {
-      title: document.getElementById('link-title').value,
-      url: document.getElementById('link-url').value,
-      icon: document.getElementById('link-icon').value
-    };
-    if (!link.title || !link.url) return;
+    const prev = editingLinkIndex >= 0 ? (config.links[editingLinkIndex] || {}) : {};
+    const titleVal = document.getElementById('link-title').value.trim();
+    const subtitleVal = document.getElementById('link-subtitle').value.trim();
+    const urlVal = document.getElementById('link-url').value.trim();
+    const iconImgVal = document.getElementById('link-icon-img').value.trim();
+    const iconVal = document.getElementById('link-icon').value;
+
+    if (!titleVal || (!urlVal && !prev.action)) return;
+
+    const link = Object.assign({}, prev, {
+      title: titleVal,
+      icon: iconVal
+    });
+
+    if (subtitleVal) link.subtitle = subtitleVal;
+    else delete link.subtitle;
+
+    if (urlVal) link.url = urlVal;
+    else delete link.url;
+
+    if (iconImgVal) link.iconImg = iconImgVal;
+    else delete link.iconImg;
 
     if (editingLinkIndex >= 0) {
       config.links[editingLinkIndex] = link;
