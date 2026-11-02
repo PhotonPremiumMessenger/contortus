@@ -227,8 +227,8 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 28px 16px 36px;
-      gap: 14px;
+      padding: 22px 16px 28px;
+      gap: 12px;
     }
 
     @supports (padding-bottom: env(safe-area-inset-bottom)) {
@@ -555,6 +555,7 @@
     }
 
     .link-btn:focus-visible,
+    .order-card:focus-visible,
     .halloween-toggle:focus-visible,
     .modal-close:focus-visible,
     .contact-action-btn:focus-visible {
@@ -787,42 +788,289 @@
     }
 
     /* ============================================================
-       КНОПКА "ЗАКАЗАТЬ ТАКОЙ ЖЕ САЙТ" (строго в Ч/Б стиле, не перекрывает контент)
+       ФИРМЕННЫЙ БАННЕР "ЗАКАЗАТЬ ТАКОЙ ЖЕ САЙТ"
+       Заметный, на видном месте в общей колонке, выше классом по деталям,
+       но сдержанный в строгой Ч/Б гамме — не перетягивает на себя саму визитку
        ============================================================ */
-    .order-btn {
-      position: fixed;
-      bottom: 18px;
-      right: 18px;
-      z-index: 50;
+    .order-card {
+      position: relative;
+      display: block;
+      width: 100%;
+      max-width: 476px;
+      padding: 1px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.16);
+      text-decoration: none;
+      color: #ffffff;
+      overflow: hidden;
+      box-shadow:
+        0 18px 48px rgba(0, 0, 0, 0.72),
+        0 0 28px rgba(255, 255, 255, 0.05);
+      transition:
+        transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.3s ease,
+        background 0.3s ease;
+    }
+
+    /* Тонкий бегущий лунный луч по контуру (100% GPU rotate — 0 перерисовок) */
+    .order-card::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 135%;
+      aspect-ratio: 1 / 1;
+      background: conic-gradient(
+        from 0deg,
+        transparent 0deg,
+        transparent 250deg,
+        rgba(255, 255, 255, 0.32) 300deg,
+        rgba(255, 255, 255, 0.92) 345deg,
+        transparent 360deg
+      );
+      transform: translate3d(-50%, -50%, 0) rotate(0deg);
+      animation: orderBeamSpin 8s linear infinite;
+      will-change: transform;
+      pointer-events: none;
+    }
+
+    @keyframes orderBeamSpin {
+      from { transform: translate3d(-50%, -50%, 0) rotate(0deg); }
+      to   { transform: translate3d(-50%, -50%, 0) rotate(360deg); }
+    }
+
+    .order-card__inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 14px;
+      border-radius: 21px;
+      background: #09090c;
+      overflow: hidden;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16);
+    }
+
+    /* Кастомная Ч/Б шёлковая текстура фона карточки */
+    .order-card__bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.52;
+      pointer-events: none;
+      transform: scale(1.01);
+      transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.35s ease;
+    }
+
+    .order-card__scrim {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        95deg,
+        rgba(7, 7, 9, 0.88) 0%,
+        rgba(10, 10, 14, 0.52) 52%,
+        rgba(7, 7, 9, 0.86) 100%
+      );
+      pointer-events: none;
+    }
+
+    /* Мягкий периодический серебряный отблеск (только GPU transform) */
+    .order-card__inner::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 42%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.09) 50%,
+        transparent 100%
+      );
+      transform: translate3d(-150%, 0, 0) skewX(-24deg);
+      animation: orderSheen 7.5s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes orderSheen {
+      0%, 62% { transform: translate3d(-150%, 0, 0) skewX(-24deg); }
+      92%, 100% { transform: translate3d(320%, 0, 0) skewX(-24deg); }
+    }
+
+    .order-card__media {
+      position: relative;
+      z-index: 2;
+      width: 50px;
+      height: 50px;
+      flex-shrink: 0;
+    }
+
+    .order-card__icon {
+      width: 100%;
+      height: 100%;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #060608;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      box-shadow:
+        0 6px 16px rgba(0, 0, 0, 0.65),
+        0 0 18px rgba(255, 255, 255, 0.10);
+      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease;
+    }
+
+    .order-card__icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(1) contrast(1.06);
+    }
+
+    .order-card__spark {
+      position: absolute;
+      right: -3px;
+      bottom: -3px;
+      width: 19px;
+      height: 19px;
+      border-radius: 7px;
+      background: #ffffff;
+      color: #050505;
+      border: 2px solid #09090c;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .order-card__spark svg {
+      width: 10px;
+      height: 10px;
+    }
+
+    .order-card__content {
+      position: relative;
+      z-index: 2;
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .order-card__kicker {
       display: inline-flex;
       align-items: center;
-      gap: 7px;
-      padding: 9px 14px;
-      background: rgba(12, 12, 15, 0.88);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      border-radius: 999px;
-      color: rgba(255, 255, 255, 0.82);
-      font-family: 'Manrope', sans-serif;
-      font-size: 11.5px;
+      gap: 5px;
+      font-family: 'Unbounded', sans-serif;
+      font-size: 8.5px;
       font-weight: 700;
-      letter-spacing: 0.2px;
-      text-decoration: none;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.65);
-      transition: transform 0.25s ease, border-color 0.25s ease, color 0.25s ease, background 0.25s ease;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.58);
     }
 
-    .order-btn:hover {
-      background: rgba(26, 26, 32, 0.96);
-      border-color: rgba(255, 255, 255, 0.55);
+    .order-card__kicker svg {
+      width: 10px;
+      height: 10px;
+      flex-shrink: 0;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .order-card__title {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+      line-height: 1.25;
+      background: linear-gradient(90deg, #ffffff 0%, #dcdcdc 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
       color: #ffffff;
-      transform: translate3d(0, -2px, 0);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
-    .order-btn svg {
+    .order-card__sub {
+      font-size: 11.5px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.52);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .order-card__cta {
+      position: relative;
+      z-index: 2;
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      padding: 8px 12px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.09);
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      color: #ffffff;
+      font-family: 'Unbounded', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      transition:
+        background 0.25s ease,
+        color 0.25s ease,
+        border-color 0.25s ease,
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+    }
+
+    .order-card__cta svg {
       width: 13px;
       height: 13px;
       flex-shrink: 0;
-      color: #ffffff;
+    }
+
+    @media (hover: hover) {
+      .order-card:hover {
+        transform: translate3d(0, -2px, 0);
+        background: rgba(255, 255, 255, 0.34);
+        box-shadow:
+          0 22px 54px rgba(0, 0, 0, 0.82),
+          0 0 34px rgba(255, 255, 255, 0.13);
+      }
+
+      .order-card:hover .order-card__bg {
+        opacity: 0.72;
+        transform: scale(1.05);
+      }
+
+      .order-card:hover .order-card__icon {
+        transform: scale(1.05);
+        border-color: rgba(255, 255, 255, 0.58);
+      }
+
+      .order-card:hover .order-card__spark {
+        transform: rotate(15deg) scale(1.08);
+      }
+
+      .order-card:hover .order-card__cta {
+        background: #ffffff;
+        color: #050505;
+        border-color: #ffffff;
+        transform: translate3d(2px, 0, 0);
+        box-shadow: 0 0 18px rgba(255, 255, 255, 0.32);
+      }
+    }
+
+    .order-card:active {
+      transform: scale(0.985);
     }
 
     /* ============================================================
@@ -1163,12 +1411,49 @@
         font-size: 10.5px;
       }
 
-      /* На мобильных кнопка заказа располагается аккуратно под карточкой и не перекрывает кнопки */
-      .order-btn {
-        position: static;
-        margin-top: 2px;
-        padding: 8px 14px;
+      /* На мобильных карточка заказа аккуратно лежит прямо под основной визиткой */
+      .order-card {
+        border-radius: 19px;
+      }
+
+      .order-card__inner {
+        padding: 10px 12px;
+        gap: 11px;
+        border-radius: 18px;
+      }
+
+      .order-card__media {
+        width: 44px;
+        height: 44px;
+      }
+
+      .order-card__icon {
+        border-radius: 12px;
+      }
+
+      .order-card__spark {
+        width: 17px;
+        height: 17px;
+        border-radius: 6px;
+      }
+
+      .order-card__kicker {
+        font-size: 8px;
+        letter-spacing: 1.1px;
+      }
+
+      .order-card__title {
+        font-size: 12px;
+      }
+
+      .order-card__sub {
         font-size: 11px;
+      }
+
+      .order-card__cta {
+        padding: 7px 10px;
+        font-size: 9.5px;
+        border-radius: 10px;
       }
 
       .hanging-spider {
@@ -1189,6 +1474,18 @@
         width: 48px;
         height: 48px;
         margin-bottom: 11px;
+      }
+    }
+
+    @media (max-width: 410px) {
+      .order-card__cta-label {
+        display: none;
+      }
+
+      .order-card__cta {
+        width: 34px;
+        height: 34px;
+        padding: 0;
       }
     }
 
@@ -1305,14 +1602,63 @@
       <div id="card-body"></div>
     </section>
 
-    <!-- Кнопка "Заказать такой же сайт" -->
-    <a href="https://telegram.me/mglochKa" target="_blank" rel="noopener noreferrer" class="order-btn">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-        <path d="M2 17l10 5 10-5"/>
-        <path d="M2 12l10 5 10-5"/>
-      </svg>
-      <span>Заказать такой же сайт</span>
+    <!-- Фирменный блок "Заказать такой же сайт" -->
+    <a
+      href="https://telegram.me/mglochKa"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="order-card animate-in"
+      id="order-site-card"
+      style="animation-delay: 0.34s;"
+    >
+      <div class="order-card__inner">
+        <img
+          src="video/order-bg.jpg"
+          alt=""
+          class="order-card__bg"
+          width="476"
+          height="96"
+          decoding="async"
+        >
+        <div class="order-card__scrim" aria-hidden="true"></div>
+
+        <div class="order-card__media">
+          <div class="order-card__icon">
+            <img
+              src="video/icon-order.jpg"
+              alt=""
+              width="50"
+              height="50"
+              decoding="async"
+            >
+          </div>
+          <span class="order-card__spark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 1.5 14.7 9.3 22.5 12 14.7 14.7 12 22.5 9.3 14.7 1.5 12 9.3 9.3Z"/>
+            </svg>
+          </span>
+        </div>
+
+        <div class="order-card__content">
+          <span class="order-card__kicker">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="16 18 22 12 16 6"/>
+              <polyline points="8 6 2 12 8 18"/>
+            </svg>
+            <span>Разработка · @mglochKa</span>
+          </span>
+          <span class="order-card__title">Заказать такой же сайт</span>
+          <span class="order-card__sub">Индивидуальный дизайн под ключ</span>
+        </div>
+
+        <span class="order-card__cta" aria-hidden="true">
+          <span class="order-card__cta-label">Заказать</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 17 17 7"/>
+            <path d="M8 7h9v9"/>
+          </svg>
+        </span>
+      </div>
     </a>
   </main>
 
@@ -1878,6 +2224,16 @@
           });
         }
       });
+
+      const orderCard = document.getElementById('order-site-card');
+      if (orderCard) {
+        orderCard.addEventListener('click', function() {
+          trackClick('order_site');
+          if (typeof ym === 'function') {
+            ym(113351229, 'reachGoal', 'click_order_site');
+          }
+        });
+      }
 
       const copyBtn = document.getElementById('copy-email-btn');
       const copyLabel = document.getElementById('copy-email-label');
