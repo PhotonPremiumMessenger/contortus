@@ -3,49 +3,42 @@
   "bio": "Стример · Создатель контента",
   "avatar": "video/avatar.jpg",
   "tags": ["Roblox", "CS2", "Minecraft"],
-  "halloween": true,
   "links": [
     {
       "title": "Telegram",
       "subtitle": "@contortus · Канал и анонсы",
       "url": "https://telegram.me/contortus",
-      "icon": "telegram",
-      "iconImg": "video/icon-telegram.jpg"
+      "icon": "telegram"
     },
     {
       "title": "Kick",
       "subtitle": "contortuszxc · Прямые эфиры",
       "url": "https://kick.com/contortuszxc",
-      "icon": "kick",
-      "iconImg": "video/icon-kick.jpg"
+      "icon": "kick"
     },
     {
       "title": "TikTok",
       "subtitle": "@contortuszxc · Нарезки и клипы",
       "url": "https://www.tiktok.com/@contortuszxc",
-      "icon": "tiktok",
-      "iconImg": "video/icon-tiktok.jpg"
+      "icon": "tiktok"
     },
     {
       "title": "Донат",
       "subtitle": "DonationAlerts · Поддержать стрим",
       "url": "https://www.donationalerts.com/r/contortuszxc797",
-      "icon": "donate",
-      "iconImg": "video/icon-donationalerts.jpg"
+      "icon": "donate"
     },
     {
       "title": "Обо мне",
       "subtitle": "Кто я такой",
       "action": "about",
-      "icon": "about",
-      "iconImg": "video/icon-about.jpg"
+      "icon": "about"
     },
     {
       "title": "Контакты",
       "subtitle": "Связь и почта",
       "action": "contacts",
-      "icon": "contacts",
-      "iconImg": "video/icon-contacts.jpg"
+      "icon": "contacts"
     }
   ],
   "seo": {
