@@ -16,6 +16,8 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Unbounded:wght@600;700;800;900&display=swap">
   <link rel="preload" href="config.json" as="fetch" crossorigin>
   <link rel="preload" href="video/avatar.jpg" as="image">
+  <link rel="preload" href="video/avatar-tree.jpg" as="image">
+  <link rel="preload" href="video/avatar-alt.jpg" as="image">
 
   <style>
     *, *::before, *::after {
@@ -199,6 +201,12 @@
       user-select: none;
       animation: avatarFloat 5s ease-in-out infinite;
       will-change: transform;
+      border-radius: 28px;
+    }
+
+    .avatar:focus-visible {
+      outline: 2px solid var(--cyan);
+      outline-offset: 4px;
     }
 
     @keyframes avatarFloat {
@@ -244,7 +252,83 @@
         0 12px 34px rgba(0, 0, 0, 0.65),
         0 0 28px rgba(0, 210, 255, 0.38),
         inset 0 0 18px rgba(0, 210, 255, 0.12);
-      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease;
+      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease, opacity 0.22s ease;
+    }
+
+    .avatar.switching img {
+      opacity: 0;
+      transform: scale(0.92);
+    }
+
+    /* Значок-подсказка: клик меняет аватар */
+    .avatar-badge {
+      position: absolute;
+      right: -6px;
+      bottom: -6px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--cyan);
+      color: #0B0E1E;
+      border: 2px solid #0B0E1E;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 14px rgba(0, 210, 255, 0.65);
+      z-index: 3;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      pointer-events: none;
+    }
+
+    .avatar-badge svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .avatar:hover .avatar-badge,
+    .avatar:focus-visible .avatar-badge {
+      transform: rotate(180deg) scale(1.08);
+      box-shadow: 0 0 20px rgba(0, 210, 255, 0.85);
+    }
+
+    .avatar-tooltip {
+      position: absolute;
+      left: 50%;
+      bottom: calc(100% + 10px);
+      transform: translateX(-50%) translateY(4px);
+      white-space: nowrap;
+      padding: 6px 10px;
+      border-radius: 10px;
+      background: rgba(10, 15, 30, 0.92);
+      border: 1px solid rgba(0, 210, 255, 0.45);
+      color: #ffffff;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.55), 0 0 14px rgba(0, 210, 255, 0.25);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s ease;
+      z-index: 4;
+      pointer-events: none;
+    }
+
+    .avatar-tooltip::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 100%;
+      transform: translateX(-50%);
+      border: 5px solid transparent;
+      border-top-color: rgba(0, 210, 255, 0.45);
+    }
+
+    .avatar:hover .avatar-tooltip,
+    .avatar:focus-visible .avatar-tooltip {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
     }
 
     .avatar:hover img {
@@ -1798,12 +1882,22 @@
       return (tr && tr[text]) || text;
     }
 
+    const AVATAR_VARIANTS = [
+      'video/avatar.jpg',
+      'video/avatar-tree.jpg',
+      'video/avatar-alt.jpg'
+    ];
+
     function renderProfile(config, lang) {
       const profile = document.createElement('div');
       profile.className = 'profile';
 
       const avatarWrap = document.createElement('div');
       avatarWrap.className = 'avatar';
+      avatarWrap.setAttribute('role', 'button');
+      avatarWrap.setAttribute('tabindex', '0');
+      avatarWrap.setAttribute('aria-label', 'Сменить аватар');
+      avatarWrap.setAttribute('title', 'Нажми, чтобы сменить аватар');
       avatarWrap.innerHTML =
         '<div class="avatar-haze" aria-hidden="true">' +
           '<svg viewBox="0 0 148 148" fill="none" aria-hidden="true">' +
@@ -1818,24 +1912,78 @@
             '<path d="M118 42 110 66 82 58 90 30Z" stroke="rgba(255,255,255,0.25)" stroke-width="1"/>' +
           '</svg>' +
         '</div>' +
-        '<div class="avatar-glow"></div>';
+        '<div class="avatar-glow"></div>' +
+        '<span class="avatar-tooltip" aria-hidden="true">Нажми, чтобы сменить аватар ↻</span>';
+
+      let avatarIdx = 0;
+      try {
+        const saved = parseInt(localStorage.getItem('contortus_avatar_idx') || '0', 10);
+        if (!isNaN(saved) && saved >= 0 && saved < AVATAR_VARIANTS.length) avatarIdx = saved;
+      } catch (e) {}
 
       const img = document.createElement('img');
-      img.src = config.avatar || 'video/avatar.jpg';
+      img.src = AVATAR_VARIANTS[avatarIdx] || config.avatar || 'video/avatar.jpg';
       img.alt = config.name || 'CONTORTUS';
       img.width = 104;
       img.height = 104;
       img.decoding = 'async';
       img.fetchPriority = 'high';
       img.onerror = function() {
+        if (avatarIdx !== 0) {
+          avatarIdx = 0;
+          img.src = AVATAR_VARIANTS[0];
+          return;
+        }
         avatarWrap.style.display = 'none';
       };
       avatarWrap.appendChild(img);
 
-      avatarWrap.addEventListener('click', function() {
+      const badge = document.createElement('span');
+      badge.className = 'avatar-badge';
+      badge.setAttribute('aria-hidden', 'true');
+      badge.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg>';
+      avatarWrap.appendChild(badge);
+
+      // Предзагрузка остальных вариантов — смена без мигания
+      AVATAR_VARIANTS.forEach(function(src) {
+        const pre = new Image();
+        pre.src = src;
+      });
+
+      function cycleAvatar() {
+        avatarIdx = (avatarIdx + 1) % AVATAR_VARIANTS.length;
+        try {
+          localStorage.setItem('contortus_avatar_idx', String(avatarIdx));
+        } catch (e) {}
+        avatarWrap.classList.add('switching');
         avatarWrap.classList.remove('pulse');
         void avatarWrap.offsetWidth;
         avatarWrap.classList.add('pulse');
+        const nextSrc = AVATAR_VARIANTS[avatarIdx];
+        const pre = new Image();
+        pre.onload = function() {
+          img.src = nextSrc;
+          avatarWrap.classList.remove('switching');
+        };
+        pre.onerror = function() {
+          avatarWrap.classList.remove('switching');
+        };
+        pre.src = nextSrc;
+        // Страховка: если предзагрузка зависла — просто меняем
+        setTimeout(function() {
+          if (avatarWrap.classList.contains('switching')) {
+            img.src = nextSrc;
+            avatarWrap.classList.remove('switching');
+          }
+        }, 600);
+      }
+
+      avatarWrap.addEventListener('click', cycleAvatar);
+      avatarWrap.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          cycleAvatar();
+        }
       });
 
       profile.appendChild(avatarWrap);
