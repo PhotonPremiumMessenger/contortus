@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="theme-color" content="#050505">
+  <meta name="theme-color" content="#0B0E1E">
   <title>CONTORTUS — Официальные ссылки</title>
   <meta name="description" content="Стример, создатель контента · Telegram, Kick, TikTok, Донат">
   <meta property="og:title" content="CONTORTUS">
   <meta property="og:description" content="Стример, создатель контента · Telegram, Kick, TikTok, Донат">
   <meta property="og:type" content="website">
   <meta property="og:image" content="video/avatar.jpg">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23050505'/%3E%3Ccircle cx='32' cy='32' r='20' fill='%23ffffff'/%3E%3Cpath d='M18 35c5-4 9-3 14-8 5 5 9 4 14 8-4 1-7 4-9 8-3-3-7-3-10 0-2-4-5-7-9-8z' fill='%23050505'/%3E%3C/svg%3E">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230B0E1E'/%3E%3Crect x='6' y='6' width='52' height='52' rx='12' fill='none' stroke='%2300D2FF' stroke-width='2'/%3E%3Cpath d='M18 38c5-5 9-4 14-10 5 6 9 5 14 10-4 1-7 4-9 9-3-4-7-4-10 0-2-5-5-8-9-9z' fill='%2300D2FF'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@600;700;800;900&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Unbounded:wght@600;700;800;900&display=swap">
   <link rel="preload" href="config.json" as="fetch" crossorigin>
   <link rel="preload" href="video/avatar.jpg" as="image">
 
@@ -25,18 +25,25 @@
     }
 
     :root {
-      --bg-deep: #050505;
-      --surface-shell: rgba(10, 10, 12, 0.72);
-      --surface-card: rgba(18, 18, 22, 0.86);
-      --surface-card-hover: rgba(28, 28, 34, 0.94);
-      --border-subtle: rgba(255, 255, 255, 0.12);
-      --border-strong: rgba(255, 255, 255, 0.42);
+      --bg-deep: #0B0E1E;
+      --bg-purple: #1C1335;
+      --cyan: #00D2FF;
+      --cyan-soft: #2DE2E6;
+      --cyan-dim: rgba(0, 210, 255, 0.32);
+      --cyan-glow: rgba(0, 210, 255, 0.28);
+      --surface-shell: rgba(10, 15, 30, 0.62);
+      --surface-card: rgba(10, 15, 30, 0.60);
+      --surface-card-hover: rgba(14, 22, 44, 0.78);
+      --border-subtle: rgba(0, 210, 255, 0.22);
+      --border-strong: rgba(0, 210, 255, 0.62);
       --text-primary: #ffffff;
-      --text-secondary: rgba(255, 255, 255, 0.62);
-      --text-muted: rgba(255, 255, 255, 0.40);
-      --radius-shell: 28px;
-      --radius-card: 18px;
-      --radius-icon: 13px;
+      --text-secondary: rgba(234, 242, 255, 0.68);
+      --text-muted: rgba(147, 164, 195, 0.72);
+      --yellow: #FFD700;
+      --red: #E32636;
+      --radius-shell: 16px;
+      --radius-card: 14px;
+      --radius-icon: 12px;
     }
 
     html {
@@ -48,8 +55,7 @@
     }
 
     body {
-      font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: transparent;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       color: var(--text-primary);
       min-height: 100vh;
       min-height: 100dvh;
@@ -58,10 +64,16 @@
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       -webkit-tap-highlight-color: transparent;
+      background:
+        radial-gradient(900px 620px at 12% -8%, rgba(0, 210, 255, 0.16), transparent 60%),
+        radial-gradient(820px 640px at 92% 4%, rgba(124, 58, 237, 0.20), transparent 62%),
+        radial-gradient(760px 720px at 50% 112%, rgba(28, 19, 53, 0.55), transparent 62%),
+        linear-gradient(180deg, #0B0E1E 0%, #12102B 48%, #1C1335 100%);
+      background-attachment: fixed;
     }
 
     /* ============================================================
-       ОПТИМИЗИРОВАННЫЙ ВИДЕО-ФОН (0% потери качества, 4x меньше нагрузка на GPU)
+       ФОН: градиент + созвездия (canvas) + шум — 0 видео, 0 лагов
        ============================================================ */
     .bg-stage {
       position: fixed;
@@ -70,152 +82,33 @@
       overflow: hidden;
       pointer-events: none;
       contain: strict;
-      background: #050505;
     }
 
-    /* Рендерим фильтр размытия на половинной матрице и масштабируем аппаратно x2:
-       8.5px * 2 = эквивалент blur(17px) на ПК, 4px * 2 = blur(8px) на телефоне,
-       идентичная картинка при сокращении числа пикселей шейдера на 72% */
-    .bg-video {
-      position: absolute;
-      top: -3%;
-      left: -3%;
-      width: 53%;
-      height: 53%;
-      object-fit: cover;
-      object-position: center center;
-      transform-origin: 0 0;
-      transform: translate3d(0, 0, 0) scale(2);
-      filter: grayscale(1) brightness(0.5) blur(8.5px);
-      backface-visibility: hidden;
-      opacity: 0;
-      transition: opacity 0.6s ease;
-    }
-
-    .bg-video.is-ready {
-      opacity: 1;
-    }
-
-    @media (max-width: 768px) {
-      .bg-video {
-        filter: grayscale(1) brightness(0.5) blur(4px);
-      }
-    }
-
-    .bg-overlay {
+    #constellation-canvas {
       position: absolute;
       inset: 0;
-      background:
-        radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.07) 0%, transparent 55%),
-        radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.38) 0%, rgba(0, 0, 0, 0.72) 100%);
+      width: 100%;
+      height: 100%;
+      display: block;
+      opacity: 0.9;
+    }
+
+    .bg-noise {
+      position: absolute;
+      inset: 0;
+      opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+      mix-blend-mode: overlay;
+    }
+
+    .bg-vignette {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 38%, transparent 0%, rgba(5, 6, 12, 0.42) 100%);
     }
 
     /* ============================================================
-       МОНОХРОМНЫЙ ХЕЛЛОУИН-СЛОЙ (ТОЛЬКО GPU transform/opacity)
-       ============================================================ */
-    .halloween-layer {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      opacity: 1;
-      transition: opacity 0.45s ease;
-    }
-
-    body:not(.halloween-on) .halloween-layer,
-    body:not(.halloween-on) .shell-cobweb,
-    body:not(.halloween-on) .avatar-halloween-ring {
-      opacity: 0 !important;
-    }
-
-    .corner-web {
-      position: absolute;
-      top: 0;
-      width: clamp(130px, 22vw, 250px);
-      height: clamp(130px, 22vw, 250px);
-      color: rgba(255, 255, 255, 0.14);
-    }
-
-    .corner-web--left {
-      left: 0;
-    }
-
-    .corner-web--right {
-      right: 0;
-      transform: scaleX(-1);
-    }
-
-    .hanging-spider {
-      position: absolute;
-      top: 0;
-      left: clamp(72px, 12vw, 156px);
-      width: 22px;
-      color: rgba(255, 255, 255, 0.28);
-      transform-origin: top center;
-      animation: spiderDrop 7s ease-in-out infinite;
-      will-change: transform;
-    }
-
-    @keyframes spiderDrop {
-      0%, 100% { transform: translate3d(0, -10px, 0); }
-      50%      { transform: translate3d(0, 14px, 0); }
-    }
-
-    .flying-bat {
-      position: absolute;
-      color: rgba(255, 255, 255, 0.18);
-      will-change: transform, opacity;
-      animation: batGlide 22s linear infinite;
-    }
-
-    .flying-bat--1 {
-      top: 16%;
-      left: -60px;
-      width: 28px;
-      animation-duration: 24s;
-      animation-delay: -3s;
-    }
-
-    .flying-bat--2 {
-      top: 68%;
-      left: -60px;
-      width: 20px;
-      opacity: 0.12;
-      animation-duration: 29s;
-      animation-delay: -14s;
-    }
-
-    .flying-bat--3 {
-      top: 34%;
-      left: -60px;
-      width: 16px;
-      opacity: 0.10;
-      animation-duration: 34s;
-      animation-delay: -21s;
-    }
-
-    @keyframes batGlide {
-      0% {
-        transform: translate3d(-40px, 20px, 0) rotate(-6deg) scale(0.9);
-        opacity: 0;
-      }
-      10% {
-        opacity: 0.2;
-      }
-      50% {
-        transform: translate3d(52vw, -35px, 0) rotate(4deg) scale(1.05);
-        opacity: 0.16;
-      }
-      90% {
-        opacity: 0.18;
-      }
-      100% {
-        transform: translate3d(calc(100vw + 80px), -80px, 0) rotate(-4deg) scale(0.92);
-        opacity: 0;
-      }
-    }
-
-    /* ============================================================
-       ОСНОВНОЙ КОНТЕЙНЕР И КАРТОЧКА ПРОФИЛЯ
+       ОСНОВНОЙ КОНТЕЙНЕР И КАРТОЧКА ПРОФИЛЯ (Glassmorphism + Neon)
        ============================================================ */
     .page-wrap {
       position: relative;
@@ -242,99 +135,46 @@
       position: relative;
       width: 100%;
       max-width: 476px;
-      background: linear-gradient(180deg, rgba(16, 16, 20, 0.74) 0%, rgba(7, 7, 9, 0.84) 100%);
+      background: linear-gradient(165deg, rgba(16, 22, 48, 0.72) 0%, rgba(10, 15, 30, 0.78) 100%);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-shell);
       padding: 26px 24px 24px;
       box-shadow:
-        0 28px 80px rgba(0, 0, 0, 0.78),
-        0 0 0 1px rgba(0, 0, 0, 0.6),
-        inset 0 1px 0 rgba(255, 255, 255, 0.16);
+        0 28px 80px rgba(0, 0, 0, 0.62),
+        0 0 32px rgba(0, 210, 255, 0.14),
+        0 0 0 1px rgba(0, 0, 0, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.10),
+        inset 0 0 24px rgba(0, 210, 255, 0.05);
+      backdrop-filter: blur(18px) saturate(150%);
+      -webkit-backdrop-filter: blur(18px) saturate(150%);
       overflow: hidden;
     }
 
-    /* Лунный блик сверху карточки */
+    /* Неоновая линия сверху карточки */
     .card-shell::before {
       content: '';
       position: absolute;
-      top: -90px;
-      left: 50%;
-      width: 320px;
-      height: 180px;
-      transform: translateX(-50%);
-      background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.13) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .shell-cobweb {
-      position: absolute;
       top: 0;
-      right: 0;
-      width: 96px;
-      height: 96px;
-      color: rgba(255, 255, 255, 0.09);
+      left: 18px;
+      right: 18px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--cyan) 30%, var(--cyan-soft) 50%, var(--cyan) 70%, transparent);
+      opacity: 0.85;
+      box-shadow: 0 0 12px rgba(0, 210, 255, 0.8);
       pointer-events: none;
-      transition: opacity 0.4s ease;
     }
 
-    /* Верхняя плашка Хеллоуина */
-    .top-bar {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 16px;
-      position: relative;
-      z-index: 2;
-    }
-
-    .halloween-toggle {
-      appearance: none;
-      -webkit-appearance: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      padding: 5px 12px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      color: rgba(255, 255, 255, 0.78);
-      font-family: 'Unbounded', sans-serif;
-      font-size: 9.5px;
-      font-weight: 700;
-      letter-spacing: 1.6px;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease, transform 0.2s ease;
-    }
-
-    .halloween-toggle:hover {
-      background: rgba(255, 255, 255, 0.1);
-      border-color: rgba(255, 255, 255, 0.35);
-      color: #ffffff;
-    }
-
-    .halloween-toggle:active {
-      transform: scale(0.96);
-    }
-
-    .halloween-toggle svg {
-      width: 13px;
-      height: 13px;
-      flex-shrink: 0;
-    }
-
-    .halloween-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #ffffff;
-      box-shadow: 0 0 8px rgba(255, 255, 255, 0.9);
-      transition: opacity 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
-    }
-
-    body:not(.halloween-on) .halloween-dot {
-      background: rgba(255, 255, 255, 0.3);
-      box-shadow: none;
+    /* Мягкий циановый блик внутри */
+    .card-shell::after {
+      content: '';
+      position: absolute;
+      top: -110px;
+      left: 50%;
+      width: 340px;
+      height: 190px;
+      transform: translateX(-50%);
+      background: radial-gradient(ellipse at center, rgba(0, 210, 255, 0.14) 0%, transparent 70%);
+      pointer-events: none;
     }
 
     /* ============================================================
@@ -366,49 +206,54 @@
       50%      { transform: translate3d(0, -5px, 0); }
     }
 
+    /* Белая полигональная дымка за головой (как в ТЗ) */
+    .avatar-haze {
+      position: absolute;
+      inset: -22px;
+      z-index: -1;
+      opacity: 0.55;
+      pointer-events: none;
+    }
+
+    .avatar-haze svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
     .avatar-glow {
       position: absolute;
-      inset: -6px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.28) 0%, transparent 70%);
+      inset: -8px;
+      border-radius: 34px;
+      background: radial-gradient(circle, rgba(0, 210, 255, 0.30) 0%, transparent 70%);
       pointer-events: none;
       z-index: -1;
-    }
-
-    .avatar-halloween-ring {
-      position: absolute;
-      inset: -7px;
-      border-radius: 50%;
-      border: 1px dashed rgba(255, 255, 255, 0.26);
-      pointer-events: none;
-      animation: ringSpin 24s linear infinite;
-      will-change: transform;
-      transition: opacity 0.4s ease;
-    }
-
-    @keyframes ringSpin {
-      from { transform: rotate(0deg); }
-      to   { transform: rotate(360deg); }
+      filter: blur(6px);
     }
 
     .avatar img {
       width: 100%;
       height: 100%;
-      border-radius: 50%;
+      border-radius: 28px;
       display: block;
       object-fit: cover;
-      background: #080808;
-      border: 2px solid rgba(255, 255, 255, 0.78);
+      background: #0B0E1E;
+      border: 2px solid var(--cyan);
       box-shadow:
-        0 0 0 4px rgba(0, 0, 0, 0.65),
-        0 10px 30px rgba(0, 0, 0, 0.8),
-        0 0 28px rgba(255, 255, 255, 0.16);
-      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease;
+        0 0 0 4px rgba(11, 14, 30, 0.85),
+        0 12px 34px rgba(0, 0, 0, 0.65),
+        0 0 28px rgba(0, 210, 255, 0.38),
+        inset 0 0 18px rgba(0, 210, 255, 0.12);
+      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease;
     }
 
     .avatar:hover img {
       transform: scale(1.04);
-      border-color: #ffffff;
+      box-shadow:
+        0 0 0 4px rgba(11, 14, 30, 0.85),
+        0 14px 38px rgba(0, 0, 0, 0.7),
+        0 0 38px rgba(0, 210, 255, 0.55),
+        inset 0 0 18px rgba(0, 210, 255, 0.18);
     }
 
     .avatar.pulse img {
@@ -416,8 +261,8 @@
     }
 
     @keyframes avatarPulse {
-      0%   { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.75); }
-      100% { box-shadow: 0 0 0 22px rgba(255, 255, 255, 0); }
+      0%   { box-shadow: 0 0 0 0 rgba(0, 210, 255, 0.65); }
+      100% { box-shadow: 0 0 0 22px rgba(0, 210, 255, 0); }
     }
 
     .profile-name {
@@ -428,12 +273,10 @@
       line-height: 1.15;
       margin-bottom: 7px;
       text-transform: uppercase;
-      background: linear-gradient(180deg, #ffffff 0%, #dcdcdc 55%, #9e9e9e 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
       color: #ffffff;
-      text-shadow: 0 4px 28px rgba(255, 255, 255, 0.18);
+      text-shadow:
+        0 0 18px rgba(0, 210, 255, 0.45),
+        0 0 42px rgba(0, 210, 255, 0.18);
     }
 
     .profile-bio {
@@ -455,17 +298,17 @@
 
     .profile-tag {
       font-size: 11px;
-      font-weight: 700;
+      font-weight: 600;
       letter-spacing: 0.6px;
-      color: rgba(255, 255, 255, 0.72);
+      color: rgba(234, 242, 255, 0.82);
       padding: 4px 10px;
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.10);
+      background: rgba(10, 15, 30, 0.55);
+      border: 1px solid rgba(0, 210, 255, 0.28);
     }
 
     /* ============================================================
-       КНОПКИ ПЛОЩАДОК (100% GPU-анимации, без перерисовок)
+       КНОПКИ ПЛОЩАДОК (Neon-Gamer UI: плашки + стекло + неон)
        ============================================================ */
     .links {
       display: flex;
@@ -484,18 +327,20 @@
       gap: 14px;
       width: 100%;
       padding: 12px 14px;
-      background: linear-gradient(135deg, rgba(24, 24, 29, 0.90) 0%, rgba(11, 11, 14, 0.95) 100%);
-      border: 1px solid rgba(255, 255, 255, 0.13);
+      background: linear-gradient(135deg, rgba(16, 22, 48, 0.72) 0%, rgba(10, 15, 30, 0.72) 100%);
+      border: 1px solid var(--border-subtle);
       border-radius: var(--radius-card);
       text-decoration: none;
       color: var(--text-primary);
-      font-family: 'Manrope', sans-serif;
+      font-family: 'Inter', sans-serif;
       text-align: left;
       cursor: pointer;
       overflow: hidden;
       box-shadow:
         0 8px 24px rgba(0, 0, 0, 0.45),
-        inset 0 1px 0 rgba(255, 255, 255, 0.10);
+        0 0 16px rgba(0, 210, 255, 0.10),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08),
+        inset 0 0 12px rgba(0, 210, 255, 0.04);
       transition:
         transform 0.26s cubic-bezier(0.22, 1, 0.36, 1),
         border-color 0.26s ease,
@@ -503,7 +348,7 @@
         box-shadow 0.26s ease;
     }
 
-    /* GPU-блик при наведении (transform вместо left!) */
+    /* GPU-блик при наведении */
     .link-btn::after {
       content: '';
       position: absolute;
@@ -514,7 +359,7 @@
       background: linear-gradient(
         90deg,
         transparent 0%,
-        rgba(255, 255, 255, 0.10) 50%,
+        rgba(0, 210, 255, 0.14) 50%,
         transparent 100%
       );
       transform: translate3d(-140%, 0, 0) skewX(-24deg);
@@ -526,11 +371,13 @@
       .link-btn:hover {
         transform: translate3d(0, -2px, 0);
         border-color: var(--border-strong);
-        background: linear-gradient(135deg, rgba(32, 32, 38, 0.95) 0%, rgba(16, 16, 20, 0.98) 100%);
+        background: linear-gradient(135deg, rgba(20, 30, 64, 0.82) 0%, rgba(12, 18, 40, 0.85) 100%);
         box-shadow:
-          0 14px 34px rgba(0, 0, 0, 0.65),
-          0 0 24px rgba(255, 255, 255, 0.10),
-          inset 0 1px 0 rgba(255, 255, 255, 0.22);
+          0 14px 34px rgba(0, 0, 0, 0.6),
+          0 0 28px rgba(0, 210, 255, 0.32),
+          0 0 12px rgba(0, 210, 255, 0.18),
+          inset 0 1px 0 rgba(255, 255, 255, 0.14),
+          inset 0 0 16px rgba(0, 210, 255, 0.08);
       }
 
       .link-btn:hover::after {
@@ -539,13 +386,22 @@
 
       .link-btn:hover .link-icon {
         transform: scale(1.06);
-        border-color: rgba(255, 255, 255, 0.45);
+        border-color: rgba(0, 210, 255, 0.75);
+        box-shadow:
+          0 0 18px rgba(0, 210, 255, 0.45),
+          inset 0 0 10px rgba(0, 210, 255, 0.12);
+      }
+
+      .link-btn:hover .link-icon svg {
+        color: #ffffff;
+        filter: drop-shadow(0 0 6px rgba(0, 210, 255, 0.9));
       }
 
       .link-btn:hover .link-arrow {
-        background: #ffffff;
-        color: #050505;
-        border-color: #ffffff;
+        background: var(--cyan);
+        color: #0B0E1E;
+        border-color: var(--cyan);
+        box-shadow: 0 0 16px rgba(0, 210, 255, 0.55);
         transform: translate3d(2px, 0, 0);
       }
     }
@@ -556,40 +412,38 @@
 
     .link-btn:focus-visible,
     .order-card:focus-visible,
-    .halloween-toggle:focus-visible,
     .modal-close:focus-visible,
     .contact-action-btn:focus-visible {
-      outline: 2px solid #ffffff;
+      outline: 2px solid var(--cyan);
       outline-offset: 2px;
+      box-shadow: 0 0 0 4px rgba(0, 210, 255, 0.18), 0 0 22px rgba(0, 210, 255, 0.35);
     }
 
+    /* Иконка в отдельном скруглённом квадрате с неоном (по ТЗ п.5) */
     .link-icon {
       width: 48px;
       height: 48px;
       border-radius: var(--radius-icon);
       flex-shrink: 0;
       overflow: hidden;
-      background: #070708;
-      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: linear-gradient(145deg, rgba(11, 14, 30, 0.92), rgba(28, 19, 53, 0.92));
+      border: 1px solid rgba(0, 210, 255, 0.38);
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.55);
-      transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.28s ease;
-    }
-
-    .link-icon img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      filter: grayscale(1) contrast(1.06);
+      box-shadow:
+        0 4px 14px rgba(0, 0, 0, 0.5),
+        0 0 12px rgba(0, 210, 255, 0.18),
+        inset 0 0 8px rgba(0, 210, 255, 0.08);
+      transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.28s ease, box-shadow 0.28s ease;
     }
 
     .link-icon svg {
       width: 22px;
       height: 22px;
-      color: #ffffff;
+      color: var(--cyan);
+      filter: drop-shadow(0 0 4px rgba(0, 210, 255, 0.55));
+      transition: color 0.25s ease, filter 0.25s ease;
     }
 
     .link-body {
@@ -609,7 +463,7 @@
     .link-badge-svg {
       width: 14px;
       height: 14px;
-      color: rgba(255, 255, 255, 0.72);
+      color: rgba(0, 210, 255, 0.75);
       flex-shrink: 0;
       display: inline-flex;
       align-items: center;
@@ -649,10 +503,10 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.10);
-      color: rgba(255, 255, 255, 0.70);
-      transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+      background: rgba(0, 210, 255, 0.06);
+      border: 1px solid rgba(0, 210, 255, 0.22);
+      color: rgba(0, 210, 255, 0.85);
+      transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
     }
 
     .link-arrow svg {
@@ -660,24 +514,24 @@
       height: 15px;
     }
 
-    /* Готический разделитель и 2-колоночный ряд (Обо мне / Контакты) */
-    .gothic-divider {
+    /* Неоновый разделитель и 2-колоночный ряд (Обо мне / Контакты) */
+    .neon-divider {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
       margin: 14px 0 12px;
-      color: rgba(255, 255, 255, 0.26);
+      color: rgba(0, 210, 255, 0.55);
       font-size: 10px;
       user-select: none;
     }
 
-    .gothic-divider::before,
-    .gothic-divider::after {
+    .neon-divider::before,
+    .neon-divider::after {
       content: '';
       flex: 1;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.16), transparent);
+      background: linear-gradient(90deg, transparent, rgba(0, 210, 255, 0.32), transparent);
     }
 
     .action-grid {
@@ -697,6 +551,11 @@
       width: 40px;
       height: 40px;
       border-radius: 11px;
+    }
+
+    .action-grid .link-icon svg {
+      width: 19px;
+      height: 19px;
     }
 
     .action-grid .link-text {
@@ -722,6 +581,7 @@
       text-transform: uppercase;
       text-align: center;
       margin: 16px 0 10px;
+      text-shadow: 0 0 12px rgba(0, 210, 255, 0.25);
     }
 
     .catalog-grid {
@@ -742,22 +602,26 @@
       border-radius: 14px;
       text-decoration: none;
       color: var(--text-primary);
-      transition: transform 0.25s ease, border-color 0.25s ease;
+      box-shadow: 0 0 14px rgba(0, 210, 255, 0.08);
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
     }
 
     .catalog-card:hover {
       transform: translate3d(0, -2px, 0);
       border-color: var(--border-strong);
+      box-shadow: 0 0 22px rgba(0, 210, 255, 0.28);
     }
 
     .catalog-card-icon {
       width: 34px;
       height: 34px;
       border-radius: 10px;
-      background: rgba(255, 255, 255, 0.08);
+      background: rgba(0, 210, 255, 0.08);
+      border: 1px solid rgba(0, 210, 255, 0.25);
       display: flex;
       align-items: center;
       justify-content: center;
+      color: var(--cyan);
     }
 
     .catalog-card-icon svg {
@@ -788,9 +652,9 @@
     }
 
     /* ============================================================
-       ФИРМЕННЫЙ БАННЕР "ЗАКАЗАТЬ ТАКОЙ ЖЕ САЙТ"
+       ФИРМЕННЫЙ БАННЕР "ЗАКАЗАТЬ ТАКОЙ ЖЕ САЙТ" (Neon-Gamer UI)
        Заметный, на видном месте в общей колонке, выше классом по деталям,
-       но сдержанный в строгой Ч/Б гамме — не перетягивает на себя саму визитку
+       но сдержанный в индиго/циановой гамме — не перетягивает визитку
        ============================================================ */
     .order-card {
       position: relative;
@@ -798,21 +662,21 @@
       width: 100%;
       max-width: 476px;
       padding: 1px;
-      border-radius: 22px;
-      background: rgba(255, 255, 255, 0.16);
+      border-radius: 16px;
+      background: rgba(0, 210, 255, 0.28);
       text-decoration: none;
       color: #ffffff;
       overflow: hidden;
       box-shadow:
-        0 18px 48px rgba(0, 0, 0, 0.72),
-        0 0 28px rgba(255, 255, 255, 0.05);
+        0 18px 48px rgba(0, 0, 0, 0.6),
+        0 0 28px rgba(0, 210, 255, 0.16);
       transition:
         transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
         box-shadow 0.3s ease,
         background 0.3s ease;
     }
 
-    /* Тонкий бегущий лунный луч по контуру (100% GPU rotate — 0 перерисовок) */
+    /* Тонкий бегущий циановый луч по контуру (100% GPU rotate) */
     .order-card::before {
       content: '';
       position: absolute;
@@ -824,8 +688,8 @@
         from 0deg,
         transparent 0deg,
         transparent 250deg,
-        rgba(255, 255, 255, 0.32) 300deg,
-        rgba(255, 255, 255, 0.92) 345deg,
+        rgba(0, 210, 255, 0.35) 300deg,
+        rgba(45, 226, 230, 0.95) 345deg,
         transparent 360deg
       );
       transform: translate3d(-50%, -50%, 0) rotate(0deg);
@@ -846,20 +710,20 @@
       align-items: center;
       gap: 14px;
       padding: 12px 14px;
-      border-radius: 21px;
-      background: #09090c;
+      border-radius: 15px;
+      background: #0B0E1E;
       overflow: hidden;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.10);
     }
 
-    /* Кастомная Ч/Б шёлковая текстура фона карточки */
+    /* Кастомная неоновая текстура созвездий */
     .order-card__bg {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0.52;
+      opacity: 0.55;
       pointer-events: none;
       transform: scale(1.01);
       transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.35s ease;
@@ -870,14 +734,14 @@
       inset: 0;
       background: linear-gradient(
         95deg,
-        rgba(7, 7, 9, 0.88) 0%,
-        rgba(10, 10, 14, 0.52) 52%,
-        rgba(7, 7, 9, 0.86) 100%
+        rgba(11, 14, 30, 0.90) 0%,
+        rgba(14, 20, 48, 0.55) 52%,
+        rgba(11, 14, 30, 0.88) 100%
       );
       pointer-events: none;
     }
 
-    /* Мягкий периодический серебряный отблеск (только GPU transform) */
+    /* Мягкий периодический циановый отблеск (только GPU transform) */
     .order-card__inner::after {
       content: '';
       position: absolute;
@@ -888,7 +752,7 @@
       background: linear-gradient(
         90deg,
         transparent 0%,
-        rgba(255, 255, 255, 0.09) 50%,
+        rgba(0, 210, 255, 0.12) 50%,
         transparent 100%
       );
       transform: translate3d(-150%, 0, 0) skewX(-24deg);
@@ -914,12 +778,12 @@
       height: 100%;
       border-radius: 14px;
       overflow: hidden;
-      background: #060608;
-      border: 1px solid rgba(255, 255, 255, 0.28);
+      background: #0B0E1E;
+      border: 1px solid rgba(0, 210, 255, 0.55);
       box-shadow:
-        0 6px 16px rgba(0, 0, 0, 0.65),
-        0 0 18px rgba(255, 255, 255, 0.10);
-      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease;
+        0 6px 16px rgba(0, 0, 0, 0.6),
+        0 0 18px rgba(0, 210, 255, 0.28);
+      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
     .order-card__icon img {
@@ -927,7 +791,6 @@
       height: 100%;
       object-fit: cover;
       display: block;
-      filter: grayscale(1) contrast(1.06);
     }
 
     .order-card__spark {
@@ -937,13 +800,13 @@
       width: 19px;
       height: 19px;
       border-radius: 7px;
-      background: #ffffff;
-      color: #050505;
-      border: 2px solid #09090c;
+      background: var(--cyan);
+      color: #0B0E1E;
+      border: 2px solid #0B0E1E;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+      box-shadow: 0 0 12px rgba(0, 210, 255, 0.65);
       transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
@@ -971,14 +834,14 @@
       font-weight: 700;
       letter-spacing: 1.4px;
       text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.58);
+      color: rgba(0, 210, 255, 0.85);
     }
 
     .order-card__kicker svg {
       width: 10px;
       height: 10px;
       flex-shrink: 0;
-      color: rgba(255, 255, 255, 0.85);
+      color: var(--cyan);
     }
 
     .order-card__title {
@@ -987,11 +850,8 @@
       font-weight: 800;
       letter-spacing: 0.3px;
       line-height: 1.25;
-      background: linear-gradient(90deg, #ffffff 0%, #dcdcdc 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
       color: #ffffff;
+      text-shadow: 0 0 14px rgba(0, 210, 255, 0.35);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -1000,7 +860,7 @@
     .order-card__sub {
       font-size: 11.5px;
       font-weight: 500;
-      color: rgba(255, 255, 255, 0.52);
+      color: rgba(234, 242, 255, 0.60);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -1016,8 +876,8 @@
       gap: 5px;
       padding: 8px 12px;
       border-radius: 12px;
-      background: rgba(255, 255, 255, 0.09);
-      border: 1px solid rgba(255, 255, 255, 0.24);
+      background: rgba(0, 210, 255, 0.10);
+      border: 1px solid rgba(0, 210, 255, 0.45);
       color: #ffffff;
       font-family: 'Unbounded', sans-serif;
       font-size: 10px;
@@ -1040,20 +900,23 @@
     @media (hover: hover) {
       .order-card:hover {
         transform: translate3d(0, -2px, 0);
-        background: rgba(255, 255, 255, 0.34);
+        background: rgba(0, 210, 255, 0.55);
         box-shadow:
-          0 22px 54px rgba(0, 0, 0, 0.82),
-          0 0 34px rgba(255, 255, 255, 0.13);
+          0 22px 54px rgba(0, 0, 0, 0.7),
+          0 0 36px rgba(0, 210, 255, 0.32);
       }
 
       .order-card:hover .order-card__bg {
-        opacity: 0.72;
+        opacity: 0.75;
         transform: scale(1.05);
       }
 
       .order-card:hover .order-card__icon {
         transform: scale(1.05);
-        border-color: rgba(255, 255, 255, 0.58);
+        border-color: rgba(45, 226, 230, 0.9);
+        box-shadow:
+          0 6px 18px rgba(0, 0, 0, 0.65),
+          0 0 24px rgba(0, 210, 255, 0.5);
       }
 
       .order-card:hover .order-card__spark {
@@ -1061,11 +924,11 @@
       }
 
       .order-card:hover .order-card__cta {
-        background: #ffffff;
-        color: #050505;
-        border-color: #ffffff;
+        background: var(--cyan);
+        color: #0B0E1E;
+        border-color: var(--cyan);
         transform: translate3d(2px, 0, 0);
-        box-shadow: 0 0 18px rgba(255, 255, 255, 0.32);
+        box-shadow: 0 0 18px rgba(0, 210, 255, 0.55);
       }
     }
 
@@ -1079,7 +942,7 @@
     .modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.78);
+      background: rgba(5, 6, 12, 0.78);
       z-index: 1000;
       display: flex;
       align-items: center;
@@ -1089,6 +952,8 @@
       visibility: hidden;
       pointer-events: none;
       transition: opacity 0.26s ease, visibility 0.26s ease;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
     }
 
     .modal-backdrop.active {
@@ -1103,14 +968,14 @@
       max-width: 440px;
       max-height: calc(100dvh - 36px);
       overflow-y: auto;
-      background: linear-gradient(165deg, #151519 0%, #09090b 100%);
-      border: 1px solid rgba(255, 255, 255, 0.22);
-      border-radius: 26px;
+      background: linear-gradient(165deg, rgba(20, 28, 60, 0.92) 0%, rgba(11, 14, 30, 0.96) 100%);
+      border: 1px solid rgba(0, 210, 255, 0.38);
+      border-radius: 16px;
       padding: 28px 24px 24px;
       box-shadow:
-        0 28px 90px rgba(0, 0, 0, 0.9),
-        0 0 40px rgba(255, 255, 255, 0.08),
-        inset 0 1px 0 rgba(255, 255, 255, 0.18);
+        0 28px 90px rgba(0, 0, 0, 0.75),
+        0 0 40px rgba(0, 210, 255, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.10);
       transform: translate3d(0, 16px, 0) scale(0.95);
       transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
     }
@@ -1128,37 +993,38 @@
       width: 34px;
       height: 34px;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      color: rgba(255, 255, 255, 0.85);
+      background: rgba(0, 210, 255, 0.08);
+      border: 1px solid rgba(0, 210, 255, 0.32);
+      color: rgba(234, 242, 255, 0.9);
       font-size: 20px;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       line-height: 1;
-      transition: transform 0.22s ease, background 0.22s ease, border-color 0.22s ease;
+      transition: transform 0.22s ease, background 0.22s ease, border-color 0.22s ease, color 0.22s ease;
     }
 
     .modal-close:hover {
-      background: #ffffff;
-      color: #050505;
-      border-color: #ffffff;
+      background: var(--cyan);
+      color: #0B0E1E;
+      border-color: var(--cyan);
       transform: rotate(90deg);
+      box-shadow: 0 0 16px rgba(0, 210, 255, 0.55);
     }
 
     .modal-icon {
       width: 56px;
       height: 56px;
       margin: 0 auto 14px;
-      border-radius: 16px;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.24);
+      border-radius: 14px;
+      background: rgba(0, 210, 255, 0.08);
+      border: 1px solid rgba(0, 210, 255, 0.38);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #ffffff;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+      color: var(--cyan);
+      box-shadow: 0 0 18px rgba(0, 210, 255, 0.22);
     }
 
     .modal-icon svg {
@@ -1175,6 +1041,7 @@
       color: #ffffff;
       text-transform: uppercase;
       letter-spacing: 1.2px;
+      text-shadow: 0 0 16px rgba(0, 210, 255, 0.35);
     }
 
     /* Оформление карточек "Обо мне" */
@@ -1189,9 +1056,9 @@
       flex-direction: column;
       gap: 4px;
       padding: 11px 13px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.09);
-      border-radius: 14px;
+      background: rgba(10, 15, 30, 0.55);
+      border: 1px solid rgba(0, 210, 255, 0.18);
+      border-radius: 12px;
     }
 
     .about-item--wide {
@@ -1203,7 +1070,7 @@
       font-size: 9px;
       font-weight: 700;
       letter-spacing: 1.6px;
-      color: rgba(255, 255, 255, 0.44);
+      color: rgba(0, 210, 255, 0.65);
       text-transform: uppercase;
     }
 
@@ -1216,9 +1083,9 @@
 
     /* Оформление "Контакты" */
     .contact-card {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 16px;
+      background: rgba(10, 15, 30, 0.55);
+      border: 1px solid rgba(0, 210, 255, 0.22);
+      border-radius: 14px;
       padding: 14px 16px;
       margin-bottom: 12px;
       text-align: center;
@@ -1255,31 +1122,33 @@
       justify-content: center;
       gap: 7px;
       padding: 11px 12px;
-      border-radius: 13px;
-      font-family: 'Manrope', sans-serif;
+      border-radius: 12px;
+      font-family: 'Inter', sans-serif;
       font-size: 12.5px;
       font-weight: 700;
       text-decoration: none;
       cursor: pointer;
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(0, 210, 255, 0.32);
+      background: rgba(0, 210, 255, 0.06);
       color: #ffffff;
-      transition: background 0.22s ease, color 0.22s ease, border-color 0.22s ease, transform 0.18s ease;
+      transition: background 0.22s ease, color 0.22s ease, border-color 0.22s ease, transform 0.18s ease, box-shadow 0.22s ease;
     }
 
     .contact-action-btn--primary {
-      background: #ffffff;
-      color: #050505;
-      border-color: #ffffff;
+      background: var(--cyan);
+      color: #0B0E1E;
+      border-color: var(--cyan);
+      box-shadow: 0 0 18px rgba(0, 210, 255, 0.35);
     }
 
     .contact-action-btn:hover {
-      border-color: #ffffff;
+      border-color: var(--cyan);
       transform: translate3d(0, -1px, 0);
+      box-shadow: 0 0 18px rgba(0, 210, 255, 0.35);
     }
 
     .contact-action-btn--primary:hover {
-      background: #e6e6e6;
+      background: var(--cyan-soft);
     }
 
     .contact-action-btn svg {
@@ -1289,31 +1158,33 @@
     }
 
     /* ============================================================
-       ПАНЕЛЬ СТАТИСТИКИ (в Ч/Б стиле)
+       ПАНЕЛЬ СТАТИСТИКИ (Neon-Gamer UI)
        ============================================================ */
     .stats-backdrop {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.88);
+      background: rgba(5, 6, 12, 0.88);
       z-index: 99999;
       overflow-y: auto;
       padding: 20px;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
     }
 
     .stats-box {
       max-width: 460px;
       margin: 40px auto;
-      background: linear-gradient(165deg, #16161a, #0a0a0c);
-      border-radius: 24px;
+      background: linear-gradient(165deg, rgba(20, 28, 60, 0.94), rgba(11, 14, 30, 0.97));
+      border-radius: 16px;
       padding: 26px;
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.85);
+      border: 1px solid rgba(0, 210, 255, 0.38);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.75), 0 0 32px rgba(0, 210, 255, 0.16);
       position: relative;
     }
 
     /* ============================================================
-       АДАПТИВ ДЛЯ ТЕЛЕФОНОВ (красиво, с аватаркой, без блокировки скролла!)
+       АДАПТИВ ДЛЯ ТЕЛЕФОНОВ
        ============================================================ */
     @media (max-width: 768px) {
       .page-wrap {
@@ -1323,11 +1194,7 @@
 
       .card-shell {
         padding: 20px 16px 18px;
-        border-radius: 24px;
-      }
-
-      .top-bar {
-        margin-bottom: 12px;
+        border-radius: 16px;
       }
 
       .profile {
@@ -1338,6 +1205,10 @@
         width: 82px;
         height: 82px;
         margin-bottom: 11px;
+      }
+
+      .avatar img {
+        border-radius: 22px;
       }
 
       .profile-name {
@@ -1367,13 +1238,13 @@
       .link-btn {
         padding: 10px 12px;
         gap: 12px;
-        border-radius: 16px;
+        border-radius: 14px;
       }
 
       .link-icon {
         width: 44px;
         height: 44px;
-        border-radius: 12px;
+        border-radius: 11px;
       }
 
       .link-text {
@@ -1384,7 +1255,7 @@
         font-size: 11.5px;
       }
 
-      .gothic-divider {
+      .neon-divider {
         margin: 11px 0 10px;
       }
 
@@ -1411,15 +1282,14 @@
         font-size: 10.5px;
       }
 
-      /* На мобильных карточка заказа аккуратно лежит прямо под основной визиткой */
       .order-card {
-        border-radius: 19px;
+        border-radius: 16px;
       }
 
       .order-card__inner {
         padding: 10px 12px;
         gap: 11px;
-        border-radius: 18px;
+        border-radius: 15px;
       }
 
       .order-card__media {
@@ -1456,13 +1326,9 @@
         border-radius: 10px;
       }
 
-      .hanging-spider {
-        display: none;
-      }
-
       .modal {
         padding: 22px 18px 20px;
-        border-radius: 22px;
+        border-radius: 16px;
       }
 
       .modal-title {
@@ -1512,93 +1378,17 @@
     }
   </style>
 </head>
-<body class="halloween-on">
-  <!-- ФОНОВАЯ СЦЕНА (оригинальный видео-фон + монохромный Хеллоуин-слой) -->
+<body>
+  <!-- ФОНОВАЯ СЦЕНА: градиент + созвездия + шум (без видео) -->
   <div class="bg-stage" aria-hidden="true">
-    <video
-      id="bg-video"
-      class="bg-video"
-      muted
-      loop
-      playsinline
-      webkit-playsinline
-      disablepictureinpicture
-      disableremoteplayback
-      preload="auto"
-    ></video>
-    <div class="bg-overlay"></div>
-
-    <div class="halloween-layer" id="halloween-layer">
-      <!-- Угловая паутина слева -->
-      <svg class="corner-web corner-web--left" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1">
-        <line x1="0" y1="0" x2="200" y2="32"/>
-        <line x1="0" y1="0" x2="185" y2="88"/>
-        <line x1="0" y1="0" x2="150" y2="145"/>
-        <line x1="0" y1="0" x2="92" y2="188"/>
-        <line x1="0" y1="0" x2="32" y2="200"/>
-        <path d="M42 7 Q38 18 39 20 Q28 28 31 31 Q19 36 18 40 Q10 41 7 42"/>
-        <path d="M84 14 Q74 34 78 38 Q58 55 62 61 Q38 72 39 79 Q18 82 14 84"/>
-        <path d="M128 21 Q112 52 117 57 Q88 83 94 92 Q58 108 59 119 Q28 124 21 128"/>
-        <path d="M172 28 Q150 70 156 76 Q118 112 126 124 Q78 145 79 160 Q36 166 28 172"/>
-      </svg>
-
-      <!-- Угловая паутина справа -->
-      <svg class="corner-web corner-web--right" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1">
-        <line x1="0" y1="0" x2="200" y2="32"/>
-        <line x1="0" y1="0" x2="185" y2="88"/>
-        <line x1="0" y1="0" x2="150" y2="145"/>
-        <line x1="0" y1="0" x2="92" y2="188"/>
-        <line x1="0" y1="0" x2="32" y2="200"/>
-        <path d="M42 7 Q38 18 39 20 Q28 28 31 31 Q19 36 18 40 Q10 41 7 42"/>
-        <path d="M84 14 Q74 34 78 38 Q58 55 62 61 Q38 72 39 79 Q18 82 14 84"/>
-        <path d="M128 21 Q112 52 117 57 Q88 83 94 92 Q58 108 59 119 Q28 124 21 128"/>
-      </svg>
-
-      <!-- Паучок на паутинке (ПК) -->
-      <svg class="hanging-spider" viewBox="0 0 24 120" fill="none">
-        <line x1="12" y1="0" x2="12" y2="94" stroke="currentColor" stroke-width="1"/>
-        <circle cx="12" cy="100" r="4.2" fill="currentColor"/>
-        <circle cx="12" cy="106" r="2.6" fill="currentColor"/>
-        <path d="M9 98c-4-3-6-1-8 2M9 101c-5-1-7 2-8 5M15 98c4-3 6-1 8 2M15 101c5-1 7 2 8 5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-      </svg>
-
-      <!-- Силуэты летучих мышей -->
-      <svg class="flying-bat flying-bat--1" viewBox="0 0 48 24" fill="currentColor">
-        <path d="M24 9c-2 0-3-2-4-4l-1 3c-5-4-12-5-19-2 5 2 7 6 7 10 3-3 7-3 10-1 2-2 5-2 7 3 2-5 5-5 7-3 3-2 7-2 10 1 0-4 2-8 7-10-7-3-14-2-19 2l-1-3c-1 2-2 4-4 4z"/>
-      </svg>
-      <svg class="flying-bat flying-bat--2" viewBox="0 0 48 24" fill="currentColor">
-        <path d="M24 9c-2 0-3-2-4-4l-1 3c-5-4-12-5-19-2 5 2 7 6 7 10 3-3 7-3 10-1 2-2 5-2 7 3 2-5 5-5 7-3 3-2 7-2 10 1 0-4 2-8 7-10-7-3-14-2-19 2l-1-3c-1 2-2 4-4 4z"/>
-      </svg>
-      <svg class="flying-bat flying-bat--3" viewBox="0 0 48 24" fill="currentColor">
-        <path d="M24 9c-2 0-3-2-4-4l-1 3c-5-4-12-5-19-2 5 2 7 6 7 10 3-3 7-3 10-1 2-2 5-2 7 3 2-5 5-5 7-3 3-2 7-2 10 1 0-4 2-8 7-10-7-3-14-2-19 2l-1-3c-1 2-2 4-4 4z"/>
-      </svg>
-    </div>
+    <canvas id="constellation-canvas"></canvas>
+    <div class="bg-noise"></div>
+    <div class="bg-vignette"></div>
   </div>
 
   <!-- ОСНОВНОЙ КОНТЕНТ -->
   <main class="page-wrap" id="app">
     <section class="card-shell" id="card-shell">
-      <svg class="shell-cobweb" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
-        <line x1="120" y1="0" x2="0" y2="22"/>
-        <line x1="120" y1="0" x2="18" y2="68"/>
-        <line x1="120" y1="0" x2="54" y2="104"/>
-        <line x1="120" y1="0" x2="98" y2="120"/>
-        <path d="M84 7 Q90 20 87 22 Q98 32 95 35 Q107 40 109 44"/>
-        <path d="M46 14 Q58 38 52 45 Q74 64 69 72 Q94 82 99 92"/>
-      </svg>
-
-      <div class="top-bar">
-        <button type="button" class="halloween-toggle" id="halloween-toggle" aria-pressed="true" title="Переключить атмосферу Хеллоуина">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M12 3c-1 0-1.5 1-1.5 2.5C7 5.5 3 8.5 3 13.5 3 18.5 6.8 21 12 21s9-2.5 9-7.5c0-5-4-8-7.5-8 0-1.5-.5-2.5-1.5-2.5z"/>
-            <path d="M8.5 11.5 10 13H7zM15.5 11.5 17 13h-3z" fill="currentColor"/>
-            <path d="M8.5 16.5c1 .8 2.2 1.2 3.5 1.2s2.5-.4 3.5-1.2"/>
-          </svg>
-          <span>Halloween</span>
-          <span class="halloween-dot" aria-hidden="true"></span>
-        </button>
-      </div>
-
       <div id="card-body"></div>
     </section>
 
@@ -1741,16 +1531,16 @@
     </div>
   </div>
 
-  <!-- БЛОК СТАТИСТИКИ (сохранён в Ч/Б стиле) -->
+  <!-- БЛОК СТАТИСТИКИ (Neon-Gamer UI) -->
   <div id="stats-panel" class="stats-backdrop">
     <div class="stats-box">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
-        <h2 style="font-family:'Unbounded',sans-serif; font-size:20px; margin:0; letter-spacing:1px; color:#fff;">Статистика</h2>
+        <h2 style="font-family:'Unbounded',sans-serif; font-size:20px; margin:0; letter-spacing:1px; color:#fff; text-shadow:0 0 16px rgba(0,210,255,0.35);">Статистика</h2>
         <button type="button" onclick="document.getElementById('stats-panel').style.display='none'" class="modal-close" style="position:static;" aria-label="Закрыть">×</button>
       </div>
-      <p style="color:rgba(255,255,255,0.5); font-size:12px; text-align:center; margin-bottom:18px;">Клики с момента установки счётчика</p>
+      <p style="color:rgba(234,242,255,0.55); font-size:12px; text-align:center; margin-bottom:18px;">Клики с момента установки счётчика</p>
       <div id="stats-content" style="color:#fff;"></div>
-      <div id="stats-total" style="margin-top:18px; padding-top:18px; border-top:1px solid rgba(255,255,255,0.14); text-align:center;"></div>
+      <div id="stats-total" style="margin-top:18px; padding-top:18px; border-top:1px solid rgba(0,210,255,0.22); text-align:center;"></div>
     </div>
   </div>
 
@@ -1800,92 +1590,137 @@
     trackVisit();
 
     // ============================================================
-    // ОПТИМИЗИРОВАННЫЙ ВИДЕО-ФОН (запускается сразу, декодирует только 1 поток!)
+    // СОЗВЕЗДИЯ НА CANVAS (лёгкий дрейф, пауза в фоне, reduced-motion)
     // ============================================================
-    (function setupVideoBackground() {
-      const video = document.getElementById('bg-video');
-      if (!video) return;
+    (function setupConstellation() {
+      const canvas = document.getElementById('constellation-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
 
-      const mq = window.matchMedia('(max-width: 768px)');
-      let activeSrc = '';
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const isMobile = window.matchMedia('(max-width: 768px)').matches;
+      const POINT_COUNT = isMobile ? 28 : 55;
+      const LINK_DIST = isMobile ? 110 : 135;
+      const DPR = Math.min(window.devicePixelRatio || 1, 1.5);
 
-      function applySource() {
-        const nextSrc = mq.matches ? 'video/phone.mp4' : 'video/pc.mp4';
-        if (activeSrc === nextSrc) return;
-        activeSrc = nextSrc;
-        video.classList.remove('is-ready');
-        video.src = nextSrc;
-        video.muted = true;
-        video.defaultMuted = true;
-        video.load();
-        if (!document.hidden) {
-          video.play().catch(function() {});
+      let w = 0, h = 0;
+      let points = [];
+      let rafId = null;
+      let running = false;
+
+      function resize() {
+        const rect = canvas.getBoundingClientRect();
+        w = Math.max(1, Math.floor(rect.width));
+        h = Math.max(1, Math.floor(rect.height));
+        canvas.width = Math.floor(w * DPR);
+        canvas.height = Math.floor(h * DPR);
+        ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+        initPoints();
+        if (reduceMotion) drawFrame(0);
+      }
+
+      function initPoints() {
+        points = [];
+        for (let i = 0; i < POINT_COUNT; i++) {
+          points.push({
+            x: Math.random() * w,
+            y: Math.random() * h,
+            vx: (Math.random() - 0.5) * 0.22,
+            vy: (Math.random() - 0.5) * 0.22,
+            r: Math.random() * 1.4 + 0.6,
+            a: Math.random() * 0.5 + 0.25
+          });
         }
       }
 
-      video.addEventListener('loadeddata', function() {
-        video.classList.add('is-ready');
-      });
-      video.addEventListener('playing', function() {
-        video.classList.add('is-ready');
-      });
+      function drawFrame(t) {
+        ctx.clearRect(0, 0, w, h);
 
-      applySource();
+        // Линии (10–20% прозрачности по ТЗ)
+        ctx.lineWidth = 1;
+        for (let i = 0; i < points.length; i++) {
+          const p = points[i];
+          for (let j = i + 1; j < points.length; j++) {
+            const q = points[j];
+            const dx = p.x - q.x;
+            const dy = p.y - q.y;
+            const d2 = dx * dx + dy * dy;
+            if (d2 < LINK_DIST * LINK_DIST) {
+              const alpha = (1 - Math.sqrt(d2) / LINK_DIST) * 0.18;
+              ctx.strokeStyle = 'rgba(0, 210, 255, ' + alpha.toFixed(3) + ')';
+              ctx.beginPath();
+              ctx.moveTo(p.x, p.y);
+              ctx.lineTo(q.x, q.y);
+              ctx.stroke();
+            }
+          }
+        }
 
-      if (typeof mq.addEventListener === 'function') {
-        mq.addEventListener('change', applySource);
-      } else if (typeof mq.addListener === 'function') {
-        mq.addListener(applySource);
+        // Точки
+        for (let i = 0; i < points.length; i++) {
+          const p = points[i];
+          ctx.fillStyle = 'rgba(234, 242, 255, ' + (p.a * 0.75).toFixed(3) + ')';
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fill();
+          // Циановое свечение точки
+          ctx.fillStyle = 'rgba(0, 210, 255, ' + (p.a * 0.35).toFixed(3) + ')';
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r * 2.4, 0, Math.PI * 2);
+          ctx.fill();
+        }
       }
 
-      // Пауза видео в неактивной вкладке — 0% нагрузки на батарею и GPU в фоне
+      function step(t) {
+        if (!running) return;
+        // Медленный дрейф
+        for (let i = 0; i < points.length; i++) {
+          const p = points[i];
+          p.x += p.vx;
+          p.y += p.vy;
+          if (p.x < -10) p.x = w + 10;
+          if (p.x > w + 10) p.x = -10;
+          if (p.y < -10) p.y = h + 10;
+          if (p.y > h + 10) p.y = -10;
+        }
+        drawFrame(t);
+        rafId = requestAnimationFrame(step);
+      }
+
+      function start() {
+        if (running || reduceMotion) return;
+        running = true;
+        rafId = requestAnimationFrame(step);
+      }
+
+      function stop() {
+        running = false;
+        if (rafId) cancelAnimationFrame(rafId);
+        rafId = null;
+      }
+
+      resize();
+      if (reduceMotion) {
+        drawFrame(0);
+      } else {
+        start();
+      }
+
+      let resizeTimer = null;
+      window.addEventListener('resize', function() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(resize, 180);
+      }, { passive: true });
+
       document.addEventListener('visibilitychange', function() {
-        if (document.hidden) {
-          video.pause();
-        } else {
-          video.play().catch(function() {});
-        }
+        if (document.hidden) stop();
+        else if (!reduceMotion) start();
       });
-
-      const unlockPlay = function() {
-        if (video.paused && !document.hidden) {
-          video.play().catch(function() {});
-        }
-      };
-      document.addEventListener('pointerdown', unlockPlay, { once: true, passive: true });
     })();
 
     // ============================================================
-    // МОНОХРОМНЫЙ ХЕЛЛОУИН-ПЕРЕКЛЮЧАТЕЛЬ
-    // ============================================================
-    (function setupHalloweenToggle() {
-      const toggle = document.getElementById('halloween-toggle');
-      let enabled = true;
-      try {
-        const saved = localStorage.getItem('contortus_halloween');
-        if (saved === '0') enabled = false;
-      } catch (e) {}
-
-      function sync() {
-        document.body.classList.toggle('halloween-on', enabled);
-        if (toggle) toggle.setAttribute('aria-pressed', enabled ? 'true' : 'false');
-      }
-
-      sync();
-
-      if (toggle) {
-        toggle.addEventListener('click', function() {
-          enabled = !enabled;
-          try {
-            localStorage.setItem('contortus_halloween', enabled ? '1' : '0');
-          } catch (e) {}
-          sync();
-        });
-      }
-    })();
-
-    // ============================================================
-    // ИКОНКИ И ШАБЛОНЫ
+    // ИКОНКИ И ШАБЛОНЫ (векторные, неоновые — по ТЗ п.4)
     // ============================================================
     const INLINE_ICONS = {
       telegram: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>',
@@ -1908,12 +1743,12 @@
       avatar: 'video/avatar.jpg',
       tags: ['Roblox', 'CS2', 'Minecraft'],
       links: [
-        { title: 'Telegram', subtitle: '@contortus · Канал и анонсы', url: 'https://telegram.me/contortus', icon: 'telegram', iconImg: 'video/icon-telegram.jpg' },
-        { title: 'Kick', subtitle: 'contortuszxc · Прямые эфиры', url: 'https://kick.com/contortuszxc', icon: 'kick', iconImg: 'video/icon-kick.jpg' },
-        { title: 'TikTok', subtitle: '@contortuszxc · Нарезки и клипы', url: 'https://www.tiktok.com/@contortuszxc', icon: 'tiktok', iconImg: 'video/icon-tiktok.jpg' },
-        { title: 'Донат', subtitle: 'DonationAlerts · Поддержать стрим', url: 'https://www.donationalerts.com/r/contortuszxc797', icon: 'donate', iconImg: 'video/icon-donationalerts.jpg' },
-        { title: 'Обо мне', subtitle: 'Кто я такой', action: 'about', icon: 'about', iconImg: 'video/icon-about.jpg' },
-        { title: 'Контакты', subtitle: 'Связь и почта', action: 'contacts', icon: 'contacts', iconImg: 'video/icon-contacts.jpg' }
+        { title: 'Telegram', subtitle: '@contortus · Канал и анонсы', url: 'https://telegram.me/contortus', icon: 'telegram' },
+        { title: 'Kick', subtitle: 'contortuszxc · Прямые эфиры', url: 'https://kick.com/contortuszxc', icon: 'kick' },
+        { title: 'TikTok', subtitle: '@contortuszxc · Нарезки и клипы', url: 'https://www.tiktok.com/@contortuszxc', icon: 'tiktok' },
+        { title: 'Донат', subtitle: 'DonationAlerts · Поддержать стрим', url: 'https://www.donationalerts.com/r/contortuszxc797', icon: 'donate' },
+        { title: 'Обо мне', subtitle: 'Кто я такой', action: 'about', icon: 'about' },
+        { title: 'Контакты', subtitle: 'Связь и почта', action: 'contacts', icon: 'contacts' }
       ]
     };
 
@@ -1957,7 +1792,6 @@
       return config.i18n.default || null;
     }
 
-    // Исправлена ошибка TDZ с порядком const tr и return
     function t(text, config, lang) {
       if (!lang || !config.i18n || !config.i18n.translations) return text;
       const tr = config.i18n.translations[lang];
@@ -1970,7 +1804,21 @@
 
       const avatarWrap = document.createElement('div');
       avatarWrap.className = 'avatar';
-      avatarWrap.innerHTML = '<div class="avatar-glow"></div><div class="avatar-halloween-ring"></div>';
+      avatarWrap.innerHTML =
+        '<div class="avatar-haze" aria-hidden="true">' +
+          '<svg viewBox="0 0 148 148" fill="none" aria-hidden="true">' +
+            '<path d="M74 8 96 34 74 52 52 34Z" fill="rgba(255,255,255,0.22)"/>' +
+            '<path d="M30 42 58 30 66 58 38 66Z" fill="rgba(255,255,255,0.14)"/>' +
+            '<path d="M118 42 110 66 82 58 90 30Z" fill="rgba(255,255,255,0.14)"/>' +
+            '<path d="M22 84 48 74 56 100 30 108Z" fill="rgba(255,255,255,0.10)"/>' +
+            '<path d="M126 84 118 108 92 100 100 74Z" fill="rgba(255,255,255,0.10)"/>' +
+            '<path d="M74 118 92 132 74 142 56 132Z" fill="rgba(255,255,255,0.08)"/>' +
+            '<path d="M74 8 96 34 74 52 52 34Z" stroke="rgba(255,255,255,0.35)" stroke-width="1"/>' +
+            '<path d="M30 42 58 30 66 58 38 66Z" stroke="rgba(255,255,255,0.25)" stroke-width="1"/>' +
+            '<path d="M118 42 110 66 82 58 90 30Z" stroke="rgba(255,255,255,0.25)" stroke-width="1"/>' +
+          '</svg>' +
+        '</div>' +
+        '<div class="avatar-glow"></div>';
 
       const img = document.createElement('img');
       img.src = config.avatar || 'video/avatar.jpg';
@@ -2054,7 +1902,9 @@
       iconDiv.className = 'link-icon';
       const iconName = link.icon || 'link';
 
-      if (link.iconImg) {
+      // Векторные неоновые иконки по ТЗ — фото не используем.
+      // iconImg оставлен только как fallback для кастомных ссылок.
+      if (link.iconImg && iconName === 'link') {
         const iconImg = document.createElement('img');
         iconImg.src = link.iconImg;
         iconImg.alt = '';
@@ -2132,9 +1982,9 @@
       if (actionLinks.length) {
         if (primaryLinks.length) {
           const divider = document.createElement('div');
-          divider.className = 'gothic-divider';
+          divider.className = 'neon-divider';
           divider.setAttribute('aria-hidden', 'true');
-          divider.textContent = '✦';
+          divider.textContent = '◆';
           fragment.appendChild(divider);
         }
 
