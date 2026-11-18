@@ -674,52 +674,35 @@
       margin-top: 10px;
       padding: 1px;
       border-radius: 14px;
-      background: rgba(0, 210, 255, 0.45);
+      background: rgba(0, 210, 255, 0.30);
       text-decoration: none;
       color: #ffffff;
       overflow: hidden;
       box-shadow:
         0 12px 32px rgba(0, 0, 0, 0.50),
-        0 0 28px rgba(0, 210, 255, 0.28),
-        0 0 12px rgba(0, 210, 255, 0.18);
-      animation: promoPulse 2.8s ease-in-out infinite;
+        0 0 22px rgba(0, 210, 255, 0.14);
       transition:
         transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
         box-shadow 0.3s ease,
         background 0.3s ease;
     }
 
-    @keyframes promoPulse {
-      0%, 100% {
-        box-shadow:
-          0 12px 32px rgba(0, 0, 0, 0.50),
-          0 0 28px rgba(0, 210, 255, 0.28),
-          0 0 12px rgba(0, 210, 255, 0.18);
-      }
-      50% {
-        box-shadow:
-          0 12px 32px rgba(0, 0, 0, 0.50),
-          0 0 38px rgba(0, 210, 255, 0.48),
-          0 0 20px rgba(0, 210, 255, 0.30);
-      }
-    }
-
-    /* Бейдж «СКИДКА» — бросается в глаза, не двигает кнопки */
+    /* Бейдж «СКИДКА» — спокойный, не кричащий */
     .promo-card__badge {
       position: absolute;
       top: 8px;
       right: 8px;
       z-index: 5;
-      padding: 3px 8px;
+      padding: 2px 7px;
       border-radius: 999px;
-      background: var(--cyan);
-      color: #1C1335;
+      background: rgba(0, 210, 255, 0.14);
+      border: 1px solid rgba(0, 210, 255, 0.35);
+      color: rgba(255, 255, 255, 0.85);
       font-family: 'Unbounded', sans-serif;
-      font-size: 8px;
-      font-weight: 800;
-      letter-spacing: 1px;
+      font-size: 7.5px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
       text-transform: uppercase;
-      box-shadow: 0 0 14px rgba(0, 210, 255, 0.70);
       pointer-events: none;
     }
 
@@ -755,11 +738,11 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      padding: 12px 12px;
+      padding: 10px 12px;
       border-radius: 13px;
       background: #1C1335;
       overflow: hidden;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.10);
     }
 
     .promo-card__bg {
@@ -768,7 +751,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0.72;
+      opacity: 0.55;
       pointer-events: none;
       transform: scale(1.01);
       transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.35s ease;
@@ -779,9 +762,9 @@
       inset: 0;
       background: linear-gradient(
         95deg,
-        rgba(28, 19, 53, 0.82) 0%,
-        rgba(42, 26, 74, 0.45) 52%,
-        rgba(28, 19, 53, 0.80) 100%
+        rgba(28, 19, 53, 0.90) 0%,
+        rgba(42, 26, 74, 0.55) 52%,
+        rgba(28, 19, 53, 0.88) 100%
       );
       pointer-events: none;
     }
@@ -812,21 +795,21 @@
     .promo-card__media {
       position: relative;
       z-index: 2;
-      width: 48px;
-      height: 48px;
+      width: 44px;
+      height: 44px;
       flex-shrink: 0;
     }
 
     .promo-card__icon {
       width: 100%;
       height: 100%;
-      border-radius: 13px;
+      border-radius: 12px;
       overflow: hidden;
       background: #1C1335;
-      border: 1px solid rgba(0, 210, 255, 0.75);
+      border: 1px solid rgba(0, 210, 255, 0.55);
       box-shadow:
         0 6px 16px rgba(0, 0, 0, 0.55),
-        0 0 20px rgba(0, 210, 255, 0.42);
+        0 0 16px rgba(0, 210, 255, 0.28);
       transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
@@ -852,32 +835,30 @@
       align-items: center;
       gap: 5px;
       font-family: 'Unbounded', sans-serif;
-      font-size: 8.5px;
-      font-weight: 800;
-      letter-spacing: 1.4px;
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: 1.3px;
       text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.85);
+      color: rgba(255, 255, 255, 0.75);
     }
 
     .promo-card__title {
       font-family: 'Unbounded', sans-serif;
-      font-size: 14px;
-      font-weight: 900;
+      font-size: 12.5px;
+      font-weight: 800;
       letter-spacing: 0.3px;
       line-height: 1.25;
       color: #ffffff;
-      text-shadow:
-        0 0 14px rgba(167, 139, 250, 0.60),
-        0 0 28px rgba(0, 210, 255, 0.25);
+      text-shadow: 0 0 12px rgba(167, 139, 250, 0.45);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
     .promo-card__sub {
-      font-size: 11.5px;
+      font-size: 11px;
       font-weight: 600;
-      color: rgba(234, 242, 255, 0.85);
+      color: rgba(234, 242, 255, 0.75);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -887,10 +868,6 @@
       color: #ffffff;
       font-weight: 800;
       letter-spacing: 0.5px;
-      background: rgba(0, 210, 255, 0.18);
-      padding: 1px 6px;
-      border-radius: 6px;
-      border: 1px solid rgba(0, 210, 255, 0.40);
     }
 
     .promo-card__cta {
@@ -901,16 +878,15 @@
       align-items: center;
       justify-content: center;
       gap: 5px;
-      padding: 9px 13px;
-      border-radius: 12px;
-      background: var(--cyan);
-      border: 1px solid var(--cyan);
-      color: #1C1335;
+      padding: 7px 11px;
+      border-radius: 11px;
+      background: rgba(0, 210, 255, 0.10);
+      border: 1px solid rgba(0, 210, 255, 0.45);
+      color: #ffffff;
       font-family: 'Unbounded', sans-serif;
-      font-size: 10px;
-      font-weight: 800;
+      font-size: 9.5px;
+      font-weight: 700;
       letter-spacing: 0.4px;
-      box-shadow: 0 0 18px rgba(0, 210, 255, 0.45);
       transition:
         background 0.25s ease,
         color 0.25s ease,
