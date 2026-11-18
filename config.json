@@ -29,6 +29,12 @@
       "icon": "donate"
     },
     {
+      "title": "Discord",
+      "subtitle": "discord.gg/dXWbdSPgP · Комьюнити",
+      "url": "https://discord.gg/dXWbdSPgP",
+      "icon": "discord"
+    },
+    {
       "title": "Обо мне",
       "subtitle": "Кто я такой",
       "action": "about",
@@ -43,6 +49,6 @@
   ],
   "seo": {
     "title": "CONTORTUS — Официальные ссылки",
-    "description": "Стример, создатель контента · Telegram, Kick, TikTok, Донат"
+    "description": "Стример, создатель контента · Telegram, Kick, TikTok, Discord, Донат"
   }
 }

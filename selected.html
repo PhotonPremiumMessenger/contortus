@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="theme-color" content="#0B0E1E">
+  <meta name="theme-color" content="#1C1335">
   <title>Выбранные заявки — CONTORTUS</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230B0E1E'/%3E%3Crect x='6' y='6' width='52' height='52' rx='12' fill='none' stroke='%2300D2FF' stroke-width='2'/%3E%3Cpath d='M18 38c5-5 9-4 14-10 5 6 9 5 14 10-4 1-7 4-9 9-3-4-7-4-10 0-2-5-5-8-9-9z' fill='%2300D2FF'/%3E%3C/svg%3E">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%231C1335'/%3E%3Crect x='6' y='6' width='52' height='52' rx='12' fill='none' stroke='%2300D2FF' stroke-width='2'/%3E%3Cpath d='M18 38c5-5 9-4 14-10 5 6 9 5 14 10-4 1-7 4-9 9-3-4-7-4-10 0-2-5-5-8-9-9z' fill='%2300D2FF'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&family=Unbounded:wght@600;700;800;900&display=swap">
@@ -14,7 +14,7 @@
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     html {
-      background: #0B0E1E;
+      background: #1C1335;
       color-scheme: dark;
       min-height: 100vh;
     }
@@ -22,9 +22,9 @@
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       background:
-        radial-gradient(900px 620px at 12% -8%, rgba(0, 210, 255, 0.14), transparent 60%),
-        radial-gradient(820px 640px at 92% 4%, rgba(124, 58, 237, 0.18), transparent 62%),
-        linear-gradient(180deg, #0B0E1E 0%, #12102B 48%, #1C1335 100%);
+        radial-gradient(900px 620px at 12% -8%, rgba(124, 58, 237, 0.28), transparent 60%),
+        radial-gradient(820px 640px at 92% 4%, rgba(167, 139, 250, 0.18), transparent 62%),
+        linear-gradient(180deg, #1C1335 0%, #241645 48%, #0F0A1E 100%);
       background-attachment: fixed;
       color: #ffffff;
       min-height: 100vh;
@@ -80,7 +80,7 @@
       padding: 7px 14px;
       margin-bottom: 14px;
       border-radius: 12px;
-      background: rgba(10, 15, 30, 0.60);
+      background: rgba(28, 19, 53, 0.60);
       border: 1px solid rgba(0, 210, 255, 0.28);
       color: rgba(234, 242, 255, 0.85);
       font-size: 12px;
@@ -104,14 +104,14 @@
       text-align: center;
       margin-bottom: 6px;
       color: #ffffff;
-      text-shadow: 0 0 18px rgba(0, 210, 255, 0.45), 0 0 42px rgba(0, 210, 255, 0.18);
+      text-shadow: 0 0 18px rgba(167, 139, 250, 0.50), 0 0 42px rgba(124, 58, 237, 0.25);
       text-transform: uppercase;
       letter-spacing: 2px;
     }
 
     .subtitle {
       text-align: center;
-      color: rgba(0, 210, 255, 0.75);
+      color: rgba(255, 255, 255, 0.75);
       font-size: 12px;
       font-weight: 700;
       letter-spacing: 2.5px;
@@ -134,7 +134,7 @@
 
     .card {
       position: relative;
-      background: linear-gradient(155deg, rgba(20, 28, 60, 0.72), rgba(10, 15, 30, 0.78));
+      background: linear-gradient(155deg, rgba(42, 26, 74, 0.72), rgba(28, 19, 53, 0.78));
       border: 1px solid rgba(0, 210, 255, 0.22);
       border-radius: 14px;
       padding: 18px 20px;
@@ -171,7 +171,7 @@
       font-weight: 800;
       color: #ffffff;
       letter-spacing: 1px;
-      text-shadow: 0 0 12px rgba(0, 210, 255, 0.35);
+      text-shadow: 0 0 12px rgba(167, 139, 250, 0.45);
     }
 
     .card-badge {
@@ -180,7 +180,7 @@
       padding: 4px 9px;
       border-radius: 999px;
       background: rgba(0, 210, 255, 0.10);
-      color: #00D2FF;
+      color: #ffffff;
       border: 1px solid rgba(0, 210, 255, 0.38);
       letter-spacing: 1px;
       text-transform: uppercase;
@@ -201,7 +201,7 @@
     }
 
     .card-row .label {
-      color: rgba(0, 210, 255, 0.60);
+      color: rgba(255, 255, 255, 0.55);
       font-size: 11px;
       font-weight: 700;
       text-transform: uppercase;
@@ -211,7 +211,7 @@
 
     .card-row .value {
       font-family: 'JetBrains Mono', monospace;
-      background: rgba(10, 15, 30, 0.60);
+      background: rgba(28, 19, 53, 0.60);
       border: 1px solid rgba(0, 210, 255, 0.18);
       padding: 5px 9px;
       border-radius: 8px;
@@ -245,8 +245,8 @@
       height: 48px;
       margin: 0 auto 14px;
       opacity: 0.75;
-      color: #00D2FF;
-      filter: drop-shadow(0 0 8px rgba(0, 210, 255, 0.45));
+      color: #ffffff;
+      filter: drop-shadow(0 0 8px rgba(167, 139, 250, 0.45));
     }
 
     @media (max-width: 768px) {
@@ -260,7 +260,7 @@
     }
 
     ::-webkit-scrollbar { width: 8px; }
-    ::-webkit-scrollbar-track { background: #0B0E1E; }
+    ::-webkit-scrollbar-track { background: #1C1335; }
     ::-webkit-scrollbar-thumb {
       background: rgba(0, 210, 255, 0.35);
       border-radius: 4px;
@@ -335,7 +335,7 @@
             const d2 = dx * dx + dy * dy;
             if (d2 < LINK_DIST * LINK_DIST) {
               const alpha = (1 - Math.sqrt(d2) / LINK_DIST) * 0.16;
-              ctx.strokeStyle = 'rgba(0, 210, 255, ' + alpha.toFixed(3) + ')';
+              ctx.strokeStyle = 'rgba(167, 139, 250, ' + alpha.toFixed(3) + ')';
               ctx.beginPath();
               ctx.moveTo(p.x, p.y);
               ctx.lineTo(q.x, q.y);

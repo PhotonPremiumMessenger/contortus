@@ -3,21 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="theme-color" content="#0B0E1E">
+  <meta name="theme-color" content="#1C1335">
   <title>CONTORTUS — Официальные ссылки</title>
-  <meta name="description" content="Стример, создатель контента · Telegram, Kick, TikTok, Донат">
+  <meta name="description" content="Стример, создатель контента · Telegram, Kick, TikTok, Discord, Донат">
   <meta property="og:title" content="CONTORTUS">
-  <meta property="og:description" content="Стример, создатель контента · Telegram, Kick, TikTok, Донат">
+  <meta property="og:description" content="Стример, создатель контента · Telegram, Kick, TikTok, Discord, Донат">
   <meta property="og:type" content="website">
   <meta property="og:image" content="video/avatar.jpg">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230B0E1E'/%3E%3Crect x='6' y='6' width='52' height='52' rx='12' fill='none' stroke='%2300D2FF' stroke-width='2'/%3E%3Cpath d='M18 38c5-5 9-4 14-10 5 6 9 5 14 10-4 1-7 4-9 9-3-4-7-4-10 0-2-5-5-8-9-9z' fill='%2300D2FF'/%3E%3C/svg%3E">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%231C1335'/%3E%3Crect x='6' y='6' width='52' height='52' rx='12' fill='none' stroke='%2300D2FF' stroke-width='2'/%3E%3Cpath d='M18 38c5-5 9-4 14-10 5 6 9 5 14 10-4 1-7 4-9 9-3-4-7-4-10 0-2-5-5-8-9-9z' fill='%23A78BFA'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Unbounded:wght@600;700;800;900&display=swap">
   <link rel="preload" href="config.json" as="fetch" crossorigin>
   <link rel="preload" href="video/avatar.jpg" as="image">
-  <link rel="preload" href="video/avatar-tree.jpg" as="image">
-  <link rel="preload" href="video/avatar-alt.jpg" as="image">
 
   <style>
     *, *::before, *::after {
@@ -27,22 +25,18 @@
     }
 
     :root {
-      --bg-deep: #0B0E1E;
-      --bg-purple: #1C1335;
+      --bg-deep: #1C1335;
+      --bg-dark: #0F0A1E;
+      --purple: #7C3AED;
+      --purple-soft: #A78BFA;
+      --purple-dim: rgba(124, 58, 237, 0.28);
       --cyan: #00D2FF;
       --cyan-soft: #2DE2E6;
-      --cyan-dim: rgba(0, 210, 255, 0.32);
-      --cyan-glow: rgba(0, 210, 255, 0.28);
-      --surface-shell: rgba(10, 15, 30, 0.62);
-      --surface-card: rgba(10, 15, 30, 0.60);
-      --surface-card-hover: rgba(14, 22, 44, 0.78);
-      --border-subtle: rgba(0, 210, 255, 0.22);
-      --border-strong: rgba(0, 210, 255, 0.62);
+      --border-subtle: rgba(0, 210, 255, 0.28);
+      --border-strong: rgba(0, 210, 255, 0.68);
       --text-primary: #ffffff;
-      --text-secondary: rgba(234, 242, 255, 0.68);
-      --text-muted: rgba(147, 164, 195, 0.72);
-      --yellow: #FFD700;
-      --red: #E32636;
+      --text-secondary: rgba(234, 242, 255, 0.70);
+      --text-muted: rgba(167, 139, 250, 0.72);
       --radius-shell: 16px;
       --radius-card: 14px;
       --radius-icon: 12px;
@@ -67,15 +61,15 @@
       -moz-osx-font-smoothing: grayscale;
       -webkit-tap-highlight-color: transparent;
       background:
-        radial-gradient(900px 620px at 12% -8%, rgba(0, 210, 255, 0.16), transparent 60%),
-        radial-gradient(820px 640px at 92% 4%, rgba(124, 58, 237, 0.20), transparent 62%),
-        radial-gradient(760px 720px at 50% 112%, rgba(28, 19, 53, 0.55), transparent 62%),
-        linear-gradient(180deg, #0B0E1E 0%, #12102B 48%, #1C1335 100%);
+        radial-gradient(900px 620px at 12% -8%, rgba(124, 58, 237, 0.28), transparent 60%),
+        radial-gradient(820px 640px at 92% 4%, rgba(167, 139, 250, 0.18), transparent 62%),
+        radial-gradient(760px 720px at 50% 112%, rgba(28, 19, 53, 0.65), transparent 62%),
+        linear-gradient(180deg, #1C1335 0%, #241645 48%, #0F0A1E 100%);
       background-attachment: fixed;
     }
 
     /* ============================================================
-       ФОН: градиент + созвездия (canvas) + шум — 0 видео, 0 лагов
+       ФОН: фиолетовый градиент + созвездия + шум — синий неон только на рамках
        ============================================================ */
     .bg-stage {
       position: fixed;
@@ -106,11 +100,11 @@
     .bg-vignette {
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse at 50% 38%, transparent 0%, rgba(5, 6, 12, 0.42) 100%);
+      background: radial-gradient(ellipse at 50% 38%, transparent 0%, rgba(15, 10, 30, 0.45) 100%);
     }
 
     /* ============================================================
-       ОСНОВНОЙ КОНТЕЙНЕР И КАРТОЧКА ПРОФИЛЯ (Glassmorphism + Neon)
+       ОСНОВНОЙ КОНТЕЙНЕР И КАРТОЧКА (фиолетовое стекло + синий неон на рамке)
        ============================================================ */
     .page-wrap {
       position: relative;
@@ -122,14 +116,14 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 22px 16px 28px;
-      gap: 12px;
+      padding: 14px 14px 18px;
+      gap: 10px;
     }
 
     @supports (padding-bottom: env(safe-area-inset-bottom)) {
       .page-wrap {
-        padding-top: max(20px, env(safe-area-inset-top));
-        padding-bottom: calc(24px + env(safe-area-inset-bottom));
+        padding-top: max(12px, env(safe-area-inset-top));
+        padding-bottom: calc(16px + env(safe-area-inset-bottom));
       }
     }
 
@@ -137,22 +131,22 @@
       position: relative;
       width: 100%;
       max-width: 476px;
-      background: linear-gradient(165deg, rgba(16, 22, 48, 0.72) 0%, rgba(10, 15, 30, 0.78) 100%);
+      background: linear-gradient(165deg, rgba(42, 26, 74, 0.72) 0%, rgba(28, 19, 53, 0.78) 100%);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-shell);
-      padding: 26px 24px 24px;
+      padding: 18px 18px 16px;
       box-shadow:
-        0 28px 80px rgba(0, 0, 0, 0.62),
-        0 0 32px rgba(0, 210, 255, 0.14),
+        0 28px 80px rgba(0, 0, 0, 0.55),
+        0 0 28px rgba(0, 210, 255, 0.14),
         0 0 0 1px rgba(0, 0, 0, 0.35),
-        inset 0 1px 0 rgba(255, 255, 255, 0.10),
-        inset 0 0 24px rgba(0, 210, 255, 0.05);
+        inset 0 1px 0 rgba(255, 255, 255, 0.12),
+        inset 0 0 24px rgba(124, 58, 237, 0.10);
       backdrop-filter: blur(18px) saturate(150%);
       -webkit-backdrop-filter: blur(18px) saturate(150%);
       overflow: hidden;
     }
 
-    /* Неоновая линия сверху карточки */
+    /* Синий неон — только верхняя рамка */
     .card-shell::before {
       content: '';
       position: absolute;
@@ -161,12 +155,13 @@
       right: 18px;
       height: 1px;
       background: linear-gradient(90deg, transparent, var(--cyan) 30%, var(--cyan-soft) 50%, var(--cyan) 70%, transparent);
-      opacity: 0.85;
-      box-shadow: 0 0 12px rgba(0, 210, 255, 0.8);
+      opacity: 0.9;
+      box-shadow: 0 0 12px rgba(0, 210, 255, 0.85);
       pointer-events: none;
+      z-index: 3;
     }
 
-    /* Мягкий циановый блик внутри */
+    /* Зеркальный блик */
     .card-shell::after {
       content: '';
       position: absolute;
@@ -175,33 +170,33 @@
       width: 340px;
       height: 190px;
       transform: translateX(-50%);
-      background: radial-gradient(ellipse at center, rgba(0, 210, 255, 0.14) 0%, transparent 70%);
+      background: radial-gradient(ellipse at center, rgba(167, 139, 250, 0.16) 0%, transparent 70%);
       pointer-events: none;
     }
 
     /* ============================================================
-       ПРОФИЛЬ
+       ПРОФИЛЬ (компактно — всё на одном экране)
        ============================================================ */
     .profile {
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
-      margin-bottom: 22px;
+      margin-bottom: 14px;
       position: relative;
       z-index: 2;
     }
 
     .avatar {
       position: relative;
-      width: 104px;
-      height: 104px;
-      margin-bottom: 14px;
+      width: 84px;
+      height: 84px;
+      margin-bottom: 10px;
       cursor: pointer;
       user-select: none;
       animation: avatarFloat 5s ease-in-out infinite;
       will-change: transform;
-      border-radius: 28px;
+      border-radius: 24px;
     }
 
     .avatar:focus-visible {
@@ -211,13 +206,12 @@
 
     @keyframes avatarFloat {
       0%, 100% { transform: translate3d(0, 0, 0); }
-      50%      { transform: translate3d(0, -5px, 0); }
+      50%      { transform: translate3d(0, -4px, 0); }
     }
 
-    /* Белая полигональная дымка за головой (как в ТЗ) */
     .avatar-haze {
       position: absolute;
-      inset: -22px;
+      inset: -18px;
       z-index: -1;
       opacity: 0.55;
       pointer-events: none;
@@ -231,9 +225,9 @@
 
     .avatar-glow {
       position: absolute;
-      inset: -8px;
-      border-radius: 34px;
-      background: radial-gradient(circle, rgba(0, 210, 255, 0.30) 0%, transparent 70%);
+      inset: -6px;
+      border-radius: 30px;
+      background: radial-gradient(circle, rgba(124, 58, 237, 0.35) 0%, transparent 70%);
       pointer-events: none;
       z-index: -1;
       filter: blur(6px);
@@ -242,102 +236,26 @@
     .avatar img {
       width: 100%;
       height: 100%;
-      border-radius: 28px;
+      border-radius: 24px;
       display: block;
       object-fit: cover;
-      background: #0B0E1E;
+      background: #1C1335;
       border: 2px solid var(--cyan);
       box-shadow:
-        0 0 0 4px rgba(11, 14, 30, 0.85),
-        0 12px 34px rgba(0, 0, 0, 0.65),
-        0 0 28px rgba(0, 210, 255, 0.38),
-        inset 0 0 18px rgba(0, 210, 255, 0.12);
-      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease, opacity 0.22s ease;
-    }
-
-    .avatar.switching img {
-      opacity: 0;
-      transform: scale(0.92);
-    }
-
-    /* Значок-подсказка: клик меняет аватар */
-    .avatar-badge {
-      position: absolute;
-      right: -6px;
-      bottom: -6px;
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background: var(--cyan);
-      color: #0B0E1E;
-      border: 2px solid #0B0E1E;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 0 14px rgba(0, 210, 255, 0.65);
-      z-index: 3;
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-      pointer-events: none;
-    }
-
-    .avatar-badge svg {
-      width: 14px;
-      height: 14px;
-    }
-
-    .avatar:hover .avatar-badge,
-    .avatar:focus-visible .avatar-badge {
-      transform: rotate(180deg) scale(1.08);
-      box-shadow: 0 0 20px rgba(0, 210, 255, 0.85);
-    }
-
-    .avatar-tooltip {
-      position: absolute;
-      left: 50%;
-      bottom: calc(100% + 10px);
-      transform: translateX(-50%) translateY(4px);
-      white-space: nowrap;
-      padding: 6px 10px;
-      border-radius: 10px;
-      background: rgba(10, 15, 30, 0.92);
-      border: 1px solid rgba(0, 210, 255, 0.45);
-      color: #ffffff;
-      font-family: 'Inter', sans-serif;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.2px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.55), 0 0 14px rgba(0, 210, 255, 0.25);
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s ease;
-      z-index: 4;
-      pointer-events: none;
-    }
-
-    .avatar-tooltip::after {
-      content: '';
-      position: absolute;
-      left: 50%;
-      top: 100%;
-      transform: translateX(-50%);
-      border: 5px solid transparent;
-      border-top-color: rgba(0, 210, 255, 0.45);
-    }
-
-    .avatar:hover .avatar-tooltip,
-    .avatar:focus-visible .avatar-tooltip {
-      opacity: 1;
-      visibility: visible;
-      transform: translateX(-50%) translateY(0);
+        0 0 0 4px rgba(15, 10, 30, 0.85),
+        0 10px 28px rgba(0, 0, 0, 0.6),
+        0 0 24px rgba(0, 210, 255, 0.35),
+        inset 0 0 16px rgba(124, 58, 237, 0.15);
+      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease;
     }
 
     .avatar:hover img {
       transform: scale(1.04);
       box-shadow:
-        0 0 0 4px rgba(11, 14, 30, 0.85),
-        0 14px 38px rgba(0, 0, 0, 0.7),
-        0 0 38px rgba(0, 210, 255, 0.55),
-        inset 0 0 18px rgba(0, 210, 255, 0.18);
+        0 0 0 4px rgba(15, 10, 30, 0.85),
+        0 12px 32px rgba(0, 0, 0, 0.65),
+        0 0 32px rgba(0, 210, 255, 0.55),
+        inset 0 0 16px rgba(124, 58, 237, 0.20);
     }
 
     .avatar.pulse img {
@@ -346,58 +264,58 @@
 
     @keyframes avatarPulse {
       0%   { box-shadow: 0 0 0 0 rgba(0, 210, 255, 0.65); }
-      100% { box-shadow: 0 0 0 22px rgba(0, 210, 255, 0); }
+      100% { box-shadow: 0 0 0 20px rgba(0, 210, 255, 0); }
     }
 
     .profile-name {
       font-family: 'Unbounded', sans-serif;
-      font-size: clamp(24px, 6vw, 30px);
+      font-size: clamp(22px, 5.5vw, 28px);
       font-weight: 900;
       letter-spacing: 2.5px;
       line-height: 1.15;
-      margin-bottom: 7px;
+      margin-bottom: 5px;
       text-transform: uppercase;
       color: #ffffff;
       text-shadow:
-        0 0 18px rgba(0, 210, 255, 0.45),
-        0 0 42px rgba(0, 210, 255, 0.18);
+        0 0 18px rgba(167, 139, 250, 0.50),
+        0 0 42px rgba(124, 58, 237, 0.25);
     }
 
     .profile-bio {
-      font-size: 13.5px;
+      font-size: 12.5px;
       font-weight: 500;
       color: var(--text-secondary);
       letter-spacing: 0.3px;
       max-width: 340px;
-      line-height: 1.45;
+      line-height: 1.4;
     }
 
     .profile-tags {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 6px;
-      margin-top: 11px;
+      gap: 5px;
+      margin-top: 8px;
     }
 
     .profile-tag {
-      font-size: 11px;
+      font-size: 10.5px;
       font-weight: 600;
       letter-spacing: 0.6px;
-      color: rgba(234, 242, 255, 0.82);
-      padding: 4px 10px;
+      color: rgba(234, 242, 255, 0.88);
+      padding: 3px 9px;
       border-radius: 999px;
-      background: rgba(10, 15, 30, 0.55);
-      border: 1px solid rgba(0, 210, 255, 0.28);
+      background: rgba(28, 19, 53, 0.60);
+      border: 1px solid var(--border-subtle);
     }
 
     /* ============================================================
-       КНОПКИ ПЛОЩАДОК (Neon-Gamer UI: плашки + стекло + неон)
+       КНОПКИ (фиолетовое стекло + зеркало + движение, синий неон только на рамке)
        ============================================================ */
     .links {
       display: flex;
       flex-direction: column;
-      gap: 11px;
+      gap: 8px;
       position: relative;
       z-index: 2;
     }
@@ -408,10 +326,10 @@
       position: relative;
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
       width: 100%;
-      padding: 12px 14px;
-      background: linear-gradient(135deg, rgba(16, 22, 48, 0.72) 0%, rgba(10, 15, 30, 0.72) 100%);
+      padding: 9px 12px;
+      background: linear-gradient(135deg, rgba(42, 26, 74, 0.72) 0%, rgba(28, 19, 53, 0.72) 100%);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-card);
       text-decoration: none;
@@ -421,15 +339,28 @@
       cursor: pointer;
       overflow: hidden;
       box-shadow:
-        0 8px 24px rgba(0, 0, 0, 0.45),
-        0 0 16px rgba(0, 210, 255, 0.10),
-        inset 0 1px 0 rgba(255, 255, 255, 0.08),
-        inset 0 0 12px rgba(0, 210, 255, 0.04);
+        0 8px 24px rgba(0, 0, 0, 0.40),
+        0 0 14px rgba(0, 210, 255, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.10),
+        inset 0 0 12px rgba(124, 58, 237, 0.06);
       transition:
         transform 0.26s cubic-bezier(0.22, 1, 0.36, 1),
         border-color 0.26s ease,
         background 0.26s ease,
         box-shadow 0.26s ease;
+    }
+
+    /* Зеркальный блик (движение) */
+    .link-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, 0.08) 45%, rgba(255, 255, 255, 0.02) 55%, transparent 70%);
+      pointer-events: none;
+      z-index: 1;
     }
 
     /* GPU-блик при наведении */
@@ -443,25 +374,31 @@
       background: linear-gradient(
         90deg,
         transparent 0%,
-        rgba(0, 210, 255, 0.14) 50%,
+        rgba(167, 139, 250, 0.16) 50%,
         transparent 100%
       );
       transform: translate3d(-140%, 0, 0) skewX(-24deg);
       transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
       pointer-events: none;
+      z-index: 1;
+    }
+
+    .link-btn > * {
+      position: relative;
+      z-index: 2;
     }
 
     @media (hover: hover) {
       .link-btn:hover {
         transform: translate3d(0, -2px, 0);
         border-color: var(--border-strong);
-        background: linear-gradient(135deg, rgba(20, 30, 64, 0.82) 0%, rgba(12, 18, 40, 0.85) 100%);
+        background: linear-gradient(135deg, rgba(52, 32, 92, 0.82) 0%, rgba(32, 22, 62, 0.85) 100%);
         box-shadow:
-          0 14px 34px rgba(0, 0, 0, 0.6),
-          0 0 28px rgba(0, 210, 255, 0.32),
-          0 0 12px rgba(0, 210, 255, 0.18),
-          inset 0 1px 0 rgba(255, 255, 255, 0.14),
-          inset 0 0 16px rgba(0, 210, 255, 0.08);
+          0 14px 34px rgba(0, 0, 0, 0.55),
+          0 0 26px rgba(0, 210, 255, 0.28),
+          0 0 12px rgba(0, 210, 255, 0.16),
+          inset 0 1px 0 rgba(255, 255, 255, 0.16),
+          inset 0 0 16px rgba(124, 58, 237, 0.10);
       }
 
       .link-btn:hover::after {
@@ -472,18 +409,17 @@
         transform: scale(1.06);
         border-color: rgba(0, 210, 255, 0.75);
         box-shadow:
-          0 0 18px rgba(0, 210, 255, 0.45),
-          inset 0 0 10px rgba(0, 210, 255, 0.12);
+          0 0 18px rgba(0, 210, 255, 0.40),
+          inset 0 0 10px rgba(124, 58, 237, 0.15);
       }
 
       .link-btn:hover .link-icon svg {
         color: #ffffff;
-        filter: drop-shadow(0 0 6px rgba(0, 210, 255, 0.9));
       }
 
       .link-btn:hover .link-arrow {
         background: var(--cyan);
-        color: #0B0E1E;
+        color: #1C1335;
         border-color: var(--cyan);
         box-shadow: 0 0 16px rgba(0, 210, 255, 0.55);
         transform: translate3d(2px, 0, 0);
@@ -496,6 +432,7 @@
 
     .link-btn:focus-visible,
     .order-card:focus-visible,
+    .promo-card:focus-visible,
     .modal-close:focus-visible,
     .contact-action-btn:focus-visible {
       outline: 2px solid var(--cyan);
@@ -503,31 +440,28 @@
       box-shadow: 0 0 0 4px rgba(0, 210, 255, 0.18), 0 0 22px rgba(0, 210, 255, 0.35);
     }
 
-    /* Иконка в отдельном скруглённом квадрате с неоном (по ТЗ п.5) */
     .link-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: var(--radius-icon);
+      width: 40px;
+      height: 40px;
+      border-radius: 11px;
       flex-shrink: 0;
       overflow: hidden;
-      background: linear-gradient(145deg, rgba(11, 14, 30, 0.92), rgba(28, 19, 53, 0.92));
-      border: 1px solid rgba(0, 210, 255, 0.38);
+      background: linear-gradient(145deg, rgba(28, 19, 53, 0.92), rgba(42, 26, 74, 0.92));
+      border: 1px solid var(--border-subtle);
       display: flex;
       align-items: center;
       justify-content: center;
       box-shadow:
-        0 4px 14px rgba(0, 0, 0, 0.5),
-        0 0 12px rgba(0, 210, 255, 0.18),
-        inset 0 0 8px rgba(0, 210, 255, 0.08);
+        0 4px 12px rgba(0, 0, 0, 0.45),
+        inset 0 1px 0 rgba(255, 255, 255, 0.10);
       transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.28s ease, box-shadow 0.28s ease;
     }
 
     .link-icon svg {
-      width: 22px;
-      height: 22px;
-      color: var(--cyan);
-      filter: drop-shadow(0 0 4px rgba(0, 210, 255, 0.55));
-      transition: color 0.25s ease, filter 0.25s ease;
+      width: 20px;
+      height: 20px;
+      color: #ffffff;
+      transition: color 0.25s ease;
     }
 
     .link-body {
@@ -535,7 +469,7 @@
       min-width: 0;
       display: flex;
       flex-direction: column;
-      gap: 2px;
+      gap: 1px;
     }
 
     .link-title-row {
@@ -545,9 +479,9 @@
     }
 
     .link-badge-svg {
-      width: 14px;
-      height: 14px;
-      color: rgba(0, 210, 255, 0.75);
+      width: 13px;
+      height: 13px;
+      color: rgba(255, 255, 255, 0.75);
       flex-shrink: 0;
       display: inline-flex;
       align-items: center;
@@ -561,7 +495,7 @@
 
     .link-text {
       font-family: 'Unbounded', sans-serif;
-      font-size: 13.5px;
+      font-size: 12.5px;
       font-weight: 700;
       letter-spacing: 0.4px;
       color: #ffffff;
@@ -571,7 +505,7 @@
     }
 
     .link-sub {
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 500;
       color: var(--text-muted);
       white-space: nowrap;
@@ -580,33 +514,32 @@
     }
 
     .link-arrow {
-      width: 32px;
-      height: 32px;
-      border-radius: 10px;
+      width: 30px;
+      height: 30px;
+      border-radius: 9px;
       flex-shrink: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: rgba(0, 210, 255, 0.06);
-      border: 1px solid rgba(0, 210, 255, 0.22);
-      color: rgba(0, 210, 255, 0.85);
+      background: rgba(124, 58, 237, 0.12);
+      border: 1px solid var(--border-subtle);
+      color: rgba(255, 255, 255, 0.85);
       transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
     }
 
     .link-arrow svg {
-      width: 15px;
-      height: 15px;
+      width: 14px;
+      height: 14px;
     }
 
-    /* Неоновый разделитель и 2-колоночный ряд (Обо мне / Контакты) */
     .neon-divider {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
-      margin: 14px 0 12px;
-      color: rgba(0, 210, 255, 0.55);
-      font-size: 10px;
+      margin: 10px 0 9px;
+      color: rgba(0, 210, 255, 0.65);
+      font-size: 9px;
       user-select: none;
     }
 
@@ -615,47 +548,46 @@
       content: '';
       flex: 1;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(0, 210, 255, 0.32), transparent);
+      background: linear-gradient(90deg, transparent, rgba(0, 210, 255, 0.35), transparent);
     }
 
     .action-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
+      gap: 8px;
       position: relative;
       z-index: 2;
     }
 
     .action-grid .link-btn {
-      padding: 11px 12px;
-      gap: 10px;
+      padding: 9px 10px;
+      gap: 9px;
     }
 
     .action-grid .link-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 11px;
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
     }
 
     .action-grid .link-icon svg {
-      width: 19px;
-      height: 19px;
+      width: 17px;
+      height: 17px;
     }
 
     .action-grid .link-text {
-      font-size: 12px;
+      font-size: 11.5px;
       letter-spacing: 0.2px;
     }
 
     .action-grid .link-sub {
-      font-size: 11px;
+      font-size: 10.5px;
     }
 
     .action-grid .link-arrow {
       display: none;
     }
 
-    /* Дополнительные секции каталога (из config.json, если есть) */
     .section-title {
       font-family: 'Unbounded', sans-serif;
       font-size: 11px;
@@ -664,14 +596,13 @@
       color: var(--text-secondary);
       text-transform: uppercase;
       text-align: center;
-      margin: 16px 0 10px;
-      text-shadow: 0 0 12px rgba(0, 210, 255, 0.25);
+      margin: 14px 0 9px;
     }
 
     .catalog-grid {
       display: grid;
-      gap: 10px;
-      margin-top: 8px;
+      gap: 9px;
+      margin-top: 7px;
     }
 
     .catalog-card {
@@ -680,13 +611,12 @@
       align-items: center;
       justify-content: center;
       gap: 6px;
-      padding: 14px 10px;
-      background: var(--surface-card);
+      padding: 13px 10px;
+      background: rgba(28, 19, 53, 0.65);
       border: 1px solid var(--border-subtle);
       border-radius: 14px;
       text-decoration: none;
       color: var(--text-primary);
-      box-shadow: 0 0 14px rgba(0, 210, 255, 0.08);
       transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
     }
 
@@ -697,20 +627,20 @@
     }
 
     .catalog-card-icon {
-      width: 34px;
-      height: 34px;
+      width: 32px;
+      height: 32px;
       border-radius: 10px;
-      background: rgba(0, 210, 255, 0.08);
-      border: 1px solid rgba(0, 210, 255, 0.25);
+      background: rgba(124, 58, 237, 0.14);
+      border: 1px solid var(--border-subtle);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--cyan);
+      color: #ffffff;
     }
 
     .catalog-card-icon svg {
-      width: 17px;
-      height: 17px;
+      width: 16px;
+      height: 16px;
     }
 
     .catalog-card-name {
@@ -718,7 +648,6 @@
       font-weight: 700;
     }
 
-    /* Плавное появление элементов (только opacity + transform) */
     .animate-in {
       opacity: 0;
       animation: fadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
@@ -727,7 +656,7 @@
     @keyframes fadeUp {
       from {
         opacity: 0;
-        transform: translate3d(0, 14px, 0);
+        transform: translate3d(0, 12px, 0);
       }
       to {
         opacity: 1;
@@ -736,32 +665,29 @@
     }
 
     /* ============================================================
-       ФИРМЕННЫЙ БАННЕР "ЗАКАЗАТЬ ТАКОЙ ЖЕ САЙТ" (Neon-Gamer UI)
-       Заметный, на видном месте в общей колонке, выше классом по деталям,
-       но сдержанный в индиго/циановой гамме — не перетягивает визитку
+       ПРОМО-БАННЕР "РОБУКСЫ СО СКИДКОЙ" (внутри карточки, на одном экране)
        ============================================================ */
-    .order-card {
+    .promo-card {
       position: relative;
       display: block;
       width: 100%;
-      max-width: 476px;
+      margin-top: 10px;
       padding: 1px;
-      border-radius: 16px;
-      background: rgba(0, 210, 255, 0.28);
+      border-radius: 14px;
+      background: rgba(0, 210, 255, 0.30);
       text-decoration: none;
       color: #ffffff;
       overflow: hidden;
       box-shadow:
-        0 18px 48px rgba(0, 0, 0, 0.6),
-        0 0 28px rgba(0, 210, 255, 0.16);
+        0 12px 32px rgba(0, 0, 0, 0.50),
+        0 0 22px rgba(0, 210, 255, 0.14);
       transition:
         transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
         box-shadow 0.3s ease,
         background 0.3s ease;
     }
 
-    /* Тонкий бегущий циановый луч по контуру (100% GPU rotate) */
-    .order-card::before {
+    .promo-card::before {
       content: '';
       position: absolute;
       top: 50%;
@@ -787,6 +713,254 @@
       to   { transform: translate3d(-50%, -50%, 0) rotate(360deg); }
     }
 
+    .promo-card__inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      border-radius: 13px;
+      background: #1C1335;
+      overflow: hidden;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.10);
+    }
+
+    .promo-card__bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.55;
+      pointer-events: none;
+      transform: scale(1.01);
+      transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.35s ease;
+    }
+
+    .promo-card__scrim {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        95deg,
+        rgba(28, 19, 53, 0.90) 0%,
+        rgba(42, 26, 74, 0.55) 52%,
+        rgba(28, 19, 53, 0.88) 100%
+      );
+      pointer-events: none;
+    }
+
+    .promo-card__inner::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 42%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.10) 50%,
+        transparent 100%
+      );
+      transform: translate3d(-150%, 0, 0) skewX(-24deg);
+      animation: orderSheen 7.5s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes orderSheen {
+      0%, 62% { transform: translate3d(-150%, 0, 0) skewX(-24deg); }
+      92%, 100% { transform: translate3d(320%, 0, 0) skewX(-24deg); }
+    }
+
+    .promo-card__media {
+      position: relative;
+      z-index: 2;
+      width: 44px;
+      height: 44px;
+      flex-shrink: 0;
+    }
+
+    .promo-card__icon {
+      width: 100%;
+      height: 100%;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #1C1335;
+      border: 1px solid rgba(0, 210, 255, 0.55);
+      box-shadow:
+        0 6px 16px rgba(0, 0, 0, 0.55),
+        0 0 16px rgba(0, 210, 255, 0.28);
+      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .promo-card__icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .promo-card__content {
+      position: relative;
+      z-index: 2;
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .promo-card__kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-family: 'Unbounded', sans-serif;
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: 1.3px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    .promo-card__title {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 12.5px;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+      line-height: 1.25;
+      color: #ffffff;
+      text-shadow: 0 0 12px rgba(167, 139, 250, 0.45);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .promo-card__sub {
+      font-size: 11px;
+      font-weight: 600;
+      color: rgba(234, 242, 255, 0.75);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .promo-card__sub b {
+      color: #ffffff;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+    }
+
+    .promo-card__cta {
+      position: relative;
+      z-index: 2;
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      padding: 7px 11px;
+      border-radius: 11px;
+      background: rgba(0, 210, 255, 0.10);
+      border: 1px solid rgba(0, 210, 255, 0.45);
+      color: #ffffff;
+      font-family: 'Unbounded', sans-serif;
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      transition:
+        background 0.25s ease,
+        color 0.25s ease,
+        border-color 0.25s ease,
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+    }
+
+    .promo-card__cta svg {
+      width: 12px;
+      height: 12px;
+      flex-shrink: 0;
+    }
+
+    @media (hover: hover) {
+      .promo-card:hover {
+        transform: translate3d(0, -2px, 0);
+        background: rgba(0, 210, 255, 0.55);
+        box-shadow:
+          0 16px 40px rgba(0, 0, 0, 0.60),
+          0 0 30px rgba(0, 210, 255, 0.28);
+      }
+
+      .promo-card:hover .promo-card__bg {
+        opacity: 0.75;
+        transform: scale(1.05);
+      }
+
+      .promo-card:hover .promo-card__icon {
+        transform: scale(1.05);
+        border-color: rgba(45, 226, 230, 0.9);
+        box-shadow:
+          0 6px 18px rgba(0, 0, 0, 0.60),
+          0 0 22px rgba(0, 210, 255, 0.45);
+      }
+
+      .promo-card:hover .promo-card__cta {
+        background: var(--cyan);
+        color: #1C1335;
+        border-color: var(--cyan);
+        transform: translate3d(2px, 0, 0);
+        box-shadow: 0 0 16px rgba(0, 210, 255, 0.55);
+      }
+    }
+
+    .promo-card:active {
+      transform: scale(0.985);
+    }
+
+    /* ============================================================
+       БАННЕР "ЗАКАЗАТЬ ТАКОЙ ЖЕ САЙТ" (внизу, под карточкой)
+       ============================================================ */
+    .order-card {
+      position: relative;
+      display: block;
+      width: 100%;
+      max-width: 476px;
+      padding: 1px;
+      border-radius: 16px;
+      background: rgba(0, 210, 255, 0.28);
+      text-decoration: none;
+      color: #ffffff;
+      overflow: hidden;
+      box-shadow:
+        0 18px 48px rgba(0, 0, 0, 0.55),
+        0 0 28px rgba(0, 210, 255, 0.16);
+      transition:
+        transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.3s ease,
+        background 0.3s ease;
+    }
+
+    .order-card::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 135%;
+      aspect-ratio: 1 / 1;
+      background: conic-gradient(
+        from 0deg,
+        transparent 0deg,
+        transparent 250deg,
+        rgba(0, 210, 255, 0.35) 300deg,
+        rgba(45, 226, 230, 0.95) 345deg,
+        transparent 360deg
+      );
+      transform: translate3d(-50%, -50%, 0) rotate(0deg);
+      animation: orderBeamSpin 8s linear infinite;
+      will-change: transform;
+      pointer-events: none;
+    }
+
     .order-card__inner {
       position: relative;
       z-index: 1;
@@ -795,12 +969,11 @@
       gap: 14px;
       padding: 12px 14px;
       border-radius: 15px;
-      background: #0B0E1E;
+      background: #1C1335;
       overflow: hidden;
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.10);
     }
 
-    /* Кастомная неоновая текстура созвездий */
     .order-card__bg {
       position: absolute;
       inset: 0;
@@ -818,14 +991,13 @@
       inset: 0;
       background: linear-gradient(
         95deg,
-        rgba(11, 14, 30, 0.90) 0%,
-        rgba(14, 20, 48, 0.55) 52%,
-        rgba(11, 14, 30, 0.88) 100%
+        rgba(28, 19, 53, 0.90) 0%,
+        rgba(42, 26, 74, 0.55) 52%,
+        rgba(28, 19, 53, 0.88) 100%
       );
       pointer-events: none;
     }
 
-    /* Мягкий периодический циановый отблеск (только GPU transform) */
     .order-card__inner::after {
       content: '';
       position: absolute;
@@ -836,17 +1008,12 @@
       background: linear-gradient(
         90deg,
         transparent 0%,
-        rgba(0, 210, 255, 0.12) 50%,
+        rgba(255, 255, 255, 0.10) 50%,
         transparent 100%
       );
       transform: translate3d(-150%, 0, 0) skewX(-24deg);
       animation: orderSheen 7.5s ease-in-out infinite;
       pointer-events: none;
-    }
-
-    @keyframes orderSheen {
-      0%, 62% { transform: translate3d(-150%, 0, 0) skewX(-24deg); }
-      92%, 100% { transform: translate3d(320%, 0, 0) skewX(-24deg); }
     }
 
     .order-card__media {
@@ -862,10 +1029,10 @@
       height: 100%;
       border-radius: 14px;
       overflow: hidden;
-      background: #0B0E1E;
+      background: #1C1335;
       border: 1px solid rgba(0, 210, 255, 0.55);
       box-shadow:
-        0 6px 16px rgba(0, 0, 0, 0.6),
+        0 6px 16px rgba(0, 0, 0, 0.55),
         0 0 18px rgba(0, 210, 255, 0.28);
       transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease, box-shadow 0.3s ease;
     }
@@ -885,8 +1052,8 @@
       height: 19px;
       border-radius: 7px;
       background: var(--cyan);
-      color: #0B0E1E;
-      border: 2px solid #0B0E1E;
+      color: #1C1335;
+      border: 2px solid #1C1335;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -918,14 +1085,14 @@
       font-weight: 700;
       letter-spacing: 1.4px;
       text-transform: uppercase;
-      color: rgba(0, 210, 255, 0.85);
+      color: rgba(255, 255, 255, 0.70);
     }
 
     .order-card__kicker svg {
       width: 10px;
       height: 10px;
       flex-shrink: 0;
-      color: var(--cyan);
+      color: #ffffff;
     }
 
     .order-card__title {
@@ -935,7 +1102,7 @@
       letter-spacing: 0.3px;
       line-height: 1.25;
       color: #ffffff;
-      text-shadow: 0 0 14px rgba(0, 210, 255, 0.35);
+      text-shadow: 0 0 14px rgba(167, 139, 250, 0.40);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -944,7 +1111,7 @@
     .order-card__sub {
       font-size: 11.5px;
       font-weight: 500;
-      color: rgba(234, 242, 255, 0.60);
+      color: rgba(234, 242, 255, 0.65);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -986,7 +1153,7 @@
         transform: translate3d(0, -2px, 0);
         background: rgba(0, 210, 255, 0.55);
         box-shadow:
-          0 22px 54px rgba(0, 0, 0, 0.7),
+          0 22px 54px rgba(0, 0, 0, 0.65),
           0 0 36px rgba(0, 210, 255, 0.32);
       }
 
@@ -999,8 +1166,8 @@
         transform: scale(1.05);
         border-color: rgba(45, 226, 230, 0.9);
         box-shadow:
-          0 6px 18px rgba(0, 0, 0, 0.65),
-          0 0 24px rgba(0, 210, 255, 0.5);
+          0 6px 18px rgba(0, 0, 0, 0.60),
+          0 0 24px rgba(0, 210, 255, 0.50);
       }
 
       .order-card:hover .order-card__spark {
@@ -1009,7 +1176,7 @@
 
       .order-card:hover .order-card__cta {
         background: var(--cyan);
-        color: #0B0E1E;
+        color: #1C1335;
         border-color: var(--cyan);
         transform: translate3d(2px, 0, 0);
         box-shadow: 0 0 18px rgba(0, 210, 255, 0.55);
@@ -1021,12 +1188,12 @@
     }
 
     /* ============================================================
-       МОДАЛЬНЫЕ ОКНА ("Обо мне", "Контакты")
+       МОДАЛЬНЫЕ ОКНА
        ============================================================ */
     .modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(5, 6, 12, 0.78);
+      background: rgba(15, 10, 30, 0.78);
       z-index: 1000;
       display: flex;
       align-items: center;
@@ -1052,14 +1219,14 @@
       max-width: 440px;
       max-height: calc(100dvh - 36px);
       overflow-y: auto;
-      background: linear-gradient(165deg, rgba(20, 28, 60, 0.92) 0%, rgba(11, 14, 30, 0.96) 100%);
+      background: linear-gradient(165deg, rgba(42, 26, 74, 0.92) 0%, rgba(28, 19, 53, 0.96) 100%);
       border: 1px solid rgba(0, 210, 255, 0.38);
       border-radius: 16px;
       padding: 28px 24px 24px;
       box-shadow:
-        0 28px 90px rgba(0, 0, 0, 0.75),
+        0 28px 90px rgba(0, 0, 0, 0.70),
         0 0 40px rgba(0, 210, 255, 0.18),
-        inset 0 1px 0 rgba(255, 255, 255, 0.10);
+        inset 0 1px 0 rgba(255, 255, 255, 0.12);
       transform: translate3d(0, 16px, 0) scale(0.95);
       transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
     }
@@ -1077,7 +1244,7 @@
       width: 34px;
       height: 34px;
       border-radius: 50%;
-      background: rgba(0, 210, 255, 0.08);
+      background: rgba(124, 58, 237, 0.14);
       border: 1px solid rgba(0, 210, 255, 0.32);
       color: rgba(234, 242, 255, 0.9);
       font-size: 20px;
@@ -1091,7 +1258,7 @@
 
     .modal-close:hover {
       background: var(--cyan);
-      color: #0B0E1E;
+      color: #1C1335;
       border-color: var(--cyan);
       transform: rotate(90deg);
       box-shadow: 0 0 16px rgba(0, 210, 255, 0.55);
@@ -1102,12 +1269,12 @@
       height: 56px;
       margin: 0 auto 14px;
       border-radius: 14px;
-      background: rgba(0, 210, 255, 0.08);
+      background: rgba(124, 58, 237, 0.14);
       border: 1px solid rgba(0, 210, 255, 0.38);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--cyan);
+      color: #ffffff;
       box-shadow: 0 0 18px rgba(0, 210, 255, 0.22);
     }
 
@@ -1125,10 +1292,9 @@
       color: #ffffff;
       text-transform: uppercase;
       letter-spacing: 1.2px;
-      text-shadow: 0 0 16px rgba(0, 210, 255, 0.35);
+      text-shadow: 0 0 16px rgba(167, 139, 250, 0.40);
     }
 
-    /* Оформление карточек "Обо мне" */
     .about-list {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1140,8 +1306,8 @@
       flex-direction: column;
       gap: 4px;
       padding: 11px 13px;
-      background: rgba(10, 15, 30, 0.55);
-      border: 1px solid rgba(0, 210, 255, 0.18);
+      background: rgba(28, 19, 53, 0.60);
+      border: 1px solid rgba(0, 210, 255, 0.20);
       border-radius: 12px;
     }
 
@@ -1154,7 +1320,7 @@
       font-size: 9px;
       font-weight: 700;
       letter-spacing: 1.6px;
-      color: rgba(0, 210, 255, 0.65);
+      color: rgba(255, 255, 255, 0.60);
       text-transform: uppercase;
     }
 
@@ -1165,9 +1331,8 @@
       line-height: 1.4;
     }
 
-    /* Оформление "Контакты" */
     .contact-card {
-      background: rgba(10, 15, 30, 0.55);
+      background: rgba(28, 19, 53, 0.60);
       border: 1px solid rgba(0, 210, 255, 0.22);
       border-radius: 14px;
       padding: 14px 16px;
@@ -1213,14 +1378,14 @@
       text-decoration: none;
       cursor: pointer;
       border: 1px solid rgba(0, 210, 255, 0.32);
-      background: rgba(0, 210, 255, 0.06);
+      background: rgba(124, 58, 237, 0.12);
       color: #ffffff;
       transition: background 0.22s ease, color 0.22s ease, border-color 0.22s ease, transform 0.18s ease, box-shadow 0.22s ease;
     }
 
     .contact-action-btn--primary {
       background: var(--cyan);
-      color: #0B0E1E;
+      color: #1C1335;
       border-color: var(--cyan);
       box-shadow: 0 0 18px rgba(0, 210, 255, 0.35);
     }
@@ -1241,14 +1406,11 @@
       flex-shrink: 0;
     }
 
-    /* ============================================================
-       ПАНЕЛЬ СТАТИСТИКИ (Neon-Gamer UI)
-       ============================================================ */
     .stats-backdrop {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(5, 6, 12, 0.88);
+      background: rgba(15, 10, 30, 0.88);
       z-index: 99999;
       overflow-y: auto;
       padding: 20px;
@@ -1259,111 +1421,147 @@
     .stats-box {
       max-width: 460px;
       margin: 40px auto;
-      background: linear-gradient(165deg, rgba(20, 28, 60, 0.94), rgba(11, 14, 30, 0.97));
+      background: linear-gradient(165deg, rgba(42, 26, 74, 0.94), rgba(28, 19, 53, 0.97));
       border-radius: 16px;
       padding: 26px;
       border: 1px solid rgba(0, 210, 255, 0.38);
-      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.75), 0 0 32px rgba(0, 210, 255, 0.16);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.70), 0 0 32px rgba(0, 210, 255, 0.16);
       position: relative;
     }
 
     /* ============================================================
-       АДАПТИВ ДЛЯ ТЕЛЕФОНОВ
+       АДАПТИВ (всё на одном экране)
        ============================================================ */
     @media (max-width: 768px) {
       .page-wrap {
-        padding: 16px 14px 24px;
+        padding: 10px 12px 14px;
         justify-content: center;
       }
 
       .card-shell {
-        padding: 20px 16px 18px;
+        padding: 14px 14px 12px;
         border-radius: 16px;
       }
 
       .profile {
-        margin-bottom: 16px;
+        margin-bottom: 10px;
       }
 
       .avatar {
-        width: 82px;
-        height: 82px;
-        margin-bottom: 11px;
+        width: 68px;
+        height: 68px;
+        margin-bottom: 8px;
       }
 
       .avatar img {
-        border-radius: 22px;
+        border-radius: 18px;
       }
 
       .profile-name {
-        font-size: 24px;
+        font-size: 20px;
         letter-spacing: 2px;
-        margin-bottom: 5px;
+        margin-bottom: 4px;
       }
 
       .profile-bio {
-        font-size: 12.5px;
-      }
-
-      .profile-tags {
-        margin-top: 8px;
-        gap: 5px;
-      }
-
-      .profile-tag {
-        font-size: 10.5px;
-        padding: 3px 9px;
-      }
-
-      .links {
-        gap: 9px;
-      }
-
-      .link-btn {
-        padding: 10px 12px;
-        gap: 12px;
-        border-radius: 14px;
-      }
-
-      .link-icon {
-        width: 44px;
-        height: 44px;
-        border-radius: 11px;
-      }
-
-      .link-text {
-        font-size: 13px;
-      }
-
-      .link-sub {
         font-size: 11.5px;
       }
 
-      .neon-divider {
-        margin: 11px 0 10px;
+      .profile-tags {
+        margin-top: 6px;
+        gap: 4px;
       }
 
-      .action-grid {
-        gap: 8px;
+      .profile-tag {
+        font-size: 10px;
+        padding: 2px 8px;
       }
 
-      .action-grid .link-btn {
-        padding: 10px 10px;
-        gap: 9px;
+      .links {
+        gap: 6px;
       }
 
-      .action-grid .link-icon {
+      .link-btn {
+        padding: 7px 10px;
+        gap: 10px;
+        border-radius: 12px;
+      }
+
+      .link-icon {
         width: 36px;
         height: 36px;
         border-radius: 10px;
       }
 
+      .link-icon svg {
+        width: 18px;
+        height: 18px;
+      }
+
+      .link-text {
+        font-size: 12px;
+      }
+
+      .link-sub {
+        font-size: 10.5px;
+      }
+
+      .link-arrow {
+        width: 28px;
+        height: 28px;
+      }
+
+      .neon-divider {
+        margin: 8px 0 7px;
+      }
+
+      .action-grid {
+        gap: 6px;
+      }
+
+      .action-grid .link-btn {
+        padding: 7px 9px;
+        gap: 8px;
+      }
+
+      .action-grid .link-icon {
+        width: 32px;
+        height: 32px;
+      }
+
       .action-grid .link-text {
-        font-size: 11.5px;
+        font-size: 11px;
       }
 
       .action-grid .link-sub {
+        font-size: 10px;
+      }
+
+      .promo-card {
+        margin-top: 8px;
+      }
+
+      .promo-card__inner {
+        padding: 8px 10px;
+        gap: 10px;
+      }
+
+      .promo-card__media {
+        width: 38px;
+        height: 38px;
+      }
+
+      .promo-card__title {
+        font-size: 11.5px;
+      }
+
+      .promo-card__sub {
         font-size: 10.5px;
+      }
+
+      .promo-card__cta {
+        padding: 6px 9px;
+        font-size: 9px;
       }
 
       .order-card {
@@ -1428,11 +1626,13 @@
     }
 
     @media (max-width: 410px) {
-      .order-card__cta-label {
+      .order-card__cta-label,
+      .promo-card__cta-label {
         display: none;
       }
 
-      .order-card__cta {
+      .order-card__cta,
+      .promo-card__cta {
         width: 34px;
         height: 34px;
         padding: 0;
@@ -1463,27 +1663,72 @@
   </style>
 </head>
 <body>
-  <!-- ФОНОВАЯ СЦЕНА: градиент + созвездия + шум (без видео) -->
   <div class="bg-stage" aria-hidden="true">
     <canvas id="constellation-canvas"></canvas>
     <div class="bg-noise"></div>
     <div class="bg-vignette"></div>
   </div>
 
-  <!-- ОСНОВНОЙ КОНТЕНТ -->
   <main class="page-wrap" id="app">
     <section class="card-shell" id="card-shell">
       <div id="card-body"></div>
+
+      <!-- Промо: Робуксы со скидкой (внутри карточки — видно сразу) -->
+      <a
+        href="https://drive.google.com/drive/folders/1eyPmHq3SQXDHMiQsgEZx9djfS7qOf5nx"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="promo-card animate-in"
+        id="promo-robux-card"
+        style="animation-delay: 0.42s;"
+      >
+        <div class="promo-card__inner">
+          <img
+            src="video/promo-bg.jpg"
+            alt=""
+            class="promo-card__bg"
+            width="476"
+            height="80"
+            decoding="async"
+          >
+          <div class="promo-card__scrim" aria-hidden="true"></div>
+
+          <div class="promo-card__media">
+            <div class="promo-card__icon">
+              <img
+                src="video/promo-icon.jpg"
+                alt=""
+                width="44"
+                height="44"
+                decoding="async"
+              >
+            </div>
+          </div>
+
+          <div class="promo-card__content">
+            <span class="promo-card__kicker">Партнёр · Roblox</span>
+            <span class="promo-card__title">Робуксы со скидкой</span>
+            <span class="promo-card__sub">Промокод <b>CONTORTUS</b> · Нажми, чтобы скопировать</span>
+          </div>
+
+          <span class="promo-card__cta" aria-hidden="true">
+            <span class="promo-card__cta-label">Купить</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7 17 17 7"/>
+              <path d="M8 7h9v9"/>
+            </svg>
+          </span>
+        </div>
+      </a>
     </section>
 
-    <!-- Фирменный блок "Заказать такой же сайт" -->
     <a
       href="https://telegram.me/mglochKa"
       target="_blank"
       rel="noopener noreferrer"
       class="order-card animate-in"
       id="order-site-card"
-      style="animation-delay: 0.34s;"
+      style="animation-delay: 0.48s;"
     >
       <div class="order-card__inner">
         <img
@@ -1536,7 +1781,6 @@
     </a>
   </main>
 
-  <!-- МОДАЛЬНОЕ ОКНО: Обо мне -->
   <div class="modal-backdrop" id="modal-about" role="dialog" aria-modal="true" aria-labelledby="modal-about-title">
     <div class="modal">
       <button type="button" class="modal-close" data-close="modal-about" aria-label="Закрыть">×</button>
@@ -1579,7 +1823,6 @@
     </div>
   </div>
 
-  <!-- МОДАЛЬНОЕ ОКНО: Контакты -->
   <div class="modal-backdrop" id="modal-contacts" role="dialog" aria-modal="true" aria-labelledby="modal-contacts-title">
     <div class="modal">
       <button type="button" class="modal-close" data-close="modal-contacts" aria-label="Закрыть">×</button>
@@ -1615,11 +1858,10 @@
     </div>
   </div>
 
-  <!-- БЛОК СТАТИСТИКИ (Neon-Gamer UI) -->
   <div id="stats-panel" class="stats-backdrop">
     <div class="stats-box">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
-        <h2 style="font-family:'Unbounded',sans-serif; font-size:20px; margin:0; letter-spacing:1px; color:#fff; text-shadow:0 0 16px rgba(0,210,255,0.35);">Статистика</h2>
+        <h2 style="font-family:'Unbounded',sans-serif; font-size:20px; margin:0; letter-spacing:1px; color:#fff; text-shadow:0 0 16px rgba(167,139,250,0.40);">Статистика</h2>
         <button type="button" onclick="document.getElementById('stats-panel').style.display='none'" class="modal-close" style="position:static;" aria-label="Закрыть">×</button>
       </div>
       <p style="color:rgba(234,242,255,0.55); font-size:12px; text-align:center; margin-bottom:18px;">Клики с момента установки счётчика</p>
@@ -1629,9 +1871,6 @@
   </div>
 
   <script>
-    // ============================================================
-    // СЧЁТЧИК ЗАХОДОВ И КЛИКОВ (сохранена полная совместимость)
-    // ============================================================
     const VISIT_URL = 'https://track.contortus.space/visit';
     const TRACKER_URL = 'https://track.contortus.space/track';
 
@@ -1673,9 +1912,6 @@
 
     trackVisit();
 
-    // ============================================================
-    // СОЗВЕЗДИЯ НА CANVAS (лёгкий дрейф, пауза в фоне, reduced-motion)
-    // ============================================================
     (function setupConstellation() {
       const canvas = document.getElementById('constellation-canvas');
       if (!canvas) return;
@@ -1720,8 +1956,6 @@
 
       function drawFrame(t) {
         ctx.clearRect(0, 0, w, h);
-
-        // Линии (10–20% прозрачности по ТЗ)
         ctx.lineWidth = 1;
         for (let i = 0; i < points.length; i++) {
           const p = points[i];
@@ -1732,7 +1966,7 @@
             const d2 = dx * dx + dy * dy;
             if (d2 < LINK_DIST * LINK_DIST) {
               const alpha = (1 - Math.sqrt(d2) / LINK_DIST) * 0.18;
-              ctx.strokeStyle = 'rgba(0, 210, 255, ' + alpha.toFixed(3) + ')';
+              ctx.strokeStyle = 'rgba(167, 139, 250, ' + alpha.toFixed(3) + ')';
               ctx.beginPath();
               ctx.moveTo(p.x, p.y);
               ctx.lineTo(q.x, q.y);
@@ -1741,15 +1975,13 @@
           }
         }
 
-        // Точки
         for (let i = 0; i < points.length; i++) {
           const p = points[i];
           ctx.fillStyle = 'rgba(234, 242, 255, ' + (p.a * 0.75).toFixed(3) + ')';
           ctx.beginPath();
           ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
           ctx.fill();
-          // Циановое свечение точки
-          ctx.fillStyle = 'rgba(0, 210, 255, ' + (p.a * 0.35).toFixed(3) + ')';
+          ctx.fillStyle = 'rgba(124, 58, 237, ' + (p.a * 0.35).toFixed(3) + ')';
           ctx.beginPath();
           ctx.arc(p.x, p.y, p.r * 2.4, 0, Math.PI * 2);
           ctx.fill();
@@ -1758,7 +1990,6 @@
 
       function step(t) {
         if (!running) return;
-        // Медленный дрейф
         for (let i = 0; i < points.length; i++) {
           const p = points[i];
           p.x += p.vx;
@@ -1803,14 +2034,12 @@
       });
     })();
 
-    // ============================================================
-    // ИКОНКИ И ШАБЛОНЫ (векторные, неоновые — по ТЗ п.4)
-    // ============================================================
     const INLINE_ICONS = {
       telegram: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>',
       kick: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M1.333 0h8v5.333h2.667V2.667h2.667V0h8v8h-2.667v2.667h-2.666v2.666h2.666V16H24v8h-8v-2.667h-2.667v-2.666h-2.666V24h-8V0z"/></svg>',
       tiktok: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>',
       donate: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>',
+      discord: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189z"/></svg>',
       about: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M5 20a7 7 0 0 1 14 0"/></svg>',
       contacts: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>',
       youtube: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>',
@@ -1831,6 +2060,7 @@
         { title: 'Kick', subtitle: 'contortuszxc · Прямые эфиры', url: 'https://kick.com/contortuszxc', icon: 'kick' },
         { title: 'TikTok', subtitle: '@contortuszxc · Нарезки и клипы', url: 'https://www.tiktok.com/@contortuszxc', icon: 'tiktok' },
         { title: 'Донат', subtitle: 'DonationAlerts · Поддержать стрим', url: 'https://www.donationalerts.com/r/contortuszxc797', icon: 'donate' },
+        { title: 'Discord', subtitle: 'discord.gg/dXWbdSPgP · Комьюнити', url: 'https://discord.gg/dXWbdSPgP', icon: 'discord' },
         { title: 'Обо мне', subtitle: 'Кто я такой', action: 'about', icon: 'about' },
         { title: 'Контакты', subtitle: 'Связь и почта', action: 'contacts', icon: 'contacts' }
       ]
@@ -1882,22 +2112,12 @@
       return (tr && tr[text]) || text;
     }
 
-    const AVATAR_VARIANTS = [
-      'video/avatar.jpg',
-      'video/avatar-tree.jpg',
-      'video/avatar-alt.jpg'
-    ];
-
     function renderProfile(config, lang) {
       const profile = document.createElement('div');
       profile.className = 'profile';
 
       const avatarWrap = document.createElement('div');
       avatarWrap.className = 'avatar';
-      avatarWrap.setAttribute('role', 'button');
-      avatarWrap.setAttribute('tabindex', '0');
-      avatarWrap.setAttribute('aria-label', 'Сменить аватар');
-      avatarWrap.setAttribute('title', 'Нажми, чтобы сменить аватар');
       avatarWrap.innerHTML =
         '<div class="avatar-haze" aria-hidden="true">' +
           '<svg viewBox="0 0 148 148" fill="none" aria-hidden="true">' +
@@ -1912,78 +2132,24 @@
             '<path d="M118 42 110 66 82 58 90 30Z" stroke="rgba(255,255,255,0.25)" stroke-width="1"/>' +
           '</svg>' +
         '</div>' +
-        '<div class="avatar-glow"></div>' +
-        '<span class="avatar-tooltip" aria-hidden="true">Нажми, чтобы сменить аватар ↻</span>';
-
-      let avatarIdx = 0;
-      try {
-        const saved = parseInt(localStorage.getItem('contortus_avatar_idx') || '0', 10);
-        if (!isNaN(saved) && saved >= 0 && saved < AVATAR_VARIANTS.length) avatarIdx = saved;
-      } catch (e) {}
+        '<div class="avatar-glow"></div>';
 
       const img = document.createElement('img');
-      img.src = AVATAR_VARIANTS[avatarIdx] || config.avatar || 'video/avatar.jpg';
+      img.src = config.avatar || 'video/avatar.jpg';
       img.alt = config.name || 'CONTORTUS';
-      img.width = 104;
-      img.height = 104;
+      img.width = 84;
+      img.height = 84;
       img.decoding = 'async';
       img.fetchPriority = 'high';
       img.onerror = function() {
-        if (avatarIdx !== 0) {
-          avatarIdx = 0;
-          img.src = AVATAR_VARIANTS[0];
-          return;
-        }
         avatarWrap.style.display = 'none';
       };
       avatarWrap.appendChild(img);
 
-      const badge = document.createElement('span');
-      badge.className = 'avatar-badge';
-      badge.setAttribute('aria-hidden', 'true');
-      badge.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg>';
-      avatarWrap.appendChild(badge);
-
-      // Предзагрузка остальных вариантов — смена без мигания
-      AVATAR_VARIANTS.forEach(function(src) {
-        const pre = new Image();
-        pre.src = src;
-      });
-
-      function cycleAvatar() {
-        avatarIdx = (avatarIdx + 1) % AVATAR_VARIANTS.length;
-        try {
-          localStorage.setItem('contortus_avatar_idx', String(avatarIdx));
-        } catch (e) {}
-        avatarWrap.classList.add('switching');
+      avatarWrap.addEventListener('click', function() {
         avatarWrap.classList.remove('pulse');
         void avatarWrap.offsetWidth;
         avatarWrap.classList.add('pulse');
-        const nextSrc = AVATAR_VARIANTS[avatarIdx];
-        const pre = new Image();
-        pre.onload = function() {
-          img.src = nextSrc;
-          avatarWrap.classList.remove('switching');
-        };
-        pre.onerror = function() {
-          avatarWrap.classList.remove('switching');
-        };
-        pre.src = nextSrc;
-        // Страховка: если предзагрузка зависла — просто меняем
-        setTimeout(function() {
-          if (avatarWrap.classList.contains('switching')) {
-            img.src = nextSrc;
-            avatarWrap.classList.remove('switching');
-          }
-        }, 600);
-      }
-
-      avatarWrap.addEventListener('click', cycleAvatar);
-      avatarWrap.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          cycleAvatar();
-        }
       });
 
       profile.appendChild(avatarWrap);
@@ -2050,14 +2216,12 @@
       iconDiv.className = 'link-icon';
       const iconName = link.icon || 'link';
 
-      // Векторные неоновые иконки по ТЗ — фото не используем.
-      // iconImg оставлен только как fallback для кастомных ссылок.
       if (link.iconImg && iconName === 'link') {
         const iconImg = document.createElement('img');
         iconImg.src = link.iconImg;
         iconImg.alt = '';
-        iconImg.width = 48;
-        iconImg.height = 48;
+        iconImg.width = 40;
+        iconImg.height = 40;
         iconImg.decoding = 'async';
         iconImg.onerror = function() {
           iconDiv.innerHTML = getIconSVG(iconName);
@@ -2122,7 +2286,7 @@
         const list = document.createElement('div');
         list.className = 'links';
         primaryLinks.forEach(function(link, idx) {
-          list.appendChild(createLinkElement(link, config, lang, 0.06 + idx * 0.05));
+          list.appendChild(createLinkElement(link, config, lang, 0.06 + idx * 0.04));
         });
         fragment.appendChild(list);
       }
@@ -2138,9 +2302,9 @@
 
         const grid = document.createElement('div');
         grid.className = actionLinks.length >= 2 ? 'action-grid' : 'links';
-        const baseDelay = 0.06 + primaryLinks.length * 0.05;
+        const baseDelay = 0.06 + primaryLinks.length * 0.04;
         actionLinks.forEach(function(link, idx) {
-          grid.appendChild(createLinkElement(link, config, lang, baseDelay + idx * 0.05));
+          grid.appendChild(createLinkElement(link, config, lang, baseDelay + idx * 0.04));
         });
         fragment.appendChild(grid);
       }
@@ -2229,6 +2393,37 @@
           trackClick('order_site');
           if (typeof ym === 'function') {
             ym(113351229, 'reachGoal', 'click_order_site');
+          }
+        });
+      }
+
+      const promoCard = document.getElementById('promo-robux-card');
+      if (promoCard) {
+        const ctaLabel = promoCard.querySelector('.promo-card__cta-label');
+        let promoTimer = null;
+        promoCard.addEventListener('click', function() {
+          trackClick('promo_robux');
+          if (typeof ym === 'function') {
+            ym(113351229, 'reachGoal', 'click_promo_robux');
+          }
+          // Копируем промокод при клике
+          const code = 'CONTORTUS';
+          const showDone = function() {
+            if (!ctaLabel) return;
+            ctaLabel.textContent = 'Скопировано ✓';
+            clearTimeout(promoTimer);
+            promoTimer = setTimeout(function() {
+              ctaLabel.textContent = 'Купить';
+            }, 1600);
+          };
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(code).then(showDone).catch(function() {
+              fallbackCopy(code);
+              showDone();
+            });
+          } else {
+            fallbackCopy(code);
+            showDone();
           }
         });
       }
