@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /jackpots/
+Disallow: /editor.html
+Disallow: /selected.html
+Disallow: /jackpots.html
+
+Sitemap: https://contortus.space/sitemap.xml

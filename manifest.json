@@ -1,0 +1,16 @@
+{
+  "name": "CONTORTUS",
+  "short_name": "CONTORTUS",
+  "description": "Стример, создатель контента · Telegram, Kick, TikTok, Discord, Донат",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1C1335",
+  "theme_color": "#1C1335",
+  "icons": [
+    {
+      "src": "video/avatar.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}
