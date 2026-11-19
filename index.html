@@ -4,18 +4,35 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#1C1335">
+  <meta name="color-scheme" content="dark">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com https://track.contortus.space https://mc.yandex.ru https://mc.yandex.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https://track.contortus.space; connect-src 'self' https://track.contortus.space https://mc.yandex.ru https://mc.yandex.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self';">
   <title>CONTORTUS — Официальные ссылки</title>
   <meta name="description" content="Стример, создатель контента · Telegram, Kick, TikTok, Discord, Донат">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://contortus.space/">
   <meta property="og:title" content="CONTORTUS">
   <meta property="og:description" content="Стример, создатель контента · Telegram, Kick, TikTok, Discord, Донат">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="video/avatar.jpg">
+  <meta property="og:url" content="https://contortus.space/">
+  <meta property="og:image" content="https://contortus.space/video/avatar.jpg">
+  <meta property="og:locale" content="ru_RU">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="CONTORTUS">
+  <meta name="twitter:description" content="Стример, создатель контента · Telegram, Kick, TikTok, Discord, Донат">
+  <meta name="twitter:image" content="https://contortus.space/video/avatar.jpg">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%231C1335'/%3E%3Crect x='6' y='6' width='52' height='52' rx='12' fill='none' stroke='%2300D2FF' stroke-width='2'/%3E%3Cpath d='M18 38c5-5 9-4 14-10 5 6 9 5 14 10-4 1-7 4-9 9-3-4-7-4-10 0-2-5-5-8-9-9z' fill='%23A78BFA'/%3E%3C/svg%3E">
+  <link rel="manifest" href="manifest.json">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Unbounded:wght@600;700;800;900&display=swap">
   <link rel="preload" href="config.json" as="fetch" crossorigin>
   <link rel="preload" href="video/avatar.jpg" as="image">
+  <link rel="preload" href="video/promo-icon.jpg" as="image">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Person","name":"CONTORTUS","description":"Стример, создатель контента","url":"https://contortus.space/","image":"https://contortus.space/video/avatar.jpg","sameAs":["https://telegram.me/contortus","https://kick.com/contortuszxc","https://www.tiktok.com/@contortuszxc","https://discord.gg/dXWbdSPgP"]}
+  </script>
 
   <style>
     *, *::before, *::after {
@@ -61,11 +78,29 @@
       -moz-osx-font-smoothing: grayscale;
       -webkit-tap-highlight-color: transparent;
       background:
-        radial-gradient(900px 620px at 12% -8%, rgba(124, 58, 237, 0.28), transparent 60%),
-        radial-gradient(820px 640px at 92% 4%, rgba(167, 139, 250, 0.18), transparent 62%),
+        radial-gradient(900px 620px at 12% -8%, rgba(124, 58, 237, 0.30), transparent 60%),
+        radial-gradient(820px 640px at 92% 4%, rgba(167, 139, 250, 0.20), transparent 62%),
         radial-gradient(760px 720px at 50% 112%, rgba(28, 19, 53, 0.65), transparent 62%),
         linear-gradient(180deg, #1C1335 0%, #241645 48%, #0F0A1E 100%);
       background-attachment: fixed;
+    }
+
+    ::selection {
+      background: rgba(124, 58, 237, 0.45);
+      color: #ffffff;
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #0F0A1E;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, #7C3AED, #00D2FF);
+      border-radius: 8px;
     }
 
     /* ============================================================
@@ -78,6 +113,24 @@
       overflow: hidden;
       pointer-events: none;
       contain: strict;
+    }
+
+    .bg-aurora {
+      position: absolute;
+      inset: -20%;
+      background:
+        radial-gradient(600px 400px at 20% 20%, rgba(124, 58, 237, 0.18), transparent 60%),
+        radial-gradient(500px 380px at 80% 30%, rgba(0, 210, 255, 0.08), transparent 60%),
+        radial-gradient(700px 500px at 50% 80%, rgba(167, 139, 250, 0.12), transparent 60%);
+      filter: blur(40px);
+      animation: auroraDrift 18s ease-in-out infinite alternate;
+      will-change: transform;
+    }
+
+    @keyframes auroraDrift {
+      0% { transform: translate3d(0, 0, 0) scale(1); }
+      50% { transform: translate3d(2%, -1.5%, 0) scale(1.04); }
+      100% { transform: translate3d(-2%, 1.5%, 0) scale(0.98); }
     }
 
     #constellation-canvas {
@@ -101,6 +154,24 @@
       position: absolute;
       inset: 0;
       background: radial-gradient(ellipse at 50% 38%, transparent 0%, rgba(15, 10, 30, 0.45) 100%);
+    }
+
+    .cursor-glow {
+      position: fixed;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+      background: radial-gradient(circle, rgba(124, 58, 237, 0.10) 0%, transparent 70%);
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      will-change: transform;
+    }
+
+    @media (pointer: fine) {
+      .cursor-glow { opacity: 1; }
     }
 
     /* ============================================================
@@ -144,9 +215,11 @@
       backdrop-filter: blur(18px) saturate(150%);
       -webkit-backdrop-filter: blur(18px) saturate(150%);
       overflow: hidden;
+      transform-style: preserve-3d;
+      will-change: transform;
     }
 
-    /* Синий неон — только верхняя рамка */
+    /* Синий неон — верхняя рамка с бегущим бликом */
     .card-shell::before {
       content: '';
       position: absolute;
@@ -159,6 +232,13 @@
       box-shadow: 0 0 12px rgba(0, 210, 255, 0.85);
       pointer-events: none;
       z-index: 3;
+      background-size: 200% 100%;
+      animation: shellTopShine 6s ease-in-out infinite;
+    }
+
+    @keyframes shellTopShine {
+      0%, 100% { background-position: 0% 0; }
+      50% { background-position: 100% 0; }
     }
 
     /* Зеркальный блик */
@@ -275,10 +355,18 @@
       line-height: 1.15;
       margin-bottom: 5px;
       text-transform: uppercase;
-      color: #ffffff;
-      text-shadow:
-        0 0 18px rgba(167, 139, 250, 0.50),
-        0 0 42px rgba(124, 58, 237, 0.25);
+      background: linear-gradient(100deg, #ffffff 20%, #A78BFA 40%, #ffffff 60%, #2DE2E6 80%, #ffffff 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: nameShimmer 8s linear infinite;
+      filter: drop-shadow(0 0 18px rgba(167, 139, 250, 0.35));
+    }
+
+    @keyframes nameShimmer {
+      0% { background-position: 0% center; }
+      100% { background-position: 200% center; }
     }
 
     .profile-bio {
@@ -665,44 +753,45 @@
     }
 
     /* ============================================================
-       ПРОМО-БАННЕР "РОБУКСЫ СО СКИДКОЙ" (внутри карточки, на одном экране)
+       ПРОМО-БАННЕР "РОБУКСЫ СО СКИДКОЙ" — главный акцент, но без крика
        ============================================================ */
     .promo-card {
       position: relative;
       display: block;
       width: 100%;
       margin-top: 10px;
-      padding: 1px;
+      padding: 1.5px;
       border-radius: 14px;
-      background: rgba(0, 210, 255, 0.30);
+      background: linear-gradient(135deg, rgba(124, 58, 237, 0.55), rgba(0, 210, 255, 0.45));
       text-decoration: none;
       color: #ffffff;
       overflow: hidden;
       box-shadow:
         0 12px 32px rgba(0, 0, 0, 0.50),
-        0 0 22px rgba(0, 210, 255, 0.14);
+        0 0 26px rgba(124, 58, 237, 0.22),
+        0 0 18px rgba(0, 210, 255, 0.16);
       transition:
         transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
         box-shadow 0.3s ease,
         background 0.3s ease;
     }
 
-    /* Бейдж «СКИДКА» — спокойный, не кричащий */
+    /* Бейдж «СКИДКА» — градиент, заметный, но не кричащий */
     .promo-card__badge {
       position: absolute;
       top: 8px;
       right: 8px;
       z-index: 5;
-      padding: 2px 7px;
+      padding: 3px 8px;
       border-radius: 999px;
-      background: rgba(0, 210, 255, 0.14);
-      border: 1px solid rgba(0, 210, 255, 0.35);
-      color: rgba(255, 255, 255, 0.85);
+      background: linear-gradient(135deg, #7C3AED, #00D2FF);
+      color: #ffffff;
       font-family: 'Unbounded', sans-serif;
       font-size: 7.5px;
-      font-weight: 700;
+      font-weight: 800;
       letter-spacing: 0.8px;
       text-transform: uppercase;
+      box-shadow: 0 0 12px rgba(124, 58, 237, 0.45);
       pointer-events: none;
     }
 
@@ -711,18 +800,19 @@
       position: absolute;
       top: 50%;
       left: 50%;
-      width: 135%;
+      width: 150%;
       aspect-ratio: 1 / 1;
       background: conic-gradient(
         from 0deg,
         transparent 0deg,
-        transparent 250deg,
-        rgba(0, 210, 255, 0.35) 300deg,
+        transparent 200deg,
+        rgba(124, 58, 237, 0.55) 260deg,
+        rgba(0, 210, 255, 0.85) 320deg,
         rgba(45, 226, 230, 0.95) 345deg,
         transparent 360deg
       );
       transform: translate3d(-50%, -50%, 0) rotate(0deg);
-      animation: orderBeamSpin 8s linear infinite;
+      animation: orderBeamSpin 6s linear infinite;
       will-change: transform;
       pointer-events: none;
     }
@@ -795,8 +885,8 @@
     .promo-card__media {
       position: relative;
       z-index: 2;
-      width: 44px;
-      height: 44px;
+      width: 46px;
+      height: 46px;
       flex-shrink: 0;
     }
 
@@ -806,11 +896,18 @@
       border-radius: 12px;
       overflow: hidden;
       background: #1C1335;
-      border: 1px solid rgba(0, 210, 255, 0.55);
+      border: 1px solid rgba(0, 210, 255, 0.65);
       box-shadow:
         0 6px 16px rgba(0, 0, 0, 0.55),
-        0 0 16px rgba(0, 210, 255, 0.28);
+        0 0 18px rgba(0, 210, 255, 0.35),
+        0 0 12px rgba(124, 58, 237, 0.25);
+      animation: promoIconPulse 3s ease-in-out infinite;
       transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    @keyframes promoIconPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
     }
 
     .promo-card__icon img {
@@ -839,17 +936,19 @@
       font-weight: 700;
       letter-spacing: 1.3px;
       text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.75);
+      color: rgba(255, 255, 255, 0.80);
     }
 
     .promo-card__title {
       font-family: 'Unbounded', sans-serif;
-      font-size: 12.5px;
-      font-weight: 800;
+      font-size: 13.5px;
+      font-weight: 900;
       letter-spacing: 0.3px;
       line-height: 1.25;
-      color: #ffffff;
-      text-shadow: 0 0 12px rgba(167, 139, 250, 0.45);
+      background: linear-gradient(90deg, #ffffff 0%, #A78BFA 50%, #2DE2E6 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -858,7 +957,7 @@
     .promo-card__sub {
       font-size: 11px;
       font-weight: 600;
-      color: rgba(234, 242, 255, 0.75);
+      color: rgba(234, 242, 255, 0.80);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -868,6 +967,10 @@
       color: #ffffff;
       font-weight: 800;
       letter-spacing: 0.5px;
+      background: rgba(124, 58, 237, 0.25);
+      padding: 1px 6px;
+      border-radius: 6px;
+      border: 1px solid rgba(167, 139, 250, 0.45);
     }
 
     .promo-card__cta {
@@ -878,15 +981,16 @@
       align-items: center;
       justify-content: center;
       gap: 5px;
-      padding: 7px 11px;
+      padding: 8px 12px;
       border-radius: 11px;
-      background: rgba(0, 210, 255, 0.10);
-      border: 1px solid rgba(0, 210, 255, 0.45);
+      background: linear-gradient(135deg, #7C3AED 0%, #00D2FF 100%);
+      border: 1px solid rgba(255, 255, 255, 0.25);
       color: #ffffff;
       font-family: 'Unbounded', sans-serif;
       font-size: 9.5px;
-      font-weight: 700;
+      font-weight: 800;
       letter-spacing: 0.4px;
+      box-shadow: 0 0 16px rgba(124, 58, 237, 0.40);
       transition:
         background 0.25s ease,
         color 0.25s ease,
@@ -904,31 +1008,28 @@
     @media (hover: hover) {
       .promo-card:hover {
         transform: translate3d(0, -2px, 0);
-        background: rgba(0, 210, 255, 0.55);
         box-shadow:
           0 16px 40px rgba(0, 0, 0, 0.60),
-          0 0 30px rgba(0, 210, 255, 0.28);
+          0 0 32px rgba(124, 58, 237, 0.35),
+          0 0 22px rgba(0, 210, 255, 0.25);
       }
 
       .promo-card:hover .promo-card__bg {
-        opacity: 0.75;
+        opacity: 0.70;
         transform: scale(1.05);
       }
 
       .promo-card:hover .promo-card__icon {
-        transform: scale(1.05);
         border-color: rgba(45, 226, 230, 0.9);
         box-shadow:
           0 6px 18px rgba(0, 0, 0, 0.60),
-          0 0 22px rgba(0, 210, 255, 0.45);
+          0 0 24px rgba(0, 210, 255, 0.50),
+          0 0 14px rgba(124, 58, 237, 0.35);
       }
 
       .promo-card:hover .promo-card__cta {
-        background: var(--cyan);
-        color: #1C1335;
-        border-color: var(--cyan);
         transform: translate3d(2px, 0, 0);
-        box-shadow: 0 0 16px rgba(0, 210, 255, 0.55);
+        box-shadow: 0 0 22px rgba(124, 58, 237, 0.55), 0 0 16px rgba(0, 210, 255, 0.45);
       }
     }
 
@@ -1204,6 +1305,65 @@
 
     .order-card:active {
       transform: scale(0.985);
+    }
+
+    /* ============================================================
+       ФУТЕР + ШАРИНГ
+       ============================================================ */
+    .site-footer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 0 2px;
+      width: 100%;
+      max-width: 476px;
+    }
+
+    .share-btn {
+      appearance: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: rgba(28, 19, 53, 0.60);
+      border: 1px solid var(--border-subtle);
+      color: rgba(234, 242, 255, 0.85);
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      cursor: pointer;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .share-btn svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    @media (hover: hover) {
+      .share-btn:hover {
+        border-color: var(--border-strong);
+        background: rgba(42, 26, 74, 0.70);
+        transform: translate3d(0, -1px, 0);
+        box-shadow: 0 0 18px rgba(0, 210, 255, 0.22);
+      }
+    }
+
+    .share-btn:active {
+      transform: scale(0.97);
+    }
+
+    .footer-text {
+      font-size: 10.5px;
+      font-weight: 500;
+      color: rgba(167, 139, 250, 0.55);
+      letter-spacing: 0.4px;
+      text-align: center;
     }
 
     /* ============================================================
@@ -1645,16 +1805,23 @@
     }
 
     @media (max-width: 410px) {
-      .order-card__cta-label,
-      .promo-card__cta-label {
+      .order-card__cta-label {
         display: none;
       }
 
-      .order-card__cta,
-      .promo-card__cta {
+      .order-card__cta {
         width: 34px;
         height: 34px;
         padding: 0;
+      }
+
+      .promo-card__cta {
+        padding: 6px 9px;
+        font-size: 8.5px;
+      }
+
+      .promo-card__cta-label {
+        display: inline;
       }
     }
 
@@ -1683,10 +1850,12 @@
 </head>
 <body>
   <div class="bg-stage" aria-hidden="true">
+    <div class="bg-aurora"></div>
     <canvas id="constellation-canvas"></canvas>
     <div class="bg-noise"></div>
     <div class="bg-vignette"></div>
   </div>
+  <div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
 
   <main class="page-wrap" id="app">
     <section class="card-shell" id="card-shell">
@@ -1799,6 +1968,19 @@
         </span>
       </div>
     </a>
+
+    <footer class="site-footer">
+      <button type="button" class="share-btn" id="share-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="18" cy="5" r="3"/>
+          <circle cx="6" cy="12" r="3"/>
+          <circle cx="18" cy="19" r="3"/>
+          <path d="m8.59 13.51 6.83 3.98M15.41 6.51l-6.82 3.98"/>
+        </svg>
+        <span id="share-label">Поделиться</span>
+      </button>
+      <span class="footer-text">© 2026 CONTORTUS · Сделано с любовью к хаосу</span>
+    </footer>
   </main>
 
   <div class="modal-backdrop" id="modal-about" role="dialog" aria-modal="true" aria-labelledby="modal-about-title">
@@ -2488,8 +2670,75 @@
       document.body.removeChild(ta);
     }
 
+    function setupEnhancements() {
+      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var finePointer = window.matchMedia('(pointer: fine)').matches;
+
+      // Курсорное свечение (только десктоп)
+      var glow = document.getElementById('cursor-glow');
+      if (glow && finePointer && !reduceMotion) {
+        var glowX = -500, glowY = -500, glowTX = -500, glowTY = -500;
+        document.addEventListener('mousemove', function(e) {
+          glowTX = e.clientX;
+          glowTY = e.clientY;
+        }, { passive: true });
+        (function glowLoop() {
+          glowX += (glowTX - glowX) * 0.12;
+          glowY += (glowTY - glowY) * 0.12;
+          glow.style.transform = 'translate(' + (glowX - 160) + 'px,' + (glowY - 160) + 'px)';
+          requestAnimationFrame(glowLoop);
+        })();
+      }
+
+      // 3D-наклон карточки (только десктоп, тонкий)
+      var shell = document.getElementById('card-shell');
+      if (shell && finePointer && !reduceMotion) {
+        var tiltRaf = null;
+        shell.addEventListener('mousemove', function(e) {
+          if (tiltRaf) return;
+          tiltRaf = requestAnimationFrame(function() {
+            var rect = shell.getBoundingClientRect();
+            var px = (e.clientX - rect.left) / rect.width - 0.5;
+            var py = (e.clientY - rect.top) / rect.height - 0.5;
+            shell.style.transform = 'perspective(900px) rotateY(' + (px * 4).toFixed(2) + 'deg) rotateX(' + (-py * 4).toFixed(2) + 'deg)';
+            tiltRaf = null;
+          });
+        }, { passive: true });
+        shell.addEventListener('mouseleave', function() {
+          shell.style.transform = '';
+        });
+      }
+
+      // Шаринг
+      var shareBtn = document.getElementById('share-btn');
+      var shareLabel = document.getElementById('share-label');
+      if (shareBtn) {
+        shareBtn.addEventListener('click', function() {
+          var url = 'https://contortus.space/';
+          var title = 'CONTORTUS — Официальные ссылки';
+          var text = 'CONTORTUS · Стример, создатель контента';
+          function done() {
+            if (!shareLabel) return;
+            var old = shareLabel.textContent;
+            shareLabel.textContent = 'Скопировано ✓';
+            setTimeout(function() { shareLabel.textContent = old; }, 1600);
+          }
+          if (navigator.share) {
+            navigator.share({ title: title, text: text, url: url }).catch(function() {});
+          } else if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(url).then(done).catch(function() { fallbackCopy(url); done(); });
+          } else {
+            fallbackCopy(url);
+            done();
+          }
+          trackClick('share');
+        });
+      }
+    }
+
     async function init() {
       setupModalsAndActions();
+      setupEnhancements();
 
       let config = FALLBACK_CONFIG;
       try {
